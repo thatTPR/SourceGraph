@@ -1,10 +1,7 @@
 // Parse directory
 
 import './LSPFileHandler.ts' ;
-const fs = require('fs')
+import 'fs';
+import { fstat, readdirSync } from 'fs';
 
-const folderPath = '.'
-
-fs.readdirSync(folderPath)
-
-fs.
+readdirSync()
