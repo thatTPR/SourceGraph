@@ -1,7 +1,7 @@
 {
-	"name": "include-graph-zoom-out",
-	"displayName": "include graph zoom out",
-	"description": "A zoom out of your project that display your project structure",
+	"name": "interactive-sourcegraph",
+	"displayName": "interactive-source-graph",
+	"description": "An interactive source graph  ",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.61.0"
@@ -10,20 +10,23 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:include-graph-zoom-out.helloWorld"
+		"onCommand:interactive-source-graph.enable"
 	],
-	"main": "./extension.js",
+	"main": "./src/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "include-graph-zoom-out.helloWorld",
+				"command": "interactive-source-graph.enable",
+				"category": "interactive-source-graph",
 				"title": "Hello World"
 			},
 			{
-				"command": "enable",
-				"title": "Display View"
+				"comand": "interactive-source-graph.3d",
+				"category": "interactive-source-graph",
+				"title" : "Enable 3d"
 			}
 		]
+		
 	},
 	"scripts": {
 		"lint": "eslint .",
@@ -44,6 +47,7 @@
 	},
 	"dependencies": {
 		"d3": "^7.1.1",
+		"tsc": "^2.0.3",
 		"walker": "^1.0.7"
 	}
 }
