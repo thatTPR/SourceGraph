@@ -7,7 +7,8 @@
 		"vscode": "^1.61.0"
 	},
 	"categories": [
-		"Other"
+		"Other",
+		"Visualization"
 	],
 	"activationEvents": [
 		"onCommand:interactive-source-graph.enable"
@@ -19,19 +20,14 @@
 				"command": "interactive-source-graph.enable",
 				"category": "interactive-source-graph",
 				"title": "Hello World"
-			},
-			{
-				"comand": "interactive-source-graph.3d",
-				"category": "interactive-source-graph",
-				"title" : "Enable 3d"
 			}
 		]
-		
 	},
 	"scripts": {
 		"lint": "eslint .",
 		"pretest": "npm run lint",
 		"test": "node ./test/runTest.js"
+
 	},
 	"devDependencies": {
 		"@types/d3": "^7.0.0",
@@ -43,10 +39,11 @@
 		"eslint": "^7.32.0",
 		"glob": "^7.1.7",
 		"mocha": "^9.1.1",
-		"typescript": "^4.4.3"
+		"typescript": "^4.4.3"		
 	},
 	"dependencies": {
 		"d3": "^7.1.1",
+		"langium": "^0.1.0",
 		"tsc": "^2.0.3",
 		"walker": "^1.0.7"
 	}
