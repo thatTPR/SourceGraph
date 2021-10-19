@@ -20,13 +20,5 @@ Not even remotely ready
 
 Users appreciate release notes as you update your extension.
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
 
 **Enjoy!**

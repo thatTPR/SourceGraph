@@ -10,18 +10,29 @@
 		"Other",
 		"Visualization"
 	],
-	"activationEvents": [
-		"onCommand:interactive-source-graph.enable"
-	],
 	"main": "./src/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "interactive-source-graph.enable",
+				"command": "interactive-source-graph.start",
 				"category": "interactive-source-graph",
 				"title": "Hello World"
 			}
-		]
+			
+		],
+		"viewsContainers": {
+			"activity-bar": [
+				{
+				  "id": "interactive-source-graph",
+				  "title": "Interactive-source-graph",
+				  "icon": "resources/interactive-source-graph.svg"
+				}
+			  ]
+			  
+		},
+		"views": {
+			
+		}
 	},
 	"scripts": {
 		"lint": "eslint .",
@@ -29,6 +40,7 @@
 		"test": "node ./test/runTest.js"
 
 	},
+	
 	"devDependencies": {
 		"@types/d3": "^7.0.0",
 		"@types/glob": "^7.1.4",
