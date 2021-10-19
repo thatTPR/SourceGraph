@@ -7,19 +7,17 @@
 
 // The visualization is alway built from the main out and 
 import * as de from 'd3';
-import "../directoryparser.ts";
-import "../LSPFileHandler";
-import * as path from 'path';
-import * as vscode from 'vscode';
+import "../parser";
 import * as d3 from 'd3' ;
 
+// Uses the parser api
 
 class filehandler {
     
     problem: Boolean ;
     path: path.ParsedPath ;
     
- 
+    
     constructor(path: path.ParsedPath) {
         this.problem = false ;
         this.path = path ;
