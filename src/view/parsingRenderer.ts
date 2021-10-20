@@ -8,57 +8,57 @@
 // The visualization is alway built from the main out and 
 import * as de from 'd3';
 import "../parser";
-import * as d3 from 'd3' ;
+import { Uri, workspace, TextDocument, FileSystemWatcher } from 'vscode';
 
 // Uses the parser api
 
-class filehandler {
+class handler {
     
-    problem: Boolean ;
-    path: path.ParsedPath ;
+    sysWatch: FileSystemWatcher ; 
+    uriThens: Thenable<Uri[]> ;
     
-    
-    constructor(path: path.ParsedPath) {
-        this.problem = false ;
-        this.path = path ;
-    }
-    
-    public checkProblems() {
-        if (/* Check file diagnostics */) {
-            this.problem = true ;
-        } else {
-            this.problem = false ;
-        }
+    constructor() {
+        this.sysWatch = workspace.createFileSystemWatcher('*', false, false, false) ;
+        this.uriThens = workspace.findFiles('*', null, ) ;
         
     }
     
 
-}
-
-class folderContainer {
-    constructor(path: path.ParsedPath) {
-        
-    }
+    
 
 }
 
 
 
-class folderincludeflow { // A big pipe that shows relations between modules 
-    constructor(includingFolder: folderContainer, includedFodlers: Array<folderContainer>){
+class folderincludeGraph { // First build tree ( simple graph connection ) than than let the file includes replace with flow where appropiate and add where appropiate
 
-    }
 }
+class fileincludeGraph { 
 
-// If file is not in same directory than pipe will be rendered inside a folder include flow
-class fileincludePipe {
-    constructor(includingFile: filehandler, includedFiles: Array<filehandler>) {
-
-    }
 }
+/*
+class symbolincludeGraph {
+
+}
+*/
+
+
+
+
 
 class renderer {
-    public addFile
+    public addFile(){
+
+    }
+    public addFolder(){
+
+    }
+    /*
+    public addSymbol(){
+
+    }
+    */
+ 
 }
 export function stoprenderer() {
     
