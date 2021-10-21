@@ -1,9 +1,8 @@
 ## Features
 
 Work In progress
-For example if there is an image subfolder under your extension project workspace:
 
-\!\[feature X\]\(images/feature-x.png\)
+
 
 
 
@@ -13,7 +12,7 @@ No special requirements
 
 ## Known Issues
 
-Not even remotely ready
+Does not handle files without extension (.gitignore is an extension, )
 
 ## Release Notes
 
