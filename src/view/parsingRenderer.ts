@@ -4,13 +4,11 @@
 // (Cycle is when A calls B calls C calls A)
 // Includes are pipes that flow to the including file (same with modules)
 // Classes , overkill would be to use d3 force.
-
 // The visualization is alway built from the main out and 
-import { Axis, D3BrushEvent } from 'd3';
+import { Axis, brush, chord, color, Contours, Delaunay, Dispatch, drag, DSV, easeBack, easeBackInOut, easeBackOut ,
+         Force, forceCenter, ForceLink, forceSimulation, format, Path, Quadtree, RandomGeometric, scaleBand, ScalePower, Selection, timeDay, Timer,  Transition, 
+         ZoomBehavior, ZoomInterpolator,  ZoomScale } from 'd3';
 import { Uri, workspace, TextDocument, FileSystemWatcher } from 'vscode';
-
-
-
 
 
 class handler {
@@ -70,7 +68,7 @@ class renderer {
 
     }
     */
- 
+    public addHtml()
 }
 export function startRenderer(){
 
@@ -78,3 +76,6 @@ export function startRenderer(){
 export function stoprenderer() {
     
 }
+
+// Executing everything
+
