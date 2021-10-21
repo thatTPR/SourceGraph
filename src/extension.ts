@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import * as renderer from './view/renderer';
+import * as renderer from './view/parsingRenderer';
 
 
 // this method is called when your extension is activated
@@ -11,9 +11,9 @@ export function activate(context: vscode.ExtensionContext) {
 	console.log('Congratulations, your extension "interactive-source-graph" is now active!');
 	
 	context.subscriptions.push(vscode.commands.registerCommand('interactive-source-graph.start', () => {
-		renderer.startrender() ;
+		renderer.startRenderer() ;
 	}));
-		
+
 }
 
 // this method is called when your extension is deactivated

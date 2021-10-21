@@ -6,11 +6,12 @@
 // Classes , overkill would be to use d3 force.
 
 // The visualization is alway built from the main out and 
-import * as de from 'd3';
-import "../parser";
+import { Axis, D3BrushEvent } from 'd3';
 import { Uri, workspace, TextDocument, FileSystemWatcher } from 'vscode';
 
-// Uses the parser api
+
+
+
 
 class handler {
     
@@ -23,14 +24,25 @@ class handler {
         
     }
     
-
+    // Event Handlers
+    // workspace.onDidChangeWorkspaceFolders
+    // onDidChangeWorkspaceFolders()
+    function changeWorkspace(){
+        sysWatch.onDidChange()
+    }
+    
     
 
+    
 }
 
+class EditorHandler {
+    private name() {
+        
+    }
+}
 
-
-class folderincludeGraph { // First build tree ( simple graph connection ) than than let the file includes replace with flow where appropiate and add where appropiate
+class folderincludeGraph { // First build tree ( simple graph connection ) than than let the file includes replace with flow where appropiate and add where appropiate 
 
 }
 class fileincludeGraph { 
@@ -59,6 +71,9 @@ class renderer {
     }
     */
  
+}
+export function startRenderer(){
+
 }
 export function stoprenderer() {
     
