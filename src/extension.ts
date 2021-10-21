@@ -11,7 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
 	console.log('Congratulations, your extension "interactive-source-graph" is now active!');
 	
 	context.subscriptions.push(vscode.commands.registerCommand('interactive-source-graph.start', () => {
-		renderer.startRenderer() ;
+		window.createWebviewPanel('./view.index.html');
 	}));
 
 }
