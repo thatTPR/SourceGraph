@@ -14,7 +14,7 @@ import { Uri, workspace, TextDocument, FileSystemWatcher, CustomTextEditorProvid
 class fileHandler {
     editor: CustomTextEditorProvider ;
     symbolHandler: Array<symbolHandler>;
-    constructor(editorProvider: CustomTextEditorProvider, symHandler: Array<symbolHandler){
+    constructor(editorProvider: CustomTextEditorProvider, symHandler: Array<symbolHandler>){
         this.editor = editorProvider ; 
         this.symbolHandler = symHandler ;
     }
@@ -28,35 +28,58 @@ class folderHandler {
     folders: Array<folderHandler> ;
 }
 class workspaceHandler {
-    root:
+    files: Array<fileHandler>
+    symbolHandler
     diamondDetector: diamondDetector ;
     cycleDetector: cycleDetector ; 
     
 }
 
-class EditorHandler {
-    
+class editorHandler {
+    Edit
+}
+class folderTree {
+
 }
 
 class d3FolderNode {
+    
+    nodes: workspace.workspaceFolders()
+
 
 }
 class d3FolderChannel {
+    public addChannel(){
 
+    }
 }
-class folderincludeGraph { // First build tree ( simple graph connection ) than than let the file includes replace with flow where appropiate and add where appropiate // Pipe container visualization
+class d3FolderHierArchy {
+    nodes: Array<d3FolderNode> ;
+    constructor(){
+        this.nodes = workspace.workspaceFolders()
+    }
+}
+class folderincludeGraph {
     nodes: Array<d3FolderNode> ;
     channel: Array<d3FolderChannel> ;
-    constructor(nodes: Array<d3FolderNode>, channel: Array<d3FolderChannel>)
+    constructor(nodes: Array<d3FolderNode>)
     {
-        this.nodes = nodes ; this.channel = channel ;
+
+        this.nodes = nodes ; this.channel(this.nodes.)
     }
     
+    public buildHierarchy(){ // Builds faded channel of stuff
+
+    }
+    public addCrossInclude(Index1: d3FolderNode, Index2: d3FolderNode){
+        this.nodes
+        this.channel.push()
+    }
 
 }
 
 class d3FileNode {
-
+    constt
 }
 class d3FilePipe {
 
@@ -70,10 +93,11 @@ class fileincludeGraph {
     }
 }
 class d3SymbolNode {
-
+    type: 
+    // Gets all relevant type definition, implementation and definition document providers and handles them. 
 }
 class d3SymbolArrow {
-
+    type: 
 }
 class symbolincludeGraph { // Arrow include Types : References( red ), Implmentation (yellow ) , Definition ( denim ) , 
     
@@ -98,8 +122,8 @@ class symbolincludeGraph { // Arrow include Types : References( red ), Implmenta
 class workspaceEditor {
     
      
-    folderHandler: folderHandler ;
     workspaceHandler: workspaceHandler ;
+    folderHandler: folderHandler ;
     editorHandler: editorHandler ;
     folderIncludeGraph: folderincludeGraph;
     fileIncludeGraph: fileincludeGraph;
