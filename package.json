@@ -11,6 +11,7 @@
 		"Visualization"
 	],
 	"main": "./src/extension.js",
+	"activationEvents": ["onCommand:commandId"],
 	"contributes": {
 		"commands": [
 			{
