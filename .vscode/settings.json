@@ -11,7 +11,7 @@
     "typescript.tsdk": "node_modules\\typescript\\lib",
     "svg.preview.background": "custom",
     "editor.tokenColorCustomizations": {
-        "comments": "",
+        
         "textMateRules": []
     }
 }
