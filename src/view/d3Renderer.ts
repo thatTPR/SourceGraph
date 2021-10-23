@@ -6,11 +6,12 @@ import { Axis, brush, chord, color, Contours, Delaunay, Dispatch, drag, DSV, eas
 
 
     // Renders Basic folder tree
-    chart = force
+
 class folderTree { 
     
     
 }
+
 class d3FolderNode {
 
     nodes: workspace.workspaceFolders;
@@ -28,14 +29,12 @@ class d3FolderHierarchy {
     constructor(){
         this.tree = eventListener ;
         this.eventListener = 
-    }
-    constructor() {
         this.nodes = workspace.workspaceFolders();
     }
 }
 class folderGraph {
     hierarchy: d3FolderHierarchy ;
-     nodes: Array<d3FolderNode>;
+    nodes: Array<d3FolderNode>;
     channel: Array<d3FolderChannel>;
     constructor(nodes: Array<d3FolderNode>) {
 
@@ -113,3 +112,5 @@ class workspaceEditor {
     public addFolder() {
     }
 }
+
+
