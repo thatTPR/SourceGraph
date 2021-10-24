@@ -1,4 +1,4 @@
-import { workspace } from 'vscode';
+import { ThemeIcon, workspace } from 'vscode';
 import { workspaceHandler, folderHandler } from './handlers';
 import { Axis, brush, chord, color, Contours, Delaunay, Dispatch, drag, DSV, easeBack, easeBackInOut, easeBackOut ,
     Force, forceCenter, ForceLink, forceSimulation, format, Path, Quadtree, RandomGeometric, scaleBand, ScalePower, Selection, SymbolType, timeDay, Timer,  Transition, 
@@ -19,8 +19,13 @@ class d3FolderNode {
 
 }
 class d3FolderChannel {
-    public addChannel() {
+    diamondFlag: Boolean ; 
+    cycleFlag: Boolean ; 
+    constructor(){
+        this.diamondFlag = false;
+        this.cycleFlag = false;
     }
+    
 }
 class d3FolderHierarchy {
     tree: Tree<d3FolderNode> ;
@@ -35,7 +40,7 @@ class d3FolderHierarchy {
 class folderGraph {
     hierarchy: d3FolderHierarchy ;
     nodes: Array<d3FolderNode>;
-    channel: Array<d3FolderChannel>;
+    channels: Array<d3FolderChannel>;
     constructor(nodes: Array<d3FolderNode>) {
 
         this.nodes = nodes; this.channel(this.nodes.);
@@ -52,8 +57,16 @@ class folderGraph {
 class d3FileNode {
 }
 class d3FilePipe {
+    cycleFlag: Boolean;
+    diamondFlag: Boolean;
+    constructor(){
+        this.cycleFlag = false;
+        this.diamondFlag = false;
+    }
 }
+
 class fileincludeGraph {
+
     nodes: Array<d3FileNode>;
     pipes: Array<d3FilePipe>;
     constructor(nodes: Array<d3FileNode>, pipes: Array<d3FilePipe>) {
@@ -64,7 +77,12 @@ class d3SymbolNode {
     type: SymbolInformation;
 }
 class d3SymbolArrow {
-    type: ;
+    cycleFlag: Boolean;
+    diamondFlag: Boolean;
+    constructor(){
+        this.cycleFlag = false;
+        this.diamondFlag = false;
+    }
 }
 class symbolincludeGraph {
 
