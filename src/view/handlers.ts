@@ -11,7 +11,7 @@ class extensionDocumentHandler {
     // handles all extension messages on document open and ensures that all messages are fed to  filehandler
     
 }
-class symbolHandler {
+class symbolHandler { // Manages extension provider for the workspace
     
     
 }
