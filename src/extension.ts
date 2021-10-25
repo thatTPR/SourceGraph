@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import * as renderer from 'Renderer';
+import * as renderer from './Renderer';
 export function activate(context: vscode.ExtensionContext) {
 	
 	console.log('Congratulations, your extension "interactive-source-graph" is now active!');
@@ -10,8 +10,8 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.ViewColumn.One,
         {}
       	)
-		panel.webview.asWebviewUri('./view/index.html')
-		renderer.
+		panel.webview.asWebviewUri(vscode.Uri.file('./view/index.html'))
+		
 	}));
 	// function getWebViewContent(){
 	// 	return 
