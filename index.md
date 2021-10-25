@@ -1,37 +1,29 @@
-## Welcome to GitHub Pages
+## Features
 
-You can use the [editor on GitHub](https://github.com/thatTPR/interactiveSourceGraph/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Parses the entire workspace and builds out a source graph visualization containing the entire workspace
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Dynamic view change according to context. When reviewing classes you can or certain symbols and namespaces the extension changes accordingly.
+Embedded Classic editor . Open the standard vscode editor and review your code
+Selective Editor. View your code selctively by using vscodes own feature set
+On startup editor announces missing extensions for a certain file format. 
+Fully integrated with vscodes theming and language api.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
+## Requirements
 
-# Header 1
-## Header 2
-### Header 3
+Requires vscode to have extensions installed such that every file in the workspace can be parsed by an Language server protocol instance
 
-- Bulleted
-- List
+## Known Issues
 
-1. Numbered
-2. List
+// Diamond and cycle detectors are not available
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
+## Release Notes
+WIP 
+Work In progress
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Users appreciate release notes as you update your extension.
+1.0.0 Basic Source graph with interactivity. You can click on a node and start editing just like you would a normal file. 
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/thatTPR/interactiveSourceGraph/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+**Enjoy!**
