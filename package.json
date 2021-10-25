@@ -1,6 +1,6 @@
 {
-	"name": "interactive-sourcegraph",
-	"displayName": "interactive-source-graph",
+	"name": "sourcegraph",
+	"displayName": "source-graph",
 	"description": "An interactive source graph  ",
 	"version": "0.0.1",
 	"engines": {
@@ -17,17 +17,17 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "interactive-source-graph.start",
-				"category": "interactive-source-graph",
+				"command": "source-graph.start",
+				"category": "source-graph",
 				"title": "Hello World"
 			}
 		],
 		"viewsContainers": {
 			"activity-bar": [
 				{
-					"id": "interactive-source-graph",
-					"title": "Interactive-source-graph",
-					"icon": "resources/interactive-source-graph.svg"
+					"id": "source-graph",
+					"title": "source-graph",
+					"icon": "resources/source-graph.svg"
 				}
 			]
 		},
