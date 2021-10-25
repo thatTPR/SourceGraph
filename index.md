@@ -1,5 +1,5 @@
 ## Features
-
+An interactive source graph built in Typescript and VSIx compatible built for vscode
 Parses the entire workspace and builds out a source graph visualization containing the entire workspace
 
 Dynamic view change according to context. When reviewing classes you can or certain symbols and namespaces the extension changes accordingly.
