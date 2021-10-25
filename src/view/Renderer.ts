@@ -3,7 +3,7 @@ import { workspaceHandler, folderHandler } from './handlers';
 import { Axis, brush, chord, color, Contours, Delaunay, Dispatch, drag, DSV, easeBack, easeBackInOut, easeBackOut ,
     Force, forceCenter, ForceLink, forceSimulation, format, Path, Quadtree, RandomGeometric, scaleBand, ScalePower, Selection, SymbolType, timeDay, Timer,  Transition, 
     ZoomBehavior, ZoomInterpolator,  ZoomScale } from 'd3';
-
+// This is the renderer
 
     // Renders Basic folder tree
 
@@ -27,7 +27,7 @@ class d3FolderChannel {
     }
     
 }
-class d3FolderHierarchy {
+class d3FolderHierarchy extends workspace.ex {
     tree: Tree<d3FolderNode> ;
     eventListener:
     nodes: Array<d3FolderNode>;
@@ -53,6 +53,9 @@ class folderGraph {
         this.channel.push();
     }
 
+}
+class d3fileNode{
+    
 }
 class d3FileNode {
 }
@@ -114,8 +117,6 @@ class workspaceEditor {
 
 
     workspaceHandler: workspaceHandler;
-    folderHandler: folderHandler;
-    editorHandler: editorHandler;
     folderIncludeGraph: folderincludeGraph;
     fileIncludeGraph: fileincludeGraph;
     symbolIncludeGraph: symbolincludeGraph;
@@ -125,10 +126,26 @@ class workspaceEditor {
             this.uriThens = workspace.findFiles('*', null);
 
     }
+    public renderWorkspace(){
+        
+    }
     public addFile() {
     }
     public addFolder() {
     }
 }
 
+// Various dom layers managed by the webview . This handles all the rendering logic. Everything is managed by the workspace layer the one most out back. 
+// By default it renders a directory hierarchy and a bunch of file nodes as well as the symbol , file and folder include edges ( pipes , arrows )
+class editorLayer {
+
+}
+
+class folderLayer {
+
+}
+
+class workspaceLayer {
+
+}
 

@@ -31,7 +31,9 @@
 				}
 			]
 		},
-		"views": {}
+		"views": {
+			
+		}
 	},
 	"scripts": {
 		"lint": "eslint .",
@@ -55,5 +57,12 @@
 		"langium": "^0.1.0",
 		"three": "^0.133.1",
 		"tsc": "^2.0.3"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/thatTPR/interactiveSourceGraph.git"
+	  },
+	  "bugs": {
+		"url":"https://github.com/thatTPR/interactiveSourceGraph/issues"
+	  }
 }
