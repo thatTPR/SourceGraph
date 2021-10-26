@@ -10,16 +10,21 @@
 		"Other",
 		"Visualization"
 	],
-	"main": "./src/extension.js",
+	"main": "./src/extension.ts",
+	"out":"./out/",	
 	"activationEvents": [
 		"onCommand:sg.enable"
 	],
 	"contributes": {
-		"commands": [
+		"customEditors": [
 			{
-				"command": "sg.enable",
-				"category": "source-graph",
-				"title": "Hello World"
+				"viewType": "viewsContainers",
+				"displayName": "source-graph",
+				"selector": [
+					{
+						"filenamePattern": "*"
+					}
+				]
 			}
 		],
 		"viewsContainers": {
@@ -31,7 +36,18 @@
 				}
 			]
 		},
-		"views": {}
+		"commands": [
+			{
+				"command": "sg.enable",
+				"category": "source-graph",
+				"title": "Surce graph explorer Enabled and set as default editor"
+			},
+			{
+				"command": "sg.disable",
+				"category": "source-graph",
+				"title": "Source graph explorer disabled and Unset as default"
+			}
+		]
 	},
 	"scripts": {
 		"lint": "eslint .",

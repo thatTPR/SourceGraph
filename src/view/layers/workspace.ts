@@ -1,9 +1,12 @@
 import {workspaceMediator} from '../../mediators/workspace';
 import "fs" ;
-import * as d3File from './file' ;
-import * as d3Folder from './folder';
-import * as d3Symbol from './symbol';
-
+import {d3File} from './file' ;
+import * as Folder from './folder';
+import * as Symbol from './symbol';
+import { folderMediator } from '../../mediators/folder';
+class nodeIndex {
+    type: 
+}
 class treeLink {
     childIndex: nodeIndex ; // NodeUri
     parentIndex: nodeIndex; // NodeUri
@@ -11,10 +14,27 @@ class treeLink {
         this.childIndex = childIndex ; this.parentIndex = parentIndex;
     }
 }
+class graphLink {
+    
+}
+class diamondIndex {
+    symbolTag: 
+}
+class cycleIndex {
+    symbolTag:
+}
+
+class cycleScale { 
+
+}
+class diamondScale{
+
+}
 
 class workspaceGraph {
-    nodes: Array<d3FolderNode | d3FileNode>
-    treeLinks: Array<treeLink>
+    nodes: Array<Folder.folderNode | File.fileNode>;
+    inks: Array<treeLink>;
+
     constructor(){ 
         // builds workspace tree from root recursively
         // builds graph
@@ -25,7 +45,7 @@ class workspaceGraph {
     private removeNode(){
 
     }
-    private addLink(){
+    private addLink(link: ){
 
     }
     private removeLink(){
@@ -61,11 +81,7 @@ class workspaceGraph {
     private folderLinkOrganise(){
 
     }
-}
-class diamondIndex {
-    symbolTag: 
-}
-class cycleIndex {
-    symbolTag:
-}
+    private organise(){
 
+    }
+}
