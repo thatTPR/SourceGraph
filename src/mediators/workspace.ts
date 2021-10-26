@@ -1,7 +1,7 @@
 import {} from 'vscode';
 
 export class workspaceMediator {
-    folder: Array<folderMediator> 
+    folder: Array<folderMediator> // Gets all open folders in workspace
     
     
     

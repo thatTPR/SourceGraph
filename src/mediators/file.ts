@@ -1,6 +1,8 @@
 import {TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument , CustomEditorProvider} from "vscode";
-
-    enum documentEditorType {
+    class fileMediator{
+        
+    }
+    export enum documentEditorType {
         classic = 0,
         graph = 1,
         notebook = 2,
@@ -24,7 +26,7 @@ import {TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument ,
             return this.editorType;
         }
         public diamondDetector(){
-            
+
         }
     }
     class customClassicEditorProvider extends Document{
