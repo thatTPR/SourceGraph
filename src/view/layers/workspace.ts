@@ -1,8 +1,9 @@
 import {workspaceMediator} from '../../mediators/workspace';
 import "fs" ;
-import {d3File} from './file' ;
-import * as Folder from './folder';
-import * as Symbol from './symbol';
+import {} from './symbol';
+import {} from './file';
+import {} from './folder';
+
 import { folderMediator } from '../../mediators/folder';
 class nodeIndex {
     type: 
@@ -79,6 +80,9 @@ class workspaceGraph {
 
     }
     private folderLinkOrganise(){
+
+    }
+    private fileOrganise(){
 
     }
     private organise(){
