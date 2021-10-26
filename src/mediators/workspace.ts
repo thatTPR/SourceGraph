@@ -1,8 +1,10 @@
-export class workspaceMediator {
-    folder: Array<folderMediator>
-   
-    
+import {} from 'vscode';
 
+export class workspaceMediator {
+    folder: Array<folderMediator> 
+    
+    
+    
     public detectDiamond(){
 
     }

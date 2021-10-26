@@ -12,12 +12,12 @@
 	],
 	"main": "./src/extension.js",
 	"activationEvents": [
-		"onCommand:commandId"
+		"onCommand:sg.enable"
 	],
 	"contributes": {
 		"commands": [
 			{
-				"command": "source-graph.start",
+				"command": "sg.enable",
 				"category": "source-graph",
 				"title": "Hello World"
 			}
@@ -35,8 +35,7 @@
 	},
 	"scripts": {
 		"lint": "eslint .",
-		"pretest": "npm run lint",
-		"test": "node ./test/runTest.js"
+		"pretest": "npm run lint"
 	},
 	"devDependencies": {
 		"types/d3": "^7.1.0",

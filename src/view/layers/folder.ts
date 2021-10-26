@@ -5,20 +5,21 @@ import { Axis, brush, chord, color, Contours, Delaunay, Dispatch, drag, DSV, eas
 import './symbol' ;
 import '../../mediator' ;
 import {} from '../../mediators/folder'
+
 class folderTree { 
     
     
 }
 
-class d3FolderNode {
+class d3FolderContainer {
 
     nodes: workspace.workspaceFolders;
 
 
 }
 class d3FolderChannel {
-    diamondFlag: Boolean ; 
-    cycleFlag: Boolean ; 
+    diamondFlag: diamondIndex ; 
+    cycleFlag: cycleIndex ; 
     constructor(){
         this.diamondFlag = false;
         this.cycleFlag = false;
@@ -51,4 +52,10 @@ class folderGraph {
         this.channel.push();
     }
 
+}
+
+
+function ForceGraph() {
+
+    
 }

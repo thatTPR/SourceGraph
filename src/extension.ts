@@ -4,7 +4,7 @@ export function activate(context: vscode.ExtensionContext) {
 	
 	console.log('Congratulations, your extension "interactive-source-graph" is now active!');
 	
-	context.subscriptions.push(vscode.commands.registerCommand('interactive-source-graph.start', () => {
+	context.subscriptions.push(vscode.commands.registerCommand('sg.enable', () => {
 		const panel = vscode.window.createWebviewPanel('Source graph',
         'Source graph',
         vscode.ViewColumn.One,
@@ -13,6 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
 		panel.webview.asWebviewUri(vscode.Uri.file('./view/index.html'))
 		
 	}));
+	
 	// function getWebViewContent(){
 	// 	return 
 	// 		'<!DOCTYPE html>
