@@ -1,8 +1,11 @@
 class symbolType {
 
 }
-class symbol
-class symbolMediator { // Manages extension provider for the workspace
-    symbols: Array
+class symbol{
     
+}
+class symbolMediator { // Manages references implementations and definitions for the given file takes the outline and show gets links for the graph
+    symbols: Array<Symbol>
+
+    constructor
 }
