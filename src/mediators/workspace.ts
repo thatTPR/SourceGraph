@@ -14,11 +14,11 @@ export class workspaceMediator {
     }
 
     
+    
     public detectDiamond() {
         // Triggered If any symbol calls two or more symbols recurring
         //  that all call 1 symbol 
     }
-
     public detectCycle() {
         // If any symbol calls a symbol reccuring that calls the original symbol
     }

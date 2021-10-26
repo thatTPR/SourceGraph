@@ -1,92 +1,129 @@
-import {workspaceMediator} from '../../mediators/workspace';
-import "fs" ;
-import {symbolNode} from './symbol';
-import {fileNode} from './file';
-import {folderNode} from './folder';
 
-import { folderMediator } from '../../mediators/folder';
+import "fs";
+import { symbolNode, symbolDiamond, symbolCycle } from './symbol';
+import { fileNode, fileDiamond, fileCycle } from './file';
+import { folderNode, treeLink, folderDiamond, folderCycle } from './folder';
+
+import { workspaceMediator } from '../../mediators/workspace';
 import { type } from 'os';
-class nodeIndex {
-   
-    type: 
-}
-type path = Array<symbolNode>;
-type cycle = Array<symbolNode>;
-class diamond{
-    start:symbolNode;
-    intPaths: Array<path>;
-    end:symbolNode;
-    constructor(start:symbolNode, intPaths: Array<path>, end:symbolNode){
-        this.start = start; this.intPaths = intPaths ; this.end = end ;
+
+
+export class diamondIndex {
+    symbolDiamonds: Array<symbolDiamond>;
+    fileDiamonds: Array<fileDiamond>;
+    folderDiamonds: Array<folderDiamond>;
+    constructor(symbolDiamonds: Array<symbolDiamond>,
+        fileDiamonds: Array<fileDiamond>,
+        folderDiamonds: Array<folderDiamond>) {
+        this.symbolDiamonds = symbolDiamonds;
+        this.fileDiamonds = fileDiamonds;
+        this.folderDiamonds = folderDiamonds;
     }
-} 
-class diamondIndex {
+}
+export class cycleIndex {
+    symbolCycles: Array<symbolCycle>;
+    fileCycles: Array<fileCycle>;
+    folderCycles: Array<folderCycle>;
+    constructor(symbolCycles: Array<symbolCycle>,
+        fileCycles: Array<fileCycle>,
+        folderCycles: Array<folderCycle>) {
+        this.symbolCycles = symbolCycles;
+        this.fileCycles = fileCycles;
+        this.folderCycles = folderCycles;
+    }
+
 
 }
-class cycleIndex {
+// It is possible for scales and diamonds to literally be on top of each other so this is 
+// handling for that
+class cycleScale {
+    minValue: Number;
+    maxValue: Number;
+    constructor(minValue: Number, maxValue:Number){
+        this.maxValue = maxValue ; this.minValue = minValue;
+    }
+
+}
+class diamondScale {
+    minValue: Number;
+    maxValue: Number;
+    constructor(minValue: Number, maxValue:Number){
+        this.maxValue = maxValue ; this.minValue = minValue;
+    }
+}
+ // If i finsh this down it should be pretty much done. Yay
+export class embeddedView {
+
+    type: editorType;
+    constructor(type: editorType) {
+        this.type = type;
+
+    }
+    public renderWorkspace() {
+
+    }
+    public addFile() {
+    }
+    public addFolder() {
+    }
 }
 
-class cycleScale { 
-
-}
-class diamondScale{
-
-}
 
 class workspaceGraph {
     nodes: Array<folderNode | fileNode>;
     links: Array<treeLink>;
     openNodes: Array<folderNode | fileNode>;
-    constructor(){ 
+    constructor() {
         // builds workspace tree from root recursively 
+        
         // builds graph and checks for diamonds and cycles returning information where appropiate
     }
-    private addnode(node: folderNode | fileNode){
+    private addnode(node: folderNode | fileNode) {
 
     }
-    private removeNode(){
+    private removeNode() {
 
     }
-    private addLink(link: ){
+    private addLink(link: ) {
 
     }
-    private removeLink(){
+    private removeLink() {
 
     }
-    private provideEmbeddedEditor(editor: ){
+    private provideEmbeddedEditor(editor: ) {
 
     }
-    private closeEmbeddedEditor(){
+    private closeEmbeddedEditor() {
 
     }
-    private openTransition(){
+    private openTransition() {
 
     }
-    private closeTransition(){ // When all 
+    private closeTransition() { // When all 
 
     }
-    private zoomLink(){
+    private zoomLink() {
 
     }
-    private zoomNode(){
+    private zoomNode() {
 
     }
-    private resizeNode(){
+    private resizeNode() {
         // Always done by absolute values. (adding and subtracting would either introduce to many bugs or require to much constant checking<< the absolute values are relative to screen size and resolution>> )
     }
-    private symbolLinkOrganise(){
+    private symbolLinkOrganise() {
 
     }
-    private fileLinkOrganise(){
+    private fileLinkOrganise() {
 
     }
-    private folderLinkOrganise(){
+    private folderLinkOrganise() {
 
     }
-    private fileOrganise(){
+    private fileOrganise() {
 
     }
-    private organise(){
+    private organise() {
 
     }
 }

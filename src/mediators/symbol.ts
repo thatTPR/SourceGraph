@@ -1,3 +1,6 @@
+import {SymbolInformation, SymbolKind, SymbolTag, DocumentSymbol, DocumentSymbolProvider, DocumentSymbolProviderMetadata, 
+WorkspaceSymbolProvider } from 'vscode';
+
 class symbolType {
 
 }

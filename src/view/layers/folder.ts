@@ -6,22 +6,35 @@ import {
 } from 'd3';
 
 import { } from './symbol';
-import { file, } from './file';
-import { } from './workspace';
+import { fileNode } from './file';
+import { diamondIndex, cycleIndex} from './workspace';
 
 import '../../mediator';
-import { } from '../../mediators/folder'
+import {folderMediator } from '../../mediators/folder'
 
-
+export type folderPath = Array<folderNode>;
+export type folderCycle = Array<folderNode>;
+export class folderDiamond {
+    start:folderNode;
+    intPaths: Array<folderPath>;
+    end:folderNode;
+    constructor(start:folderNode, intPaths: Array<folderPath>, end:folderNode){
+        this.start = start; this.intPaths = intPaths ; this.end = end ;
+    }
+   
+} 
 export class folderNode {
-
-    nodes: workspace.workspaceFolders;
-
+    
+    children: Array<folderNode | fileNode> ;
+    constructor(children: Array<folderNode | fileNode>){
+        this.children = children ;
+        
+    }
 
 }
 export class folderChannel {
-    diamondFlag: diamondIndex;
-    cycleFlag: cycleIndex;
+    diamondFlag: diamondIndex | null ;
+    cycleFlag: cycleIndex | null;
     source: | undefined;
     dest: | undefined;
     directed: boolean;
@@ -33,24 +46,24 @@ export class folderChannel {
         this.directed = directed;
 
     }
-    private animation(source: , dest: ) {
+    private animation(source: ; dest: ) {
 
     }
     private renderFilePipe() {
 
     }
-    private async
+    
 }
-class treeLink {
-    childIndex: nodeIndex; // NodeUri
-    parentIndex: nodeIndex; // NodeUri
-    constructor(childIndex: nodeIndex, parentIndex: nodeIndex) {
-        this.childIndex = childIndex; this.parentIndex = parentIndex;
+export class treeLink {
+    parentNode: folderNode; 
+    childNode: fileNode | folderNode; 
+    constructor(childNode: fileNode | folderNode, parentNode: folderNode) {
+        this.childNode = childNode; this.parentNode = parentNode;
     }
 }
 export class folderHierarchy {
-    tree: Tree<folderNode>;
-    eventListener:
+    tree: 
+    treeLink
         nodes: Array<folderNode>;
     constructor() {
         this.tree = eventListener;

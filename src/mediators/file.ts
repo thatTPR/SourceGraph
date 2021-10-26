@@ -1,54 +1,55 @@
-import {TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument , CustomEditorProvider} from "vscode";
-    class fileMediator{
-        
-    }
-    export enum documentEditorType {
-        classic = 0,
-        graph = 1,
-        notebook = 2,
-        graphnotebook = 3
-    }
-    class diamonds{
-    
-    }
-    class cycles {
-    
-    }
-    class documentEditorMediator {
-        editorType: documentEditorType;
-        constructor(editorType: documentEditorType) {
-            this.editorType = editorType;
-        }
-        public setEditorType(editorType: documentEditorType){
-            this.editorType = editorType ;
-        }
-        public getEditorType(){
-            return this.editorType;
-        }
-        public diamondDetector(){
+import { TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider } from "vscode";
 
-        }
-    }
-    class customClassicEditorProvider extends Document{
-        
-    }
-    class graphEditorProvider extends CustomTextEditorProvider {
+
+class diamonds {
+
+}
+class cycles {
+
+}
+enum editorType{
+    classic,
+    graph,
+    notebook,
+    notebookgraph,
+    custom,
+    crossgraph,
     
+}
+class documentEditor {
+    editorType: CustomEditorProvider;
+    constructor(editorType: documentEditorType) {
+        this.editorType = editorType;
     }
-    class customNotebookEditorProvider extends notebookEditorProvider {
-    
+    public setEditorType(editorType: documentEditorType) {
+        this.editorType = editorType;
     }
-    class graphNotebookEditorProvider extends customEditorProvider {
-    
+    public getEditorType() {
+        return this.editorType;
     }
-    class fileMediator {
-        editor: graphEditorProvider;
-        symbolMediator: Array<symbolMediator>;
-        constructor(editorProvider: CustomTextEditorProvider, symMediator: Array<symbolMediator>) {
-            this.editor = editorProvider;
-            this.symbolMediator = symMediator;
-        }
+   
+}
+class customClassicEditorProvider extends Document {
+
+}
+class graphEditorProvider extends CustomTextEditorProvider {
+
+}
+class customNotebookEditorProvider extends notebookEditorProvider {
+
+}
+class graphNotebookEditorProvider extends customEditorProvider {
+
+}
+export class fileMediator {
+    editor: graphEditorProvider;
+    symbolMediator: Array<symbolMediator>; // What would normally be in the outline.
+
+    constructor(editorProvider: CustomTextEditorProvider, symMediator: Array<symbolMediator>) {
+        this.editor = editorProvider;
+        this.symbolMediator = symMediator;
     }
-    
+}
+
 
 

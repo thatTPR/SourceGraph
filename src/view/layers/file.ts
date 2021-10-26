@@ -4,62 +4,58 @@ import {
     Force, forceCenter, ForceLink, forceSimulation, format, Path, Quadtree, RandomGeometric, scaleBand, ScalePower, Selection, SymbolType, timeDay, Timer, Transition,
     ZoomBehavior, ZoomInterpolator, ZoomScale
 } from 'd3';
-import {d3File, } from './symbol';
-import {folder} from './folder';
+import { symbolArrow } from './symbol';
+import {folderChannel} from './folder';
 import {} from './workspace';
 
-import {editorMediator, editorType} from '../../mediators/file';
-
-export class embeddedView {
-    
-    type: editorType ;
-    constructor(type: editorType) {
-       this.type = type;
-
+import {fileMediator} from '../../mediators/file';
+export type filePath = Array<fileNode>;
+export type fileCycle = Array<fileNode>;
+export class fileDiamond{
+    start:fileNode;
+    intPaths: Array<filePath>;
+    end:fileNode;
+    constructor(start:fileNode, intPaths: Array<filePath>, end:fileNode){
+        this.start = start; this.intPaths = intPaths ; this.end = end ;
     }
-    public renderWorkspace() {
-
-    }
-    public addFile() {
-    }
-    public addFolder() {
-    }
-}
-
-
+   
+} 
 
 export class fileNode {
+    icon: ;
     zoomThresh: number ;
-    constructor(zoomThresh: number ){
+    constructor(zoomThresh: number, icon: ){
         this.zoomThresh = zoomThresh ;
+        this.icon = icon;
     } 
-    public ()
+    
 
 }
 export class filePipe {
-    zoomThresh: 
-    cycleFlag: cycleIndex;
-    diamondFlag: diamondIndex;
-    embeddedSymbolArrows: 
-    constructor(cycleFlag: cycleIndex, diamondFlag: diamondIndex) {
+    zoomThresh: number ;
+    cycleFlag: cycleIndex | null; 
+    diamondFlag: diamondIndex | null ;
+    embeddedSymbolArrows: Array<symbolArrow>
+    constructor(cycleFlag: cycleIndex | null, diamondFlag: diamondIndex | null, zoomThresh: number) {
         this.cycleFlag = cycleIndex;
         this.diamondFlag = diamondIndex;
+        this.zoomThresh = zoomThresh ;
     }
-    private animation(source: , dest:){
+    private animation(source: fileNode, dest:fileNode){
 
     }
     private includeSymbolArrow(){
 
     }
-    render symbolArrow(){
+    private renderSymbolArrow(){
 
     }
-    private embed(folderChannel:){
-
+    private embed(folderChannel: folderChannel){
+        
     }
 }
 
-export class fileincludeGraph {
+export class fileIncludeGraph {
     
     nodes: Array<fileNode>;
     pipes: Array<filePipe>;
