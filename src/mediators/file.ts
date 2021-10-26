@@ -1,6 +1,8 @@
 import { TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider } from "vscode";
 
+export class icon{
 
+}
 class diamonds {
 
 }

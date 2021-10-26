@@ -6,9 +6,9 @@ import {
 } from 'd3';
 import { symbolArrow } from './symbol';
 import {folderChannel} from './folder';
-import {} from './workspace';
+import {cycleIndex, diamondIndex} from './workspace';
 
-import {fileMediator} from '../../mediators/file';
+import {fileMediator, icon} from '../../mediators/file';
 export type filePath = Array<fileNode>;
 export type fileCycle = Array<fileNode>;
 export class fileDiamond{
@@ -22,9 +22,9 @@ export class fileDiamond{
 } 
 
 export class fileNode {
-    icon: ;
+    icon: icon;
     zoomThresh: number ;
-    constructor(zoomThresh: number, icon: ){
+    constructor(zoomThresh: number, icon: icon ){
         this.zoomThresh = zoomThresh ;
         this.icon = icon;
     } 
@@ -33,25 +33,29 @@ export class fileNode {
 }
 export class filePipe {
     zoomThresh: number ;
-    cycleFlag: cycleIndex | null; 
-    diamondFlag: diamondIndex | null ;
-    embeddedSymbolArrows: Array<symbolArrow>
-    constructor(cycleFlag: cycleIndex | null, diamondFlag: diamondIndex | null, zoomThresh: number) {
-        this.cycleFlag = cycleIndex;
-        this.diamondFlag = diamondIndex;
+    cycleFlag: number ; 
+    diamondFlag: number  ;
+    embeddedSymbolArrows: Array<symbolArrow>;
+    includedIn: folderChannel ;
+    constructor(cycleFlag: number, diamondFlag: number, zoomThresh: number, includedIn: folderChannel, embeddedSymbolArrows: Array<symbolArrow>) {
+        this.cycleFlag = cycleFlag;
+        this.diamondFlag = diamondFlag;
         this.zoomThresh = zoomThresh ;
+        this.includedIn = includedIn;
+        this.embeddedSymbolArrows = embeddedSymbolArrows;
     }
     private animation(source: fileNode, dest:fileNode){
 
     }
-    private includeSymbolArrow(){
-
-    }
+   
     private renderSymbolArrow(){
 
     }
     private embed(folderChannel: folderChannel){
-        
+        folderChannel.include(this);
+    }
+    public include(symbolArrow: symbolArrow){
+
     }
 }
 

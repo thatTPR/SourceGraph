@@ -5,12 +5,11 @@ import {
     ZoomBehavior, ZoomInterpolator, ZoomScale
 } from 'd3';
 
-import { } from './symbol';
-import { fileNode } from './file';
+import { symbolArrow } from './symbol';
+import { fileNode, filePipe } from './file';
 import { diamondIndex, cycleIndex} from './workspace';
 
-import '../../mediator';
-import {folderMediator } from '../../mediators/folder'
+import {folderMediator, icon } from '../../mediators/folder'
 
 export type folderPath = Array<folderNode>;
 export type folderCycle = Array<folderNode>;
@@ -24,21 +23,23 @@ export class folderDiamond {
    
 } 
 export class folderNode {
-    
+    icon: icon;
     children: Array<folderNode | fileNode> ;
-    constructor(children: Array<folderNode | fileNode>){
-        this.children = children ;
+
+    constructor(children: Array<folderNode | fileNode>, icon: icon){
+        this.children = children ; this.icon = icon;
         
     }
 
+
 }
 export class folderChannel {
-    diamondFlag: diamondIndex | null ;
-    cycleFlag: cycleIndex | null;
+    diamondFlag: number ;
+    cycleFlag: number;
     source: | undefined;
     dest: | undefined;
     directed: boolean;
-    constructor(diamondFlag: diamondIndex , cycleFlag: cycleIndex , source: |undefined, dest: |undefined, directed: boolean) {
+    constructor(diamondFlag: number , cycleFlag:number , source: |undefined, dest: |undefined, directed: boolean) {
         this.diamondFlag = diamondFlag;
         this.cycleFlag = cycleFlag;
         this.source = source;
@@ -46,13 +47,23 @@ export class folderChannel {
         this.directed = directed;
 
     }
-    private animation(source: ; dest: ) {
+    private animation(source: folderNode, dest: folderNode ) {
 
     }
     private renderFilePipe() {
 
     }
+    public include(component: symbolArrow | filePipe){
+        if (typeof(component) == typeof(symbolArrow)){
+            
+        }
+        if( typeof(component) == typeof(filePipe)){
+
+        }
     
+        
+        
+    }    
 }
 export class treeLink {
     parentNode: folderNode; 
@@ -61,29 +72,21 @@ export class treeLink {
         this.childNode = childNode; this.parentNode = parentNode;
     }
 }
-export class folderHierarchy {
-    tree: 
-    treeLink
-        nodes: Array<folderNode>;
-    constructor() {
-        this.tree = eventListener;
-        this.eventListener =
-            this.nodes = workspace.workspaceFolders();
-    }
-}
+
 export class folderGraph {
     nodes: Array<folderNode>;
     channels: Array<folderChannel>;
-    constructor(nodes: Array<folderNode>, channels:Array<folderChannel>) {
+    tree: Array<treeLink>;
+    constructor(nodes: Array<folderNode>, channels:Array<folderChannel>, tree: Array<treeLink>) {
 
-        this.nodes = nodes; this.channels = channels;
+        this.nodes = nodes; this.channels = channels;this.tree = tree;
     }
 
     public buildHierarchy() {
     }
-    public addCrossInclude(Index1: folderNode, Index2: folderNode) {
+    public addChannel(folderNode: folderNode, folderNode: folderNode) {
         this.nodes;
-        this.channel.push();
+        this.channels.push();
     }
 
 }

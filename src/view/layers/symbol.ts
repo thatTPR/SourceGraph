@@ -2,8 +2,8 @@ import {SymbolKind, ThemeIcon, SymbolInformation, SaveDialogOptions} from 'vscod
 import {} from '../../mediators/symbol'
 // Contains both icons and Code symbols (if applicable)
 import {fileIncludeGraph, fileNode, filePipe} from './file';
-import {} from './folder';
-import {} from './workspace';
+import {folderChannel} from './folder';
+import { cycleIndex } from './workspace';
 
 export type symbolPath = Array<symbolNode>;
 export type symbolCycle = Array<symbolNode>;
@@ -19,47 +19,70 @@ export class symbolDiamond{
 
 export class symbolNode {
     type: SymbolInformation;
-    icon: ;
-    container: fileNode | ;
+    // icon: ;
     fileNode: fileNode ;
-    constructor(type: SymbolInformation){
+    constructor(type: SymbolInformation,/* icon: ThemeIcon,*/ fileNode: fileNode){
         this.type = type;
+        // this.icon = icon;
+        this.fileNode = fileNode;
     }
 }
 
 enum arrowType{
-    impl,
-    ref,
-    def,
-    typedef
+    impl = 0,
+    ref = 1,
+    def = 2,
+    typedef = 3
 }
 
 export class symbolArrow {
-    cycleFlag: Boolean;
-    diamondFlag: Boolean;
+    cycleFlag: number;
+    diamondFlag: number;
     type: arrowType;
     rendered: Boolean;
     source: symbolNode;
     dest: symbolNode ;
-
-    constructor() {
-        this.cycleFlag = false;
-        this.diamondFlag = false;
+    filePipe: filePipe ;
+    constructor( cycleFlag: number,
+        diamondFlag: number,
+        type: arrowType,
+        rendered: Boolean,
+        source: symbolNode,
+        dest: symbolNode, 
+        filePipe: filePipe) {
+        this.cycleFlag = cycleFlag;
+        this.diamondFlag = diamondFlag;
         this.rendered = false ;
-        this.type = ;
-        this.source = 
-        this.dest = 
+        this.type = type;
+        this.source = source;
+        this.dest = dest;
+        this.filePipe = filePipe;
     }
-
-    private async animation(source: , dest:){
+    set( cycleFlag: number,
+        diamondFlag: number,
+        type: arrowType,
+        rendered: Boolean,
+        source: symbolNode,
+        dest: symbolNode,
+        filePipe: filePipe ) {
+        this.cycleFlag = cycleFlag;
+        this.diamondFlag = diamondFlag;
+        this.rendered = false ;
+        this.type = type;
+        this.source = source;
+        this.dest = dest;
+        this.filePipe = filePipe;
+    }
+    private async animation(source: symbolNode , dest: symbolNode){
         while(this.rendered){
 
         }
+
     }
-    private embed(container: filePipe | folderChannel ){
-        container.IncludeSymbolArrow(this)
+    public embed(container: filePipe | folderChannel ){
+        container.include(this);
     }
-    private renderArrow(){
+    public renderArrow(){
 
         // Render code
         this.animation
