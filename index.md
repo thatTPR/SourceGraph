@@ -1,3 +1,5 @@
+## This is highly experimental software and not intended for general use. Use at your own risk. 
+
 ## Features
 An interactive source graph built in Typescript and VSIx compatible built for vscode
 Parses the entire workspace and builds out a source graph visualization containing the entire workspace

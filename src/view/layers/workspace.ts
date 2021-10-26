@@ -1,28 +1,29 @@
 import {workspaceMediator} from '../../mediators/workspace';
 import "fs" ;
-import {} from './symbol';
-import {} from './file';
-import {} from './folder';
+import {symbolNode} from './symbol';
+import {fileNode} from './file';
+import {folderNode} from './folder';
 
 import { folderMediator } from '../../mediators/folder';
+import { type } from 'os';
 class nodeIndex {
+   
     type: 
 }
-class treeLink {
-    childIndex: nodeIndex ; // NodeUri
-    parentIndex: nodeIndex; // NodeUri
-    constructor(childIndex: nodeIndex, parentIndex: nodeIndex){
-        this.childIndex = childIndex ; this.parentIndex = parentIndex;
+type path = Array<symbolNode>;
+type cycle = Array<symbolNode>;
+class diamond{
+    start:symbolNode;
+    intPaths: Array<path>;
+    end:symbolNode;
+    constructor(start:symbolNode, intPaths: Array<path>, end:symbolNode){
+        this.start = start; this.intPaths = intPaths ; this.end = end ;
     }
-}
-class graphLink {
-    
-}
+} 
 class diamondIndex {
-    symbolTag: 
+
 }
 class cycleIndex {
-    symbolTag:
 }
 
 class cycleScale { 
@@ -33,14 +34,14 @@ class diamondScale{
 }
 
 class workspaceGraph {
-    nodes: Array<Folder.folderNode | File.fileNode>;
-    inks: Array<treeLink>;
-
+    nodes: Array<folderNode | fileNode>;
+    links: Array<treeLink>;
+    openNodes: Array<folderNode | fileNode>;
     constructor(){ 
-        // builds workspace tree from root recursively
-        // builds graph
+        // builds workspace tree from root recursively 
+        // builds graph and checks for diamonds and cycles returning information where appropiate
     }
-    private addnode(node: d3Folder.d3FolderContainer | d3File.d3File){
+    private addnode(node: folderNode | fileNode){
 
     }
     private removeNode(){
@@ -61,7 +62,7 @@ class workspaceGraph {
     private openTransition(){
 
     }
-    private closeTransition(){
+    private closeTransition(){ // When all 
 
     }
     private zoomLink(){

@@ -6,27 +6,32 @@ import {
 } from 'd3';
 
 import { } from './symbol';
-import { d3File, } from './file';
+import { file, } from './file';
 import { } from './workspace';
 
 import '../../mediator';
 import { } from '../../mediators/folder'
 
 
-class d3FolderNode {
+export class folderNode {
 
     nodes: workspace.workspaceFolders;
 
 
 }
-class d3FolderChannel {
+export class folderChannel {
     diamondFlag: diamondIndex;
     cycleFlag: cycleIndex;
-    source:
-        dest:
-    constructor() {
-        this.diamondFlag = false;
-        this.cycleFlag = false;
+    source: | undefined;
+    dest: | undefined;
+    directed: boolean;
+    constructor(diamondFlag: diamondIndex , cycleFlag: cycleIndex , source: |undefined, dest: |undefined, directed: boolean) {
+        this.diamondFlag = diamondFlag;
+        this.cycleFlag = cycleFlag;
+        this.source = source;
+        this.dest = dest;
+        this.directed = directed;
+
     }
     private animation(source: , dest: ) {
 
@@ -36,28 +41,34 @@ class d3FolderChannel {
     }
     private async
 }
-class d3FolderHierarchy {
-    tree: Tree<d3FolderNode>;
+class treeLink {
+    childIndex: nodeIndex; // NodeUri
+    parentIndex: nodeIndex; // NodeUri
+    constructor(childIndex: nodeIndex, parentIndex: nodeIndex) {
+        this.childIndex = childIndex; this.parentIndex = parentIndex;
+    }
+}
+export class folderHierarchy {
+    tree: Tree<folderNode>;
     eventListener:
-        nodes: Array<d3FolderNode>;
+        nodes: Array<folderNode>;
     constructor() {
         this.tree = eventListener;
         this.eventListener =
             this.nodes = workspace.workspaceFolders();
     }
 }
-class folderGraph {
-    hierarchy: d3FolderHierarchy;
-    nodes: Array<d3FolderNode>;
-    channels: Array<d3FolderChannel>;
-    constructor(nodes: Array<d3FolderNode>) {
+export class folderGraph {
+    nodes: Array<folderNode>;
+    channels: Array<folderChannel>;
+    constructor(nodes: Array<folderNode>, channels:Array<folderChannel>) {
 
-        this.nodes = nodes; this.channel(this.nodes.);
+        this.nodes = nodes; this.channels = channels;
     }
 
     public buildHierarchy() {
     }
-    public addCrossInclude(Index1: d3FolderNode, Index2: d3FolderNode) {
+    public addCrossInclude(Index1: folderNode, Index2: folderNode) {
         this.nodes;
         this.channel.push();
     }

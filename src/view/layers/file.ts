@@ -5,20 +5,15 @@ import {
     ZoomBehavior, ZoomInterpolator, ZoomScale
 } from 'd3';
 import {d3File, } from './symbol';
-import {} from './file';
+import {folder} from './folder';
 import {} from './workspace';
 
-import * as meds from '../../mediators/file';
+import {editorMediator, editorType} from '../../mediators/file';
 
-class embeddedEditor {
+export class embeddedView {
     
-    type: meds.documentEditorType ;
-    workspaceMed: workspaceMediator;
-    folderIncludeGraph: folderIncludeGraph;
-    fileIncludeGraph: fileincludeGraph;
-    symbolIncludeGraph: symbolincludeGraph;
-
-    constructor(type: meds.documentEditorType) {
+    type: editorType ;
+    constructor(type: editorType) {
        this.type = type;
 
     }
@@ -33,7 +28,7 @@ class embeddedEditor {
 
 
 
-class FileNode {
+export class fileNode {
     zoomThresh: number ;
     constructor(zoomThresh: number ){
         this.zoomThresh = zoomThresh ;
@@ -41,7 +36,7 @@ class FileNode {
     public ()
 
 }
-class FilePipe {
+export class filePipe {
     zoomThresh: 
     cycleFlag: cycleIndex;
     diamondFlag: diamondIndex;
@@ -64,11 +59,11 @@ class FilePipe {
     }
 }
 
-class fileincludeGraph {
+export class fileincludeGraph {
     
-    nodes: Array<FileNode>;
-    pipes: Array<FilePipe>;
-    constructor(nodes: Array<FileNode>, pipes: Array<FilePipe>) {
+    nodes: Array<fileNode>;
+    pipes: Array<filePipe>;
+    constructor(nodes: Array<fileNode>, pipes: Array<filePipe>) {
         this.nodes = nodes; this.pipes = pipes;
     }
     public detectDiamonds(){

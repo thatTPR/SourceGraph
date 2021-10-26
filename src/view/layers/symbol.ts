@@ -1,21 +1,34 @@
-import {SymbolKind, ThemeIcon, SymbolInformation} from 'vscode';
+import {SymbolKind, ThemeIcon, SymbolInformation, SaveDialogOptions} from 'vscode';
 import {} from '../../mediators/symbol'
 // Contains both icons and Code symbols (if applicable)
 import {fileIncludeGraph, fileNode, filePipe} from './file';
-import {folderChannel, folderGraph, folderNode} from './folder';
+import {} from './folder';
 import {} from './workspace';
 
-class d3SymbolNode {
+export class symbolNode {
     type: SymbolInformation;
+    icon: 
+    constructor(type: SymbolInformation){
+        this.type = type;
+    }
 }
-class d3SymbolArrow {
+
+enum arrowType{
+    impl = 0,
+    ref = 1,
+    def = 2,
+    typedef = 3
+}
+export class symbolArrow {
     cycleFlag: Boolean;
     diamondFlag: Boolean;
+    type: arrowType;
     rendered: Boolean;
     constructor() {
         this.cycleFlag = false;
         this.diamondFlag = false;
         this.rendered = false ;
+        this.type = ;
     }
     private async animation(source: , dest:){
         while(this.rendered){
@@ -30,12 +43,12 @@ class d3SymbolArrow {
         this.animation
     }
 }
-class symbolincludeGraph {
+export class symbolincludeGraph {
 
-    symbolNodes: Array<d3SymbolArrow>;
-    symbolArrows: Array<d3SymbolNode>;
+    symbolNodes: Array<symbolArrow>;
+    symbolArrows: Array<symbolNode>;
 
-    constructor(symbolNodes: Array<d3SymbolNode>, symbolArrows: Array<d3SymbolArrow>) {
+    constructor(symbolNodes: Array<symbolNode>, symbolArrows: Array<symbolArrow>) {
         this.symbolArrows = symbolArrows; this.symbolNodes = symbolNodes;
     }
     // This applies modification to arrow cycles and / or diamonds  // Cycles pink, diamonds light blue
