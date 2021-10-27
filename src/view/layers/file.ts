@@ -24,9 +24,11 @@ export class fileDiamond{
 export class fileNode {
     icon: icon;
     zoomThresh: number ;
+    isOpen: boolean ;
     constructor(zoomThresh: number, icon: icon ){
         this.zoomThresh = zoomThresh ;
         this.icon = icon;
+        this.isOpen = false ;
     } 
     
 
@@ -66,10 +68,21 @@ export class fileIncludeGraph {
     constructor(nodes: Array<fileNode>, pipes: Array<filePipe>) {
         this.nodes = nodes; this.pipes = pipes;
     }
+    public addPipe(src: fileNode, dest: fileNode) {
+        this.nodes;
+        this.pipes.push();
+    }
+    public removePipe(){
+
+    }
     public detectDiamonds(){
 
     }
     public detectCycles(){
 
+    }
+    public diamondModifier() {
+    }
+    public cycleModifier() {
     }
 }

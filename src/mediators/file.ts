@@ -1,5 +1,5 @@
 import { TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider } from "vscode";
-
+import { embeddedEditorMediator } from './workspace';
 export class icon{
 
 }
@@ -9,15 +9,12 @@ class diamonds {
 class cycles {
 
 }
-enum editorType{
-    classic,
-    graph,
-    notebook,
-    notebookgraph,
-    custom,
-    crossgraph,
-    
+
+class classicEditorMediator implements embeddedEditorMediator{
+
 }
+
+class
 class documentEditor {
     editorType: CustomEditorProvider;
     constructor(editorType: documentEditorType) {

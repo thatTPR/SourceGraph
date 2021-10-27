@@ -4,7 +4,7 @@ import { symbolNode, symbolDiamond, symbolCycle } from './symbol';
 import { fileNode, fileDiamond, fileCycle } from './file';
 import { folderNode, treeLink, folderDiamond, folderCycle } from './folder';
 
-import { workspaceMediator } from '../../mediators/workspace';
+import {editorType, workspaceMediator, graphEditorMediator } from '../../mediators/workspace';
 import { type } from 'os';
 
 
@@ -66,16 +66,17 @@ export class embeddedView {
     }
     public addFolder() {
     }
+
 }
 
 
 class workspaceGraph {
     nodes: Array<folderNode | fileNode>;
     links: Array<treeLink>;
-    openNodes: Array<folderNode | fileNode>;
+    
     constructor() {
         // builds workspace tree from root recursively 
-        
+
         // builds graph and checks for diamonds and cycles returning information where appropiate
     }
     private addnode(node: folderNode | fileNode) {

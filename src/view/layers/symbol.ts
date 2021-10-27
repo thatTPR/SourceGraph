@@ -88,15 +88,27 @@ export class symbolArrow {
         this.animation
     }
 }
-export class symbolincludeGraph {
+export class symbolIncludeGraph {
 
-    symbolNodes: Array<symbolNode>;
-    symbolArrows: Array<symbolArrow>;
+    nodes: Array<symbolNode>;
+    arrows: Array<symbolArrow>;
 
     constructor(symbolNodes: Array<symbolNode>, symbolArrows: Array<symbolArrow>) {
-        this.symbolArrows = symbolArrows; this.symbolNodes = symbolNodes;
+        this.arrows = symbolArrows; this.nodes = symbolNodes;
     }
-    // This applies modification to arrow cycles and / or diamonds  // Cycles pink, diamonds light blue
+    public addArrow(src: symbolNode, dest: symbolNode) {
+        this.nodes;
+        this.arrows.push();
+    }
+    public removeArrow(){
+        
+    }
+    public detectDiamonds(){
+
+    }
+    public detectCycles(){
+
+    }
     public diamondModifier() {
     }
     public cycleModifier() {

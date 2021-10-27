@@ -16,6 +16,7 @@
 		"onCommand:sg.enable"
 	],
 	"contributes": {
+		
 		"customEditors": [
 			{
 				"viewType": "viewsContainers",

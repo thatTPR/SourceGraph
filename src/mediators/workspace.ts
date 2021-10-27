@@ -1,5 +1,25 @@
 import { workspace } from 'vscode';
 
+
+export enum editorType{
+    classic,
+    graph,
+    notebook,
+    notebookgraph,
+    custom,
+    crossgraph,
+    
+}
+
+export interface embeddedEditorMediator{
+    editorType: editorType ;
+}
+export class graphEditorMediator implements embeddedEditorMediator{
+
+}
+class notebookGraphEditorMeditor{
+
+}
 export class workspaceMediator {
     folders: any;
     constructor() {

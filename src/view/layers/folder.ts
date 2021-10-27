@@ -25,10 +25,14 @@ export class folderDiamond {
 export class folderNode {
     icon: icon;
     children: Array<folderNode | fileNode> ;
-
+    isOpen: boolean ;
+    
     constructor(children: Array<folderNode | fileNode>, icon: icon){
-        this.children = children ; this.icon = icon;
+        this.children = children ; this.icon = icon; this.isOpen = false;
         
+    }
+    public getChildren(){
+        return this.children ;
     }
 
 
@@ -84,9 +88,22 @@ export class folderGraph {
 
     public buildHierarchy() {
     }
-    public addChannel(folderNode: folderNode, folderNode: folderNode) {
+    public addLink(){
+
+    }
+    public addChannel(src: folderNode, dest: folderNode) {
         this.nodes;
         this.channels.push();
+    }
+    public detectDiamonds(){
+
+    }
+    public detectCycles(){
+
+    }
+    public diamondModifier() {
+    }
+    public cycleModifier() {
     }
 
 }
