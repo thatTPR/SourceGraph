@@ -1,11 +1,12 @@
 
-import "fs";
-import { symbolNode, symbolDiamond, symbolCycle } from './symbol';
-import { fileNode, fileDiamond, fileCycle } from './file';
-import { folderNode, treeLink, folderDiamond, folderCycle } from './folder';
+import { symbolNode, symbolDiamond, symbolCycle, symbolArrow } from './symbol';
+import { fileNode, fileDiamond, fileCycle, filePipe } from './file';
+import { folderGraph, treeLink, folderDiamond, folderCycle, folderChannel } from './folder';
 
-import {editorType, workspaceMediator, graphEditorMediator } from '../../mediators/workspace';
-import { type } from 'os';
+import { editorType, workspaceMediator,  embeddedEditorMediator } from '../../mediators/workspace';
+import { workspace } from 'vscode';
+
+import {scaleLinear} from 'd3-scale' ; 
 
 
 export class diamondIndex {
@@ -19,6 +20,59 @@ export class diamondIndex {
         this.fileDiamonds = fileDiamonds;
         this.folderDiamonds = folderDiamonds;
     }
+    public getMaxSymbol() {
+        return 
+    }
+    public getMaxFile() {
+        return
+    }
+    public getMaxFolder() {
+        return
+    }
+    public getMinSymbol() {
+        return
+    }
+    public getMinFile() {
+        return
+    }
+    public getMinFolder() {
+        return
+    }
+    public getMax() {
+        this.getMaxFile();
+        this.getMaxFolder();
+        this.getMaxSymbol();
+    }
+    public getMin() {
+        this.getMinFile();
+        this.getMinFolder();
+        this.getMinSymbol();
+    }
+    public checkExists(){
+
+    }
+    private getPlace(diamond: fileDiamond | folderDiamond | symbolDiamond ) {
+        if(typeof(diamond) == typeof(symbolDiamond)){
+            return this.symbolDiamonds;
+        }
+        if(typeof(diamond) == typeof(fileDiamond)){
+            return this.fileDiamonds;
+        }
+        if(typeof(diamond) == typeof(folderDiamond)){
+            return this.folderDiamonds;
+        }
+    } 
+    // private checkExists(diamond: fileDiamond | folderDiamond | symbolDiamond, 
+    //     place: Array<symbolDiamond> | Array<fileDiamond> | Array<folderDiamond> ){
+    //     place.find
+    // }
+    public add(diamond: fileDiamond | folderDiamond | symbolDiamond){
+        let temp = this.getPlace(diamond);
+
+    }
+    public remove(diamond: fileDiamond | folderDiamond | symbolDiamond){
+        let temp = this.getPlace(diamond);
+    }
 }
 export class cycleIndex {
     symbolCycles: Array<symbolCycle>;
@@ -31,67 +85,134 @@ export class cycleIndex {
         this.fileCycles = fileCycles;
         this.folderCycles = folderCycles;
     }
+    public getMaxSymbol() {
 
+    }
+    public getMaxFile() {
+
+    }
+    public getMaxFolder() {
+
+    }
+    public getMinSymbol() {
+
+    }
+    public getMinFile() {
+
+    }
+    public getMinFolder() {
+
+    }
+    public getMax() {
+        this.getMaxFile();
+        this.getMaxFolder();
+        this.getMaxSymbol();
+    }
+    public getMin() {
+        this.getMinFile();
+        this.getMinFolder();
+        this.getMinSymbol();
+    }
 
 }
 // It is possible for scales and diamonds to literally be on top of each other so this is 
 // handling for that
-class cycleScale {
+import {sourceGraphActivity} from  '../../Renderer' ;
+export class cycleScale {
+    sourceGraphActivity: sourceGraphActivity ;
     minValue: Number;
     maxValue: Number;
-    constructor(minValue: Number, maxValue:Number){
-        this.maxValue = maxValue ; this.minValue = minValue;
+    constructor(minValue: Number, maxValue: Number, sourceGraphActivity: sourceGraphActivity ) {
+        this.maxValue = maxValue; this.minValue = minValue;
+        this.sourceGraphActivity = sourceGraphActivity.getCycleScale(this);
+        
     }
 
+
 }
-class diamondScale {
+export class diamondScale {
+    sourceGraphActivity: sourceGraphActivity ;
     minValue: Number;
     maxValue: Number;
-    constructor(minValue: Number, maxValue:Number){
-        this.maxValue = maxValue ; this.minValue = minValue;
+    constructor(minValue: Number, maxValue: Number, sourceGraphActivity: sourceGraphActivity ) {
+        this.maxValue = maxValue; this.minValue = minValue;
+        this.sourceGraphActivity = sourceGraphActivity.getDiamondScale(this);
+        
     }
 }
- // If i finsh this down it should be pretty much done. Yay
+// If i finsh this down it should be pretty much done. Yay
 export class embeddedView {
+    workspace: workspaceGraph;
+    parent: fileNode | Array<fileNode>;
+    view: embeddedEditorMediator;
+    constructor(view: embeddedEditorMediator, workspace: workspaceGraph, parent: fileNode | Array<fileNode>) {
+        this.view = view;
+        this.provideView(view);
+        this.workspace = workspace ;
+        this.parent = parent;
+    }
+    public provideView(view: embeddedEditorMediator ) {
+       view.provideEditor()
+    }
+  
+    public renderWorkspace(workspace: workspaceGraph) {
 
-    type: editorType;
-    constructor(type: editorType) {
-        this.type = type;
-
     }
-    public renderWorkspace() {
-
-    }
-    public addFile() {
-    }
-    public addFolder() {
-    }
+    
 
 }
 
 
-class workspaceGraph {
-    nodes: Array<folderNode | fileNode>;
-    links: Array<treeLink>;
-    
+export class workspaceGraph {
+    folderGraph: Array<folderGraph>;
+    workspaceMediator: workspaceMediator;
+    diamondIndex: diamondIndex;
+    cycleIndex: cycleIndex;
+    sourceGraphActivity: sourceGraphActivity ;
     constructor() {
         // builds workspace tree from root recursively 
+        this.workspaceMediator = new workspaceMediator;
+        // Build Link tree
 
+        // buildChannelGraph
+
+        // buildPipeGraph
+        // buildSymbolGraph
         // builds graph and checks for diamonds and cycles returning information where appropiate
-    }
-    private addnode(node: folderNode | fileNode) {
+        
+        this.diamondIndex = new diamondIndex();
+        this.cycleIndex = new cycleIndex();
+        
+        this.workspaceMediator.detectDiamond();
+        this.workspaceMediator.detectCycle();
 
     }
-    private removeNode() {
+
+    private refreshLinkTree() {
 
     }
-    private addLink(link: ) {
+    private refreshChannelGraph() {
 
     }
-    private removeLink() {
+    private refreshPipeGraph() {
 
     }
-    private provideEmbeddedEditor(editor: ) {
+    private refreshSymbolGraph() {
+
+    }
+    private addnode(node: folderNode | fileNode | symbolNode) {
+
+    }
+    private removeNode(node: folderNode | fileNode | symbolNode) {
+
+    }
+    private addLink(link: treeLink) {
+
+    }
+    private removeLink(link: treeLink) {
+
+    }
+    private provideEmbeddedView() {
 
     }
     private closeEmbeddedEditor() {

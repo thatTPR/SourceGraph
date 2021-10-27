@@ -1,15 +1,24 @@
-import { ThemeIcon, workspace } from 'vscode';
-import { Axis, brush, chord, color, Contours, Delaunay, Dispatch, drag, DSV, easeBack, easeBackInOut, easeBackOut ,
-    Force, forceCenter, ForceLink, forceSimulation, format, Path, Quadtree, RandomGeometric, scaleBand, ScalePower, Selection, SymbolType, timeDay, Timer,  Transition, 
-    ZoomBehavior, ZoomInterpolator,  ZoomScale } from 'd3';
-// This is the renderer
+import {StatusBarItem, StatusBarAlignment} from 'vscode' ;
+import {cycleScale, diamondScale} from './view/layers/workspace';
+class sourceGraphActivity  {
+    cycleScale: cycleScale;
+    diamondScale: diamondScale;
+    public setDiamondScale(diamondScale: diamondScale){
+        this.diamondScale = diamondScale ;
+    }
+    public setCycleScale(cycleScale: cycleScale){
+        this.cycleScale = cycleScale ;
+    }
+    
+}
 
-    // Renders Basic folder tree
 
-import * as Mediator from './Mediator';
 
-import {} from './view/layers/workspace';
-import {} from './view/layers/folder';
-import {} from './view/layers/file';
-import {} from './view/layers/symbol';
-
+class sourceGraphStatusBarItem implements StatusBarItem {
+    StatusBarAlignment: StatusBarAlignment ;
+    constructor(){
+        this.StatusBarAlignment = 1 ;
+        
+    }
+    
+}

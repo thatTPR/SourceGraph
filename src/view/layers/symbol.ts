@@ -1,5 +1,5 @@
 import {SymbolKind, ThemeIcon, SymbolInformation, SaveDialogOptions} from 'vscode';
-import {} from '../../mediators/symbol'
+import {symbolMediator} from '../../mediators/symbol'
 // Contains both icons and Code symbols (if applicable)
 import {fileIncludeGraph, fileNode, filePipe} from './file';
 import {folderChannel} from './folder';
@@ -19,11 +19,11 @@ export class symbolDiamond{
 
 export class symbolNode {
     type: SymbolInformation;
-    // icon: ;
+    symbolMediator: symbolMediator;
     fileNode: fileNode ;
-    constructor(type: SymbolInformation,/* icon: ThemeIcon,*/ fileNode: fileNode){
+    constructor(type: SymbolInformation, symbolMediator: symbolMediator, fileNode: fileNode){
         this.type = type;
-        // this.icon = icon;
+        this.symbolMediator = symbolMediator ;
         this.fileNode = fileNode;
     }
 }
@@ -42,21 +42,21 @@ export class symbolArrow {
     rendered: Boolean;
     source: symbolNode;
     dest: symbolNode ;
-    filePipe: filePipe ;
+    includedIn: filePipe ;
     constructor( cycleFlag: number,
         diamondFlag: number,
         type: arrowType,
         rendered: Boolean,
         source: symbolNode,
         dest: symbolNode, 
-        filePipe: filePipe) {
+        includedIn: filePipe) {
         this.cycleFlag = cycleFlag;
         this.diamondFlag = diamondFlag;
         this.rendered = false ;
         this.type = type;
         this.source = source;
         this.dest = dest;
-        this.filePipe = filePipe;
+        this.includedIn = includedIn;
     }
     set( cycleFlag: number,
         diamondFlag: number,
@@ -64,14 +64,14 @@ export class symbolArrow {
         rendered: Boolean,
         source: symbolNode,
         dest: symbolNode,
-        filePipe: filePipe ) {
+        includedIn: filePipe ) {
         this.cycleFlag = cycleFlag;
         this.diamondFlag = diamondFlag;
         this.rendered = false ;
         this.type = type;
         this.source = source;
         this.dest = dest;
-        this.filePipe = filePipe;
+        this.includedIn= includedIn;
     }
     private async animation(source: symbolNode , dest: symbolNode){
         while(this.rendered){
@@ -92,7 +92,7 @@ export class symbolIncludeGraph {
 
     nodes: Array<symbolNode>;
     arrows: Array<symbolArrow>;
-
+    
     constructor(symbolNodes: Array<symbolNode>, symbolArrows: Array<symbolArrow>) {
         this.arrows = symbolArrows; this.nodes = symbolNodes;
     }
@@ -102,12 +102,6 @@ export class symbolIncludeGraph {
     }
     public removeArrow(){
         
-    }
-    public detectDiamonds(){
-
-    }
-    public detectCycles(){
-
     }
     public diamondModifier() {
     }

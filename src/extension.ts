@@ -11,6 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.ViewColumn.One,
         {}
       	)
+		panel.webview.options
 		panel.webview.asWebviewUri(vscode.Uri.file('./view/index.html'))
 		
 	}));

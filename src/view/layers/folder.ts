@@ -1,4 +1,4 @@
-import { ThemeIcon, workspace } from 'vscode';
+import { ThemeIcon, workspace , Uri} from 'vscode';
 import {
     Axis, brush, chord, color, Contours, Delaunay, Dispatch, drag, DSV, easeBack, easeBackInOut, easeBackOut,
     Force, forceCenter, ForceLink, forceSimulation, format, Path, Quadtree, RandomGeometric, scaleBand, ScalePower, Selection, SymbolType, timeDay, Timer, Transition,
@@ -6,10 +6,10 @@ import {
 } from 'd3';
 
 import { symbolArrow } from './symbol';
-import { fileNode, filePipe } from './file';
-import { diamondIndex, cycleIndex} from './workspace';
+import { fileIncludeGraph, fileNode, filePipe } from './file';
+import { diamondIndex, cycleIndex, workspaceGraph} from './workspace';
 
-import {folderMediator, icon } from '../../mediators/folder'
+import {folderMediator, folderIconMediator} from '../../mediators/folder'
 
 export type folderPath = Array<folderNode>;
 export type folderCycle = Array<folderNode>;
@@ -23,13 +23,14 @@ export class folderDiamond {
    
 } 
 export class folderNode {
-    icon: icon;
-    children: Array<folderNode | fileNode> ;
+     children: Array<folderNode | fileNode> ;
     isOpen: boolean ;
-    
-    constructor(children: Array<folderNode | fileNode>, icon: icon){
-        this.children = children ; this.icon = icon; this.isOpen = false;
-        
+    folderMediator: folderMediator ;
+    Uri: Uri ;
+    workspace: workspaceGraph ;
+    constructor(children: Array<folderNode | fileNode>, Uri: Uri, workspace: workspaceGraph){
+        this.children = children ; this.isOpen = false; this.Uri = Uri ; this.workspace = workspace ;
+        this.folderMediator = new folderMediator(this.Uri);        
     }
     public getChildren(){
         return this.children ;
@@ -40,15 +41,23 @@ export class folderNode {
 export class folderChannel {
     diamondFlag: number ;
     cycleFlag: number;
-    source: | undefined;
-    dest: | undefined;
+    source: folderNode | undefined;
+    dest: folderNode | undefined;
     directed: boolean;
-    constructor(diamondFlag: number , cycleFlag:number , source: |undefined, dest: |undefined, directed: boolean) {
+    zoomThresh: number ;
+    embeddedFilePipes: Array<filePipe> ;
+
+    constructor(diamondFlag: number , cycleFlag:number , source: folderNode |undefined, dest: folderNode |undefined, zoomThresh: number , embeddedFilePipes:Array<filePipe>) {
         this.diamondFlag = diamondFlag;
         this.cycleFlag = cycleFlag;
         this.source = source;
         this.dest = dest;
-        this.directed = directed;
+        this.zoomThresh = zoomThresh ;
+        this.embeddedFilePipes = embeddedFilePipes;
+        if (this.source=== undefined && this.dest === undefined){
+            this.directed = true ;
+        }
+        else {this.directed = false ;}
 
     }
     private animation(source: folderNode, dest: folderNode ) {
@@ -81,6 +90,7 @@ export class folderGraph {
     nodes: Array<folderNode>;
     channels: Array<folderChannel>;
     tree: Array<treeLink>;
+
     constructor(nodes: Array<folderNode>, channels:Array<folderChannel>, tree: Array<treeLink>) {
 
         this.nodes = nodes; this.channels = channels;this.tree = tree;
@@ -95,12 +105,7 @@ export class folderGraph {
         this.nodes;
         this.channels.push();
     }
-    public detectDiamonds(){
-
-    }
-    public detectCycles(){
-
-    }
+   
     public diamondModifier() {
     }
     public cycleModifier() {

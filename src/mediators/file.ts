@@ -1,20 +1,20 @@
-import { TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider } from "vscode";
-import { embeddedEditorMediator } from './workspace';
-export class icon{
+import { ThemeIcon,TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider, Uri } from "vscode";
+import { editorType, embeddedEditorMediator } from './workspace';
+import { symbolMediator , symbolNode} from './symbol';
+import {folderChannel} from './folder';
 
+
+export class fileIconMediator {
+   
 }
-class diamonds {
-
-}
-class cycles {
-
-}
-
 class classicEditorMediator implements embeddedEditorMediator{
-
+    editorType: editorType;
+    constructor(){
+        this.editorType = 0 ;
+    }
 }
 
-class
+
 class documentEditor {
     editorType: CustomEditorProvider;
     constructor(editorType: documentEditorType) {
@@ -28,25 +28,36 @@ class documentEditor {
     }
    
 }
-class customClassicEditorProvider extends Document {
 
-}
-class graphEditorProvider extends CustomTextEditorProvider {
-
-}
-class customNotebookEditorProvider extends notebookEditorProvider {
-
-}
-class graphNotebookEditorProvider extends customEditorProvider {
+export class notebookMediator{
 
 }
 export class fileMediator {
-    editor: graphEditorProvider;
-    symbolMediator: Array<symbolMediator>; // What would normally be in the outline.
+    iconMediator: fileIconMediator;
+    Uri: Uri ;
+    symbolMediator: symbolMediator ;
+    folder: folderMediator ;
+    constructor(child: ){
+        this.iconMediator = 
+        this.Uri = current    
+    } 
+    public detectDiamonds(){
 
-    constructor(editorProvider: CustomTextEditorProvider, symMediator: Array<symbolMediator>) {
-        this.editor = editorProvider;
-        this.symbolMediator = symMediator;
+    }
+    public detectCycles(){
+
+    }
+    public getReferences(){
+
+    }
+    public getUses(){
+
+    }
+    public editRange(range: ; content: string){
+
+    }
+    public readRange(range: ; content: string){
+
     }
 }
 

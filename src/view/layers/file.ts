@@ -4,11 +4,11 @@ import {
     Force, forceCenter, ForceLink, forceSimulation, format, Path, Quadtree, RandomGeometric, scaleBand, ScalePower, Selection, SymbolType, timeDay, Timer, Transition,
     ZoomBehavior, ZoomInterpolator, ZoomScale
 } from 'd3';
-import { symbolArrow } from './symbol';
+import { symbolArrow , symbolNode} from './symbol';
 import {folderChannel} from './folder';
-import {cycleIndex, diamondIndex} from './workspace';
+import {cycleIndex, diamondIndex, workspaceGraph} from './workspace';
 
-import {fileMediator, icon} from '../../mediators/file';
+import {fileMediator, fileIconMediator} from '../../mediators/file';
 export type filePath = Array<fileNode>;
 export type fileCycle = Array<fileNode>;
 export class fileDiamond{
@@ -22,14 +22,23 @@ export class fileDiamond{
 } 
 
 export class fileNode {
-    icon: icon;
     zoomThresh: number ;
     isOpen: boolean ;
-    constructor(zoomThresh: number, icon: icon ){
+    children : Array<symbolNode>;
+    fileMediator: fileMediator ;
+    workspace: workspaceGraph ;
+    // New workspace contstructor
+    constructor(zoomThresh: number, children : Array<symbolNode>, fileMediator: fileMediator, workspace: workspaceGraph ){
         this.zoomThresh = zoomThresh ;
-        this.icon = icon;
         this.isOpen = false ;
+        this.children = children ;
+        this.fileMediator = fileMediator ;        
+        this.workspace = workspace ;
     } 
+    public edit(){
+        
+    }
+    
     
 
 }
@@ -81,8 +90,5 @@ export class fileIncludeGraph {
     public detectCycles(){
 
     }
-    public diamondModifier() {
-    }
-    public cycleModifier() {
-    }
+   
 }

@@ -1,46 +1,45 @@
 import { workspace } from 'vscode';
+import { fileMediator , notebookMediator} from './file';
+import { folderMediator } from './folder';
 
 
 export enum editorType{
-    classic,
-    graph,
-    notebook,
-    notebookgraph,
-    custom,
-    crossgraph,
-    
+    classic = 0,
+    graph = 1,
+    notebook = 2,
+    notebookgraph = 3,
+    custom = 4,
+    crossFileGraph = 5,
+    crossNotebookGraph = 6,
+    agnosticCrossGraph = 7,
 }
 
 export interface embeddedEditorMediator{
     editorType: editorType ;
-}
-export class graphEditorMediator implements embeddedEditorMediator{
+    resources: fileMediator | notebookMediator | Array<fileMediator> | Array<notebookMediator> ;
+    public provideEditor(){
+
+    }
 
 }
-class notebookGraphEditorMeditor{
 
-}
 export class workspaceMediator {
-    folders: any;
-    constructor() {
-        this.folders = workspace.workspaceFolders;
+    folders: Array<folderMediator>;
+    editor: Array<embeddedEditorMediator>;
+    constructor() {        
+        for(let index = 1 ; index <= workspace.workspaceFolders.length; index++){
+            this.folders[index] = new folderMediator(workspace.workspaceFolders[index]);
     }
-    public buildWorkspace(folders: workspace.workspaceFolders) {
-        for (let index = 0; index < folders.length; index++) {
-            folders[index];
-
-        }
-
     }
+    
 
     
     
     public detectDiamond() {
-        // Triggered If any symbol calls two or more symbols recurring
-        //  that all call 1 symbol 
+        
     }
     public detectCycle() {
-        // If any symbol calls a symbol reccuring that calls the original symbol
+        
     }
     public getMaxCycleCount(){
 
@@ -56,10 +55,4 @@ export class workspaceMediator {
     }
 }
 
-export function startEditor() {
-
-}
-export function stopEditor() {
-
-}
 

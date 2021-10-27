@@ -1,14 +1,29 @@
 import {SymbolInformation, SymbolKind, SymbolTag, DocumentSymbol, DocumentSymbolProvider, DocumentSymbolProviderMetadata, 
-WorkspaceSymbolProvider } from 'vscode';
+WorkspaceSymbolProvider,
+CancellationToken
+ProviderResult} from 'vscode';
 
-class symbolType {
+import {fileMediator } from './file';
+export class symbolIconMediator{
+
+
+    public getSVG(fileMediator: fileMediator){
+
+    }
+}
+export class queryWorkspace implements WorkspaceSymbolProvider {
+    provideWorkspaceSymbols(query: string, token: CancellationToken): ProviderResult<SymbolInformation[]> {
+        throw new Error('Method not implemented.');
+    }
 
 }
-class symbol{
+
+export class symbolMediator { // A kind of outline manager
+    symbols: Array<DocumentSymbol> ;
+    parent: fileMediator ;
+    iconMediator: symbolIconMediator ;
     
-}
-class symbolMediator { // Manages references implementations and definitions for the given file takes the outline and show gets links for the graph
-    symbols: Array<Symbol>
+    constructor(){
 
-    constructor
+    }
 }
