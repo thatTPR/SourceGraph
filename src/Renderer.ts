@@ -4,7 +4,12 @@ import * as extension from './extension';
 // This file calls layers classes and handles calling of the app as well as responsibility for contributions. 
 // It should stay relatively simple calling embedded views and workspace methods. everything else is handled in the constructors and 
 // by the class instances automatically. The extension just loads the graph and then refreshes it. events are handled internally as well  
-
+export class SidebarProvider implements vscode.WebviewViewProvider{
+    resolveWebviewView(webviewView: vscode.WebviewView, context: vscode.WebviewViewResolveContext<unknown>, token: vscode.CancellationToken): void | Thenable<void> {
+        throw new Error('Method not implemented.');
+    }
+    
+}
 
 export function renderWorkSpace(){
     const panel = vscode.window.createWebviewPanel('Source graph',
@@ -21,15 +26,10 @@ export function openFileSymbolGraph(){
 }
 export function viewContainerEnable(){
     // contains multiple tree views. Right now just contains. Statistics about cycles and diamonds
-}
-export function treeViewEnable(){
-    vscode.window.registerTreeDataProvider("Diamond and Cycle Diagnostics", )
-    const treeView = vscode.window.createTreeView('Source Graph', new SourceGraphTreeViewOptions())
-    treeView.title = "Source Graph";
-    treeView.message = "Welcome to Source graph. You can get here either by opening a file with source graph , hitting a command, the status bar or from the activity bar ";
-    treeView.description = "This displays diamond and symbol information and is a place to configure your source graph view";
     
 }
+
+
 export function statusBarEnable() {
     // Status bar and 
     

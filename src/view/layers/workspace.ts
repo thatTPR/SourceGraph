@@ -6,7 +6,20 @@ import { folderGraph, treeLink, folderDiamond, folderCycle, folderChannel } from
 import { editorType, workspaceMediator,  embeddedEditorMediator } from '../../mediators/workspace';
 
 import {scaleLinear} from 'd3-scale' ; 
+import { index, sort } from 'd3-array';
+import { folderMediator } from '../../mediators/folder';
 
+export interface diamond{
+    start: any ;
+    intPaths: Array<any>;
+    end: any ;
+}
+export interface cycle{
+    content: Array<any> ;
+}
+export interface path{
+    content: Array<any>;
+}
 
 export class diamondIndex {
     symbolDiamonds: Array<symbolDiamond>;
@@ -20,33 +33,21 @@ export class diamondIndex {
         this.folderDiamonds = folderDiamonds;
     }
     
-    public getMaxSymbol() {
-        return 
+    public equivalent(diamond1: diamond , diamond2: diamond){
+        if(diamond1 == diamond2){
+            return true;
+        }
+        return false ;
+
     }
-    public getMaxFile() {
-        return
-    }
-    public getMaxFolder() {
-        return
-    }
-    public getMinSymbol() {
-        return
-    }
-    public getMinFile() {
-        return
-    }
-    public getMinFolder() {
-        return
-    }
-    public getMax() {
-        this.getMaxFile();
-        this.getMaxFolder();
-        this.getMaxSymbol();
-    }
-    public getMin() {
-        this.getMinFile();
-        this.getMinFolder();
-        this.getMinSymbol();
+    public removeDuplicates(diamonds: Array<diamond>){
+        for ( let i = 0 ; i < diamonds.length ; i++){
+            for ( let j = i+1 ; j < diamonds.length - i ; i++){
+                if ( this.equivalent(diamonds[i], diamonds[j])){
+                    diamonds
+                }
+            }
+        }
     }
     public checkExists(){
 
@@ -75,63 +76,37 @@ export class diamondIndex {
     }
 }
 export class cycleIndex {
-    symbolCycles: Array<symbolCycle>;
-    fileCycles: Array<fileCycle>;
-    folderCycles: Array<folderCycle>;
+    symbol: Array<symbolCycle>;
+    file: Array<fileCycle>;
+    folder: Array<folderCycle>;
     constructor(symbolCycles: Array<symbolCycle>,
         fileCycles: Array<fileCycle>,
         folderCycles: Array<folderCycle>) {
-        this.symbolCycles = symbolCycles;
-        this.fileCycles = fileCycles;
-        this.folderCycles = folderCycles;
+        this.symbol = symbolCycles;
+        this.file = fileCycles;
+        this.folder = folderCycles;
     }
-    public getMaxSymbol() {
-
-    }
-    public getMaxFile() {
-
-    }
-    public getMaxFolder() {
-
-    }
-    public getMinSymbol() {
-
-    }
-    public getMinFile() {
-
-    }
-    public getMinFolder() {
-
-    }
-    public getMax() {
-        this.getMaxFile();
-        this.getMaxFolder();
-        this.getMaxSymbol();
-    }
-    public getMin() {
-        this.getMinFile();
-        this.getMinFolder();
-        this.getMinSymbol();
-    }
+    
+    
 
 }
-// It is possible for scales and diamonds to literally be on top of each other so this is 
-// handling for that
+
 
 export class cycleScale {
-    minValue: Number;
-    maxValue: Number;
-    constructor(minValue: Number, maxValue: Number) {
-        this.maxValue = maxValue; this.minValue = minValue;
-    }
+    
 
 
 }
 export class diamondScale {
-    minValue: Number;
-    maxValue: Number;
-    constructor(minValue: Number, maxValue: Number) {
-        this.maxValue = maxValue; this.minValue = minValue;
+    symbol: 
+    file:
+    folder:
+    constructor(diamondIndex: diamondIndex) {
+        symbol = getSorted(diamondIndex.symbol)  ;        
+        file = getSorted(diamondIndex.file)     ;   
+        folder = getSorted(diamondIndex.folder);  
+        
+        
      }
 }
 // If i finsh this down it should be pretty much done. Yay
@@ -139,7 +114,7 @@ export class embeddedView {
     workspace: workspaceGraph | undefined; // 
     parent: fileNode | Array<fileNode>| undefined;
     view: embeddedEditorMediator;
-    ;
+
     constructor(view: embeddedEditorMediator, workspace: workspaceGraph| undefined, parent: fileNode | Array<fileNode> | undefined) {
         this.view = view;
         this.workspace = workspace ;
@@ -163,11 +138,17 @@ export class workspaceGraph {
     workspaceMediator: workspaceMediator;
     diamondIndex: diamondIndex;
     cycleIndex: cycleIndex;
+    cycleScale: cycleScale;
+    diamondScale: diamondScale;
+
     embeddedView: Array<embeddedView> | undefined;
     constructor() {
-        this.embeddedView  = undefined // For now no support for opening views on boot up
+        this.embeddedView  = undefined // For now no support for opening embedded views on boot up 
         // builds workspace tree from root recursively 
         this.workspaceMediator = new workspaceMediator;
+
+        var folderMediators:Array<folderMediator>  = this.workspaceMediator.getFolders()
+
         // Build Link tree
 
         // buildChannelGraph

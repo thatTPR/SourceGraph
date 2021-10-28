@@ -14,7 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
 		renderer.renderWorkSpace();
 	}));
 	context.subscriptions.push(vscode.commands.registerCommand('sg.openFileSymbolGraph', ()=> {
-		renderer.treeViewEnable();
+		renderer.viewContainerEnable();
 		renderer.statusBarEnable();
 		renderer.openFileSymbolGraph();
 	}))

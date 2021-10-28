@@ -1,4 +1,4 @@
-import {fileMediator} from "./file"
+import {fileMediator} from "./file";
 import { workspace, Uri, ThemeIcon} from "vscode";
 
 export class folderIconMediator {
