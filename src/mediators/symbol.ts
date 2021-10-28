@@ -19,7 +19,7 @@ export class queryWorkspace implements WorkspaceSymbolProvider {
 }
 
 export class symbolMediator { // A kind of outline manager
-    symbols: Array<DocumentSymbol> ;
+    symbols: Set<DocumentSymbol> ;
     parent: fileMediator ;
     iconMediator: symbolIconMediator ;
     location: SymbolInformation;

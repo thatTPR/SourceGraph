@@ -3,15 +3,25 @@ import { symbolMediator } from '../../mediators/symbol'
 // Contains both icons and Code symbols (if applicable)
 import { fileIncludeGraph, fileNode, filePipe } from './file';
 import { folderChannel } from './folder';
-import { cycleIndex } from './workspace';
+import { cycleIndex , diamond, cycle, path} from './workspace';
 
-export type symbolPath = Array<symbolNode>;
-export type symbolCycle = Array<symbolNode>;
-export class symbolDiamond {
+export class symbolPath implements path {
+    content: Set<symbolNode>;
+    constructor(content: Set<symbolNode>){
+        this.content = content ;
+    }
+}
+export class symbolCycle implements cycle {
+    content: Set<symbolNode>;
+    constructor(content: Set<symbolNode>){
+        this.content = content ;
+    }
+}
+export class symbolDiamond implements diamond{
     start: symbolNode;
-    intPaths: Array<symbolPath>;
+    intPaths: Set<symbolPath>;
     end: symbolNode;
-    constructor(start: symbolNode, intPaths: Array<symbolPath>, end: symbolNode) {
+    constructor(start: symbolNode, intPaths: Set<symbolPath>, end: symbolNode) {
         this.start = start; this.intPaths = intPaths; this.end = end;
     }
 
@@ -20,44 +30,42 @@ export class symbolDiamond {
 export class symbolNode {
     type: SymbolInformation;
     symbolMediator: symbolMediator;
-    fileNode: fileNode;
-
-    constructor(type: SymbolInformation, symbolMediator: symbolMediator, fileNode: fileNode) {
+    parentFile: fileNode;
+    parentSymbol: symbolNode | undefined;
+    constructor(type: SymbolInformation, symbolMediator: symbolMediator, parentFile: fileNode) {
         this.type = type;
         this.symbolMediator = symbolMediator;
-        this.fileNode = fileNode;
+        this.parentFile = parentFile;
     }
 }
 
 
 export class symbolArrow {
-    cycleFlag: number;
-    diamondFlag: number;
+    incycles: Set<symbolCycle>;
+    indiamonds: Set<symbolDiamond>;
     rendered: Boolean;
     source: symbolNode;
     dest: symbolNode;
     includedIn: filePipe;
-    constructor(cycleFlag: number,
-        diamondFlag: number,
+    constructor(incycles: Set<symbolCycle>,
+        indiamonds: Set<symbolDiamond>,
         rendered: Boolean,
         source: symbolNode,
         dest: symbolNode,
         includedIn: filePipe) {
-        this.cycleFlag = cycleFlag;
-        this.diamondFlag = diamondFlag;
+        this.incycles = incycles;this.indiamonds = indiamonds ;
         this.rendered = false;
         this.source = source;
         this.dest = dest;
         this.includedIn = includedIn;
     }
-    set(cycleFlag: number,
-        diamondFlag: number,
+    set(incycles: Set<symbolCycle>,
+        indiamonds: Set<symbolDiamond>,
         rendered: Boolean,
         source: symbolNode,
         dest: symbolNode,
         includedIn: filePipe) {
-        this.cycleFlag = cycleFlag;
-        this.diamondFlag = diamondFlag;
+        this.incycles = incycles;this.indiamonds = indiamonds ;
         this.rendered = false;
         this.source = source;
         this.dest = dest;
@@ -95,17 +103,17 @@ class parentArrow extends symbolArrow{
 }
 export class symbolIncludeGraph {
 
-    nodes: Array<symbolNode>;
-    implArrows: Array<implArrow> | undefined;
-    refArrows: Array<refArrow> | undefined ;
-    defArrows: Array<defArrow> | undefined ;
-    typedefArrows: Array<typedefArrow> | undefined;
+    nodes: Set<symbolNode>;
+    implArrows: Set<implArrow> | undefined;
+    refArrows: Set<refArrow> | undefined ;
+    defArrows: Set<defArrow> | undefined ;
+    typedefArrows: Set<typedefArrow> | undefined;
     parentArrow: parentArrow | undefined;
 
-    constructor(symbolNodes: Array<symbolNode>, implArrows: Array<implArrow>,
-        refArrows: Array<refArrow> | undefined ,
-        defArrows: Array<defArrow> | undefined ,
-        typedefArrows: Array<typedefArrow> | undefined,
+    constructor(symbolNodes: Set<symbolNode>, implArrows: Set<implArrow>,
+        refArrows: Set<refArrow> | undefined ,
+        defArrows: Set<defArrow> | undefined ,
+        typedefArrows: Set<typedefArrow> | undefined,
         parentArrow: parentArrow | undefined) {
         this.implArrows = implArrows; this.nodes = symbolNodes;
         this.refArrows = refArrows; 

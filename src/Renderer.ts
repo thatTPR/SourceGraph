@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { embeddedView, workspaceGraph } from './view/layers/workspace';
+import { embeddedView, workspaceGraph , } from './view/layers/workspace';
 import * as extension from './extension';
 // This file calls layers classes and handles calling of the app as well as responsibility for contributions. 
 // It should stay relatively simple calling embedded views and workspace methods. everything else is handled in the constructors and 
@@ -19,11 +19,11 @@ export function renderWorkSpace(){
     )
     panel.webview.asWebviewUri(vscode.Uri.file('./view/index.html'))
 }
-export function openFileSymbolGraph(){
+// export function openFileSymbolGraph(){
 
-    view = new embeddedView(new embeddedEditorMediator() , undefined, undefined)
+//     view = new embeddedView(new embeddedEditorMediator() , undefined, undefined)
     
-}
+// }
 export function viewContainerEnable(){
     // contains multiple tree views. Right now just contains. Statistics about cycles and diamonds
     

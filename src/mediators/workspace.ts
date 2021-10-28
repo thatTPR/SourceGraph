@@ -16,7 +16,7 @@ export enum editorType{
 
 export interface embeddedEditorMediator{
     editorType: editorType ;
-    resources: fileMediator | notebookMediator | Array<fileMediator> | Array<notebookMediator> ;
+    resources: fileMediator | notebookMediator | Set<fileMediator> | Set<notebookMediator> ;
     public provideEditor(){
 
     }
@@ -24,35 +24,28 @@ export interface embeddedEditorMediator{
 }
 
 export class workspaceMediator {
-    folders: Array<folderMediator>;
+    folders: Set<folderMediator>;
     
     constructor() {        
         for(let index = 1 ; index <= workspace.workspaceFolders.length; index++){
             this.folders[index] = new folderMediator(workspace.workspaceFolders[index]);
     }
-    }
-    
-
-    
-    
-    public detectDiamond() {
         
     }
-    public detectCycle() {
+    public getFolders(){
+        return this.folders;
+    }
+
+    
+    
+    public detectDiamonds() {
+        this.folders.
         
     }
-    public getMaxCycleCount(){
-
+    public detectCycles() {
+        
     }
-    public getMinCycleCount(){
-
-    }
-    public getMaxDiamondCount(){
-
-    }
-    public getMinDiamondCount(){
-
-    }
+   
 }
 
 

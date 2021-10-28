@@ -13,8 +13,8 @@ export class folderIconMediator {
 export class folderMediator {
     iconMediator: folderIconMediator;
     uri: Uri ;
-    children: Array<fileMediator | folderMediator> ;
-    folders: Array<folderMediator> ;
+    children: Set<fileMediator | folderMediator> ;
+    folders: Set<folderMediator> ;
     // Constructed by another folder mediator
     constructor(Uri: Uri){
         this.uri = Uri ;

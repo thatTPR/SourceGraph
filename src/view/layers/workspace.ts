@@ -6,28 +6,30 @@ import { folderGraph, treeLink, folderDiamond, folderCycle, folderChannel } from
 import { editorType, workspaceMediator,  embeddedEditorMediator } from '../../mediators/workspace';
 
 import {scaleLinear} from 'd3-scale' ; 
-import { index, sort } from 'd3-array';
+import { index, sort } from 'd3-Set';
 import { folderMediator } from '../../mediators/folder';
+import { easeQuadIn } from 'd3-ease';
 
 export interface diamond{
-    start: any ;
-    intPaths: Array<any>;
+    start: any ; 
+    intPaths: Set<any>;
     end: any ;
+
 }
 export interface cycle{
-    content: Array<any> ;
+    content: Set<any> ;
 }
 export interface path{
-    content: Array<any>;
+    content: Set<any>;
 }
 
 export class diamondIndex {
-    symbolDiamonds: Array<symbolDiamond>;
-    fileDiamonds: Array<fileDiamond>;
-    folderDiamonds: Array<folderDiamond>;
-    constructor(symbolDiamonds: Array<symbolDiamond>,
-        fileDiamonds: Array<fileDiamond>,
-        folderDiamonds: Array<folderDiamond>) {
+    symbolDiamonds: Set<symbolDiamond>;
+    fileDiamonds: Set<fileDiamond>;
+    folderDiamonds: Set<folderDiamond>;
+    constructor(symbolDiamonds: Set<symbolDiamond>,
+        fileDiamonds: Set<fileDiamond>,
+        folderDiamonds: Set<folderDiamond>) {
         this.symbolDiamonds = symbolDiamonds;
         this.fileDiamonds = fileDiamonds;
         this.folderDiamonds = folderDiamonds;
@@ -40,14 +42,15 @@ export class diamondIndex {
         return false ;
 
     }
-    public removeDuplicates(diamonds: Array<diamond>){
-        for ( let i = 0 ; i < diamonds.length ; i++){
-            for ( let j = i+1 ; j < diamonds.length - i ; i++){
-                if ( this.equivalent(diamonds[i], diamonds[j])){
-                    diamonds
+    public removeDuplicates(diamonds: Set<diamond>){
+        for (const i in diamonds) {
+            for ( const j in diamonds) {
+                if(this.equivalent(i ,diamonds.)){
+                    
                 }
-            }
+            }            
         }
+        
     }
     public checkExists(){
 
@@ -64,7 +67,7 @@ export class diamondIndex {
         }
     } 
     // private checkExists(diamond: fileDiamond | folderDiamond | symbolDiamond, 
-    //     place: Array<symbolDiamond> | Array<fileDiamond> | Array<folderDiamond> ){
+    //     place: Set<symbolDiamond> | Set<fileDiamond> | Set<folderDiamond> ){
     //     place.find
     // }
     public add(diamond: fileDiamond | folderDiamond | symbolDiamond){
@@ -76,12 +79,12 @@ export class diamondIndex {
     }
 }
 export class cycleIndex {
-    symbol: Array<symbolCycle>;
-    file: Array<fileCycle>;
-    folder: Array<folderCycle>;
-    constructor(symbolCycles: Array<symbolCycle>,
-        fileCycles: Array<fileCycle>,
-        folderCycles: Array<folderCycle>) {
+    symbol: Set<symbolCycle>;
+    file: Set<fileCycle>;
+    folder: Set<folderCycle>;
+    constructor(symbolCycles: Set<symbolCycle>,
+        fileCycles: Set<fileCycle>,
+        folderCycles: Set<folderCycle>) {
         this.symbol = symbolCycles;
         this.file = fileCycles;
         this.folder = folderCycles;
@@ -112,10 +115,10 @@ export class diamondScale {
 // If i finsh this down it should be pretty much done. Yay
 export class embeddedView {
     workspace: workspaceGraph | undefined; // 
-    parent: fileNode | Array<fileNode>| undefined;
+    parent: fileNode | Set<fileNode>| undefined;
     view: embeddedEditorMediator;
 
-    constructor(view: embeddedEditorMediator, workspace: workspaceGraph| undefined, parent: fileNode | Array<fileNode> | undefined) {
+    constructor(view: embeddedEditorMediator, workspace: workspaceGraph| undefined, parent: fileNode | Set<fileNode> | undefined) {
         this.view = view;
         this.workspace = workspace ;
         this.parent = parent;
@@ -134,20 +137,20 @@ export class embeddedView {
 
 
 export class workspaceGraph {
-    folderGraphs: Array<folderGraph>;
+    folderGraphs: Set<folderGraph>;
     workspaceMediator: workspaceMediator;
     diamondIndex: diamondIndex;
     cycleIndex: cycleIndex;
     cycleScale: cycleScale;
     diamondScale: diamondScale;
 
-    embeddedView: Array<embeddedView> | undefined;
+    embeddedView: Set<embeddedView> | undefined;
     constructor() {
         this.embeddedView  = undefined // For now no support for opening embedded views on boot up 
         // builds workspace tree from root recursively 
         this.workspaceMediator = new workspaceMediator;
 
-        var folderMediators:Array<folderMediator>  = this.workspaceMediator.getFolders()
+        var folderMediators:Set<folderMediator>  = this.workspaceMediator.getFolders()
 
         // Build Link tree
 
@@ -180,11 +183,9 @@ export class workspaceGraph {
 
     }
     private addFolderGraph(fodlerGraph: folderGraph) {
-        this.folderGraphs.push(folderGraph)
+        this.folderGraphs
     }
-    private removeFolderGraph(folderGraph: folderGraph) {
-        this.
-    }
+    
     private addLink(link: treeLink, index: number) {
         this.folderGraphs[index].addLink()
     }
