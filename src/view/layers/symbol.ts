@@ -1,7 +1,7 @@
 import { SymbolKind, ThemeIcon, SymbolInformation, SaveDialogOptions } from 'vscode';
 import { symbolMediator } from '../../mediators/symbol'
 // Contains both icons and Code symbols (if applicable)
-import { fileIncludeGraph, fileNode, filePipe } from './file';
+import { fileGraph, fileNode, filePipe } from './file';
 import { folderChannel } from './folder';
 import { cycleIndex , diamond, cycle, path} from './workspace';
 
@@ -101,7 +101,7 @@ class typedefArrow extends symbolArrow{
 class parentArrow extends symbolArrow{
 
 }
-export class symbolIncludeGraph {
+export class symbolGraph {
 
     nodes: Set<symbolNode>;
     implArrows: Set<implArrow> | undefined;

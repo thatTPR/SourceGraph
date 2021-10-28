@@ -1,6 +1,6 @@
 
-import { symbolNode, symbolDiamond, symbolCycle, symbolArrow } from './symbol';
-import { fileNode, fileDiamond, fileCycle, filePipe } from './file';
+import { symbolNode, symbolDiamond, symbolCycle, symbolArrow, symbolGraph } from './symbol';
+import { fileNode, fileDiamond, fileCycle, filePipe , fileGraph} from './file';
 import { folderGraph, treeLink, folderDiamond, folderCycle, folderChannel } from './folder';
 
 import { editorType, workspaceMediator,  embeddedEditorMediator } from '../../mediators/workspace';
@@ -96,7 +96,6 @@ export class cycleIndex {
 
 
 export class cycleScale {
-    
 
 
 }
@@ -137,7 +136,9 @@ export class embeddedView {
 
 
 export class workspaceGraph {
-    folderGraphs: Set<folderGraph>;
+    folderGraph: folderGraph;
+    fileGraph: fileGraph ;
+    symbolGraph: symbolGraph ;
     workspaceMediator: workspaceMediator;
     diamondIndex: diamondIndex;
     cycleIndex: cycleIndex;

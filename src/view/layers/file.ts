@@ -82,7 +82,7 @@ export class filePipe {
     }
 }
 
-export class fileIncludeGraph {
+export class fileGraph {
     
     nodes: Set<fileNode>;
     pipes: Set<filePipe>;

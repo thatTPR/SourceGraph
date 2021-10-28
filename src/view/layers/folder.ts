@@ -6,7 +6,7 @@ import {
 } from 'd3';
 
 import { symbolArrow } from './symbol';
-import { fileIncludeGraph, fileNode, filePipe } from './file';
+import { fileGraph, fileNode, filePipe } from './file';
 import {diamond, cycle, path, workspaceGraph} from './workspace';
 
 import {folderMediator, folderIconMediator} from '../../mediators/folder'
