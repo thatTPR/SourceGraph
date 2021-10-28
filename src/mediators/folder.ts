@@ -11,7 +11,7 @@ export class folderIconMediator {
     }
 }
 export class folderMediator {
-    iconMediator: folderIconMEdiator;
+    iconMediator: folderIconMediator;
     uri: Uri ;
     children: Array<fileMediator | folderMediator> ;
     folders: Array<folderMediator> ;

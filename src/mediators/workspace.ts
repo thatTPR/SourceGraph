@@ -25,7 +25,7 @@ export interface embeddedEditorMediator{
 
 export class workspaceMediator {
     folders: Array<folderMediator>;
-    editor: Array<embeddedEditorMediator>;
+    
     constructor() {        
         for(let index = 1 ; index <= workspace.workspaceFolders.length; index++){
             this.folders[index] = new folderMediator(workspace.workspaceFolders[index]);

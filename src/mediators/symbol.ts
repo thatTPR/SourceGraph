@@ -1,13 +1,13 @@
 import {SymbolInformation, SymbolKind, SymbolTag, DocumentSymbol, DocumentSymbolProvider, DocumentSymbolProviderMetadata, 
 WorkspaceSymbolProvider,
-CancellationToken
+CancellationToken,
 ProviderResult} from 'vscode';
 
 import {fileMediator } from './file';
 export class symbolIconMediator{
 
-
-    public getSVG(fileMediator: fileMediator){
+   
+    public getSVG(symbol: symbolMediator){
 
     }
 }
@@ -22,7 +22,9 @@ export class symbolMediator { // A kind of outline manager
     symbols: Array<DocumentSymbol> ;
     parent: fileMediator ;
     iconMediator: symbolIconMediator ;
-    
+    location: SymbolInformation;
+    icon: ; // The icon is and 
+
     constructor(){
 
     }

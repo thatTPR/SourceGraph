@@ -4,7 +4,6 @@ import { fileNode, fileDiamond, fileCycle, filePipe } from './file';
 import { folderGraph, treeLink, folderDiamond, folderCycle, folderChannel } from './folder';
 
 import { editorType, workspaceMediator,  embeddedEditorMediator } from '../../mediators/workspace';
-import { workspace } from 'vscode';
 
 import {scaleLinear} from 'd3-scale' ; 
 
@@ -20,6 +19,7 @@ export class diamondIndex {
         this.fileDiamonds = fileDiamonds;
         this.folderDiamonds = folderDiamonds;
     }
+    
     public getMaxSymbol() {
         return 
     }
@@ -117,42 +117,37 @@ export class cycleIndex {
 }
 // It is possible for scales and diamonds to literally be on top of each other so this is 
 // handling for that
-import {sourceGraphActivity} from  '../../Renderer' ;
+
 export class cycleScale {
-    sourceGraphActivity: sourceGraphActivity ;
     minValue: Number;
     maxValue: Number;
-    constructor(minValue: Number, maxValue: Number, sourceGraphActivity: sourceGraphActivity ) {
+    constructor(minValue: Number, maxValue: Number) {
         this.maxValue = maxValue; this.minValue = minValue;
-        this.sourceGraphActivity = sourceGraphActivity.getCycleScale(this);
-        
     }
 
 
 }
 export class diamondScale {
-    sourceGraphActivity: sourceGraphActivity ;
     minValue: Number;
     maxValue: Number;
-    constructor(minValue: Number, maxValue: Number, sourceGraphActivity: sourceGraphActivity ) {
+    constructor(minValue: Number, maxValue: Number) {
         this.maxValue = maxValue; this.minValue = minValue;
-        this.sourceGraphActivity = sourceGraphActivity.getDiamondScale(this);
-        
-    }
+     }
 }
 // If i finsh this down it should be pretty much done. Yay
 export class embeddedView {
-    workspace: workspaceGraph;
-    parent: fileNode | Array<fileNode>;
+    workspace: workspaceGraph | undefined; // 
+    parent: fileNode | Array<fileNode>| undefined;
     view: embeddedEditorMediator;
-    constructor(view: embeddedEditorMediator, workspace: workspaceGraph, parent: fileNode | Array<fileNode>) {
+    ;
+    constructor(view: embeddedEditorMediator, workspace: workspaceGraph| undefined, parent: fileNode | Array<fileNode> | undefined) {
         this.view = view;
-        this.provideView(view);
         this.workspace = workspace ;
         this.parent = parent;
+        this.provideView(view.provideEditor);
     }
-    public provideView(view: embeddedEditorMediator ) {
-       view.provideEditor()
+    public provideView(anchor: fileNode ) {
+       
     }
   
     public renderWorkspace(workspace: workspaceGraph) {
@@ -164,12 +159,13 @@ export class embeddedView {
 
 
 export class workspaceGraph {
-    folderGraph: Array<folderGraph>;
+    folderGraphs: Array<folderGraph>;
     workspaceMediator: workspaceMediator;
     diamondIndex: diamondIndex;
     cycleIndex: cycleIndex;
-    sourceGraphActivity: sourceGraphActivity ;
+    embeddedView: Array<embeddedView> | undefined;
     constructor() {
+        this.embeddedView  = undefined // For now no support for opening views on boot up
         // builds workspace tree from root recursively 
         this.workspaceMediator = new workspaceMediator;
         // Build Link tree
@@ -187,7 +183,9 @@ export class workspaceGraph {
         this.workspaceMediator.detectCycle();
 
     }
+    public update(any: any){
 
+    }
     private refreshLinkTree() {
 
     }
@@ -200,22 +198,22 @@ export class workspaceGraph {
     private refreshSymbolGraph() {
 
     }
-    private addnode(node: folderNode | fileNode | symbolNode) {
-
+    private addFolderGraph(fodlerGraph: folderGraph) {
+        this.folderGraphs.push(folderGraph)
     }
-    private removeNode(node: folderNode | fileNode | symbolNode) {
-
+    private removeFolderGraph(folderGraph: folderGraph) {
+        this.
     }
-    private addLink(link: treeLink) {
-
+    private addLink(link: treeLink, index: number) {
+        this.folderGraphs[index].addLink()
     }
     private removeLink(link: treeLink) {
 
     }
-    private provideEmbeddedView() {
+    private openEmbeddedView() {
 
     }
-    private closeEmbeddedEditor() {
+    private closeEmbeddedView() {
 
     }
     private openTransition() {
@@ -229,9 +227,6 @@ export class workspaceGraph {
     }
     private zoomNode() {
 
-    }
-    private resizeNode() {
-        // Always done by absolute values. (adding and subtracting would either introduce to many bugs or require to much constant checking<< the absolute values are relative to screen size and resolution>> )
     }
     private symbolLinkOrganise() {
 

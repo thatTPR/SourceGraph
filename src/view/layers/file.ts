@@ -6,7 +6,7 @@ import {
 } from 'd3';
 import { symbolArrow , symbolNode} from './symbol';
 import {folderChannel} from './folder';
-import {cycleIndex, diamondIndex, workspaceGraph} from './workspace';
+import {cycleIndex, diamondIndex, embeddedView, workspaceGraph} from './workspace';
 
 import {fileMediator, fileIconMediator} from '../../mediators/file';
 export type filePath = Array<fileNode>;
@@ -35,8 +35,9 @@ export class fileNode {
         this.fileMediator = fileMediator ;        
         this.workspace = workspace ;
     } 
-    public edit(){
-        
+    public openView(embeddedView: embeddedView ){
+        embeddedView.provideView(this);
+        this.workspace.update(this);
     }
     
     

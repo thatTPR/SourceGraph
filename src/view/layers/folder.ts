@@ -23,7 +23,7 @@ export class folderDiamond {
    
 } 
 export class folderNode {
-     children: Array<folderNode | fileNode> ;
+    children: Array<folderNode | fileNode> ;
     isOpen: boolean ;
     folderMediator: folderMediator ;
     Uri: Uri ;
@@ -38,7 +38,7 @@ export class folderNode {
 
 
 }
-export class folderChannel {
+export class folderChannel { 
     diamondFlag: number ;
     cycleFlag: number;
     source: folderNode | undefined;

@@ -1,6 +1,6 @@
 import { ThemeIcon,TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider, Uri } from "vscode";
 import { editorType, embeddedEditorMediator } from './workspace';
-import { symbolMediator , symbolNode} from './symbol';
+import { symbolMediator } from './symbol';
 import {folderChannel} from './folder';
 
 
