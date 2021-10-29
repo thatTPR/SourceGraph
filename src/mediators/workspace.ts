@@ -1,4 +1,4 @@
-import { workspace } from 'vscode';
+import { workspace, WorkspaceConfiguration, FileSystemProvider } from 'vscode';
 import { fileMediator , notebookMediator} from './file';
 import { folderMediator } from './folder';
 
@@ -35,8 +35,7 @@ export class workspaceMediator {
     public getFolders(){
         return this.folders;
     }
-
-    
+      
     
     public detectDiamonds() {
         this.folders.

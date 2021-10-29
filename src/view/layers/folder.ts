@@ -73,6 +73,7 @@ export class folderChannel {
         else {this.directed = false ;}
 
     }
+
     private animation(source: folderNode, dest: folderNode ) {
 
     }
@@ -108,9 +109,9 @@ export class folderGraph {
 
         this.nodes = nodes; this.channels = channels;this.tree = tree;
     }
-
-    public buildHierarchy() {
-    }
+   
+    
+    
     public addLink(){
 
     }

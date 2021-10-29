@@ -1,5 +1,6 @@
 import {fileMediator} from "./file";
-import { workspace, Uri, ThemeIcon} from "vscode";
+import { workspace, Uri, ThemeIcon, WorkspaceFolder, WorkspaceFoldersChangeEvent} from "vscode";
+import { workspaceMediator } from "./workspace";
 
 export class folderIconMediator {
     
@@ -11,18 +12,19 @@ export class folderIconMediator {
     }
 }
 export class folderMediator {
-    iconMediator: folderIconMediator;
+    // iconMediator: folderIconMediator;
     uri: Uri ;
     children: Set<fileMediator | folderMediator> ;
-    folders: Set<folderMediator> ;
+    parent: folderMediator | workspaceMediator ;
     // Constructed by another folder mediator
-    constructor(Uri: Uri){
+    constructor(Uri: Uri, parent: folderMediator | workspaceMediator, children: Set<fileMediator | folderMediator>  ){
         this.uri = Uri ;
-        this.iconMediator = new folderIconMediator(this.uri);
-        
+        // this.iconMediator = new folderIconMediator(this.uri);
+        this.children = children
+        this.parent = parent ;
     } 
     public provideChildren(){ // Called when constructed
-
+        
     }
     public getChildren(){ // Called when another class requests a child
 
@@ -30,10 +32,5 @@ export class folderMediator {
     public createChildren(){ // Called when user create a new file or folder
 
     }
-    public detectDiamonds(){
-
-    }
-    public detectCycles(){
-
-    }
+    
 }

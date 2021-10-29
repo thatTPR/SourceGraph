@@ -1,4 +1,4 @@
-import {SymbolInformation, SymbolKind, SymbolTag, DocumentSymbol, DocumentSymbolProvider, DocumentSymbolProviderMetadata, 
+import { SymbolInformation, SymbolKind, SymbolTag, DocumentSymbol, DocumentSymbolProvider, DocumentSymbolProviderMetadata, 
 WorkspaceSymbolProvider,
 CancellationToken,
 ProviderResult} from 'vscode';
@@ -23,9 +23,21 @@ export class symbolMediator { // A kind of outline manager
     parent: fileMediator ;
     iconMediator: symbolIconMediator ;
     location: SymbolInformation;
-    icon: ; // The icon is and 
+    
 
-    constructor(){
-
+    constructor(symbols: Set<DocumentSymbol> , parent: fileMediator, iconMediator:symbolIconMediator,){
+        this.symbols = symbols ;
+    }
+    public provideReferences(symbol: DocumentSymbol){
+     
+    }
+    public provideImplementations(symbol: DocumentSymbol){
+     
+    }
+    public provideDefinitions(symbol: DocumentSymbol){
+     
+    }
+    public provideTypeDefinitions(symbol: DocumentSymbol){
+     
     }
 }

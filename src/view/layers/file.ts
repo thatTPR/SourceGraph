@@ -47,10 +47,7 @@ export class fileNode {
         this.workspace = workspace ;
         this.parentFolder = parentFolder; 
     } 
-    public openView(embeddedView: embeddedView ){
-        embeddedView.provideView(this);
-        this.workspace.update(this);
-    }
+    
     
     
 

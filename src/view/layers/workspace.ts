@@ -1,13 +1,12 @@
 
 import { symbolNode, symbolDiamond, symbolCycle, symbolArrow, symbolGraph } from './symbol';
 import { fileNode, fileDiamond, fileCycle, filePipe , fileGraph} from './file';
-import { folderGraph, treeLink, folderDiamond, folderCycle, folderChannel } from './folder';
+import { folderGraph, treeLink,folderChannel, folderDiamond, folderCycle, folderNode, } from './folder';
 
 import { editorType, workspaceMediator,  embeddedEditorMediator } from '../../mediators/workspace';
+import { folderMediator } from '../../mediators/folder';
 
 import {scaleLinear} from 'd3-scale' ; 
-import { index, sort } from 'd3-Set';
-import { folderMediator } from '../../mediators/folder';
 import { easeQuadIn } from 'd3-ease';
 
 export interface diamond{
@@ -42,20 +41,14 @@ export class diamondIndex {
         return false ;
 
     }
-    public removeDuplicates(diamonds: Set<diamond>){
-        for (const i in diamonds) {
-            for ( const j in diamonds) {
-                if(this.equivalent(i ,diamonds.)){
-                    
-                }
-            }            
-        }
-        
-    }
-    public checkExists(){
 
+    public checkExists(diamond:  fileDiamond | folderDiamond | symbolDiamond){
+        var place = this.getPlace(diamond);
+       
+  
+        return false ;
     }
-    private getPlace(diamond: fileDiamond | folderDiamond | symbolDiamond ) {
+    private getPlace(diamond: fileDiamond | folderDiamond | symbolDiamond ){
         if(typeof(diamond) == typeof(symbolDiamond)){
             return this.symbolDiamonds;
         }
@@ -94,22 +87,54 @@ export class cycleIndex {
 
 }
 
+export class scaleFileNode{
+    value!: Number;
+    ref!: fileNode;
+    contructor(value: Number , ref: fileNode){
+        this.value = value ; this.ref = ref ;
+    }
+}
+export class scaleFolderNode{
+    value!: Number;
+    ref!: folderNode;
+    contructor(value: Number , ref: folderNode){
+        this.value = value ; this.ref = ref ;
+    }
+}
+export class scaleSymbolNode{
+    value!: Number;
+    ref!: symbolNode;
+    contructor(value: Number , ref: symbolNode){
+        this.value = value ; this.ref = ref ;
+    }
+}
 
 export class cycleScale {
-
-
-}
-export class diamondScale {
-    symbol: 
-    file:
-    folder:
-    constructor(diamondIndex: diamondIndex) {
-        symbol = getSorted(diamondIndex.symbol)  ;        
-        file = getSorted(diamondIndex.file)     ;   
-        folder = getSorted(diamondIndex.folder);  
+    symbol: Set<scaleFolderNode> ;
+    file: Set<scaleFileNode> ;
+    folder: Set<scaleSymbolNode>;
+    constructor(cycleIndex: cycleIndex) {
+        this.symbol = this.getSorted(cycleIndex.symbol)  ;        
+        this.file = this.getSorted(cycleIndex.file)     ;   
+        this.folder = this.getSorted(cycleIndex.folder);  
         
         
      }
+    private getSorted(indexMember: cycleIndex.symbol| )
+}
+export class diamondScale {
+    symbol: Set<Number> ;
+    file: Set<number> ;
+    folder: Set<number>
+    constructor(diamondIndex: diamondIndex) {
+        this.symbol = getSorted(diamondIndex.symbol)  ;        
+        this.file = getSorted(diamondIndex.file)     ;   
+        this.folder = getSorted(diamondIndex.folder);  
+        
+        
+     }
+
+     
 }
 // If i finsh this down it should be pretty much done. Yay
 export class embeddedView {
@@ -139,11 +164,11 @@ export class workspaceGraph {
     folderGraph: folderGraph;
     fileGraph: fileGraph ;
     symbolGraph: symbolGraph ;
+
     workspaceMediator: workspaceMediator;
-    diamondIndex: diamondIndex;
-    cycleIndex: cycleIndex;
-    cycleScale: cycleScale;
-    diamondScale: diamondScale;
+
+    diamondIndex: diamondIndex;  cycleIndex: cycleIndex;
+    diamondScale: diamondScale;  cycleScale: cycleScale;
 
     embeddedView: Set<embeddedView> | undefined;
     constructor() {
@@ -160,17 +185,20 @@ export class workspaceGraph {
         // buildPipeGraph
         // buildSymbolGraph
         // builds graph and checks for diamonds and cycles returning information where appropiate
-        
+        folderChannels = new 
+        folderLinks 
+        this.folderGraph = new folderGraph()
+        this.symbolGraph = new symbolGraph()
+        this.fileGraph = new fileGraph()
         this.diamondIndex = new diamondIndex();
         this.cycleIndex = new cycleIndex();
-        
+        this.cycleScale =
+        this.diamondScale =
         this.workspaceMediator.detectDiamond();
         this.workspaceMediator.detectCycle();
 
     }
-    public update(any: any){
-
-    }
+    
     private refreshLinkTree() {
 
     }
@@ -183,14 +211,10 @@ export class workspaceGraph {
     private refreshSymbolGraph() {
 
     }
-    private addFolderGraph(fodlerGraph: folderGraph) {
-        this.folderGraphs
+    private addLink() {
+        
     }
-    
-    private addLink(link: treeLink, index: number) {
-        this.folderGraphs[index].addLink()
-    }
-    private removeLink(link: treeLink) {
+    private removeLink() {
 
     }
     private openEmbeddedView() {
@@ -202,7 +226,7 @@ export class workspaceGraph {
     private openTransition() {
 
     }
-    private closeTransition() { // When all 
+    private closeTransition() {
 
     }
     private zoomLink() {

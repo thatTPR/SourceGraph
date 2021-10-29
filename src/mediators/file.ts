@@ -1,7 +1,7 @@
 import { ThemeIcon,TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider, Uri } from "vscode";
 import { editorType, embeddedEditorMediator } from './workspace';
 import { symbolMediator } from './symbol';
-import {folderChannel} from './folder';
+import { folderMediator} from './folder';
 
 
 export class fileIconMediator {
@@ -29,24 +29,25 @@ class documentEditor {
    
 }
 
-export class notebookMediator{
-
+export class multifileEditorMediator{
+    files: Set<fileMediator>;
+    constructor(files: Set<fileMediator>){
+        this.files = files ;
+    }
+}
+export class notebookEditorMediator{
+    notebook
 }
 export class fileMediator {
-    iconMediator: fileIconMediator;
     Uri: Uri ;
-    symbolMediator: symbolMediator ;
-    folder: folderMediator ;
+    children: symbolMediator ;
+    parent: folderMediator ;
+    file: 
     constructor(child: ){
         this.iconMediator = 
         this.Uri = current    
     } 
-    public detectDiamonds(){
-
-    }
-    public detectCycles(){
-
-    }
+   
     public getReferences(){
 
     }
@@ -58,6 +59,9 @@ export class fileMediator {
     }
     public readRange(range: ; content: string){
 
+    }
+    public getSVGIcon(){
+        this.
     }
 }
 

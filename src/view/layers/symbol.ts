@@ -1,9 +1,9 @@
 import { SymbolKind, ThemeIcon, SymbolInformation, SaveDialogOptions } from 'vscode';
 import { symbolMediator } from '../../mediators/symbol'
-// Contains both icons and Code symbols (if applicable)
+
 import { fileGraph, fileNode, filePipe } from './file';
 import { folderChannel } from './folder';
-import { cycleIndex , diamond, cycle, path} from './workspace';
+import { cycleIndex , diamond, cycle, path, workspaceGraph} from './workspace';
 
 export class symbolPath implements path {
     content: Set<symbolNode>;
@@ -28,14 +28,20 @@ export class symbolDiamond implements diamond{
 }
 
 export class symbolNode {
-    type: SymbolInformation;
     symbolMediator: symbolMediator;
     parentFile: fileNode;
     parentSymbol: symbolNode | undefined;
+    
     constructor(type: SymbolInformation, symbolMediator: symbolMediator, parentFile: fileNode) {
-        this.type = type;
         this.symbolMediator = symbolMediator;
         this.parentFile = parentFile;
+        
+    }
+    public render(){
+
+    }
+    public modify(){
+
     }
 }
 
@@ -88,6 +94,8 @@ export class symbolArrow {
 }
 class implArrow extends symbolArrow {
 
+
+    
 }
 class refArrow extends symbolArrow{
 
@@ -101,6 +109,8 @@ class typedefArrow extends symbolArrow{
 class parentArrow extends symbolArrow{
 
 }
+// This is never a graph of the full workspace. 
+// Instead child instances get added and removed dynamically using the index.
 export class symbolGraph {
 
     nodes: Set<symbolNode>;
@@ -109,7 +119,7 @@ export class symbolGraph {
     defArrows: Set<defArrow> | undefined ;
     typedefArrows: Set<typedefArrow> | undefined;
     parentArrow: parentArrow | undefined;
-
+   
     constructor(symbolNodes: Set<symbolNode>, implArrows: Set<implArrow>,
         refArrows: Set<refArrow> | undefined ,
         defArrows: Set<defArrow> | undefined ,
@@ -121,16 +131,45 @@ export class symbolGraph {
         this.typedefArrows = typedefArrows ;
         this.parentArrow = parentArrow
     }
-    public addArrow(src: symbolNode, dest: symbolNode) {
-        this.nodes;
+    public addRefArrow(src: symbolNode, dest: symbolNode) {
+       
         
+    }
+    public addImplArrow(src: symbolNode, dest: symbolNode){
+
+    }
+    public addTypeDefArrow(src: symbolNode, dest: symbolNode) {
+       
+        
+    }
+    public addDefArrow(src: symbolNode, dest: symbolNode){
+        
+    }
+    public arrowContructor(){
+
+    }
+    public refArrowsConstructor(){
+
+    }
+    public defArrowsConstructor(){
+
+    }
+    public implArrowsConstructor(){
+
+    }
+    public typedefArrowsConstructor(){
+
+    }
+    public arrowsConstructor(){
+
     }
     public removeArrow() {
 
     }
     public diamondModifier() {
     }
-    public cycleModifier() {
+    public cycleModifier(cycleIndex: cycleIndex) {
+        
     }
 
 }
