@@ -3,7 +3,7 @@ import { symbolNode, symbolDiamond, symbolCycle, symbolArrow, symbolGraph } from
 import { fileNode, fileDiamond, fileCycle, filePipe , fileGraph} from './file';
 import { folderGraph, treeLink,folderChannel, folderDiamond, folderCycle, folderNode, } from './folder';
 
-import { editorType, workspaceMediator,  embeddedEditorMediator } from '../../mediators/workspace';
+import {/* editorType,  embeddedEditorMediator,*/ workspaceMediator } from '../../mediators/workspace';
 import { folderMediator } from '../../mediators/folder';
 
 import {scaleLinear} from 'd3-scale' ; 
@@ -21,19 +21,37 @@ export interface cycle{
 export interface path{
     content: Set<any>;
 }
-
-export class diamondIndex {
-    symbolDiamonds: Set<symbolDiamond>;
-    fileDiamonds: Set<fileDiamond>;
-    folderDiamonds: Set<folderDiamond>;
-    constructor(symbolDiamonds: Set<symbolDiamond>,
-        fileDiamonds: Set<fileDiamond>,
-        folderDiamonds: Set<folderDiamond>) {
-        this.symbolDiamonds = symbolDiamonds;
-        this.fileDiamonds = fileDiamonds;
-        this.folderDiamonds = folderDiamonds;
+export interface indexGraph{
+    symbol: Set<any>;
+    file: Set<any>;
+    folder: Set<any>;
+    constructor(symbol: Set<any>,
+        file: Set<any>,
+        folder: Set<any>) {
+        this.symbol  = symbol;
+        this.file = file;
+        this.folder = folder;
+        
+    } 
+}
+export class diamondIndex implements indexGraph {
+    symbol : Set<symbolDiamond>;
+    file : Set<fileDiamond>;
+    folder : Set<folderDiamond>;
+    constructor(symbol: Set<symbolDiamond>,
+        file: Set<fileDiamond>,
+        folder: Set<folderDiamond>) {
+        this.symbol  = symbol;
+        this.file = file;
+        this.folder = folder;
     }
-    
+    private getSorted(indexMember: Set<symbolDiamond> | Set<fileDiamond> | Set<folderDiamond> ){
+        this.sort()
+        
+    }
+    private sortBySize(diamonds: Set<symbolDiamond> | Set<fileDiamond> | Set<folderDiamond> ){
+        
+    }
     public equivalent(diamond1: diamond , diamond2: diamond){
         if(diamond1 == diamond2){
             return true;
@@ -47,6 +65,11 @@ export class diamondIndex {
        
   
         return false ;
+    }
+    
+    private getPlaceinSet(diamond: fileDiamond | folderDiamond | symbolDiamond ){
+        var place = this.getPlace(diamond) ;
+        place.
     }
     private getPlace(diamond: fileDiamond | folderDiamond | symbolDiamond ){
         if(typeof(diamond) == typeof(symbolDiamond)){
@@ -82,8 +105,7 @@ export class cycleIndex {
         this.file = fileCycles;
         this.folder = folderCycles;
     }
-    
-    
+  
 
 }
 
@@ -120,7 +142,7 @@ export class cycleScale {
         
         
      }
-    private getSorted(indexMember: cycleIndex.symbol| )
+    
 }
 export class diamondScale {
     symbol: Set<Number> ;
@@ -137,27 +159,27 @@ export class diamondScale {
      
 }
 // If i finsh this down it should be pretty much done. Yay
-export class embeddedView {
-    workspace: workspaceGraph | undefined; // 
-    parent: fileNode | Set<fileNode>| undefined;
-    view: embeddedEditorMediator;
+// export class embeddedView {
+//     workspace: workspaceGraph | undefined; // 
+//     parent: fileNode | Set<fileNode>| undefined;
+//     view: embeddedEditorMediator;
 
-    constructor(view: embeddedEditorMediator, workspace: workspaceGraph| undefined, parent: fileNode | Set<fileNode> | undefined) {
-        this.view = view;
-        this.workspace = workspace ;
-        this.parent = parent;
-        this.provideView(view.provideEditor);
-    }
-    public provideView(anchor: fileNode ) {
+//     constructor(view: embeddedEditorMediator, workspace: workspaceGraph| undefined, parent: fileNode | Set<fileNode> | undefined) {
+//         this.view = view;
+//         this.workspace = workspace ;
+//         this.parent = parent;
+//         this.provideView(view.provideEditor);
+//     }
+//     public provideView(anchor: fileNode ) {
        
-    }
+//     }
   
-    public renderWorkspace(workspace: workspaceGraph) {
+//     public renderWorkspace(workspace: workspaceGraph) {
 
-    }
+//     }
     
 
-}
+// }
 
 
 export class workspaceGraph {
@@ -170,9 +192,9 @@ export class workspaceGraph {
     diamondIndex: diamondIndex;  cycleIndex: cycleIndex;
     diamondScale: diamondScale;  cycleScale: cycleScale;
 
-    embeddedView: Set<embeddedView> | undefined;
+    // embeddedView: Set<embeddedView> | undefined;
     constructor() {
-        this.embeddedView  = undefined // For now no support for opening embedded views on boot up 
+        // this.embeddedView  = undefined // For now no support for opening embedded views on boot up 
         // builds workspace tree from root recursively 
         this.workspaceMediator = new workspaceMediator;
 

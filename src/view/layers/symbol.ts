@@ -29,13 +29,14 @@ export class symbolDiamond implements diamond{
 
 export class symbolNode {
     symbolMediator: symbolMediator;
+    
     parentFile: fileNode;
     parentSymbol: symbolNode | undefined;
-    
+    children: symbolNode ;
     constructor(type: SymbolInformation, symbolMediator: symbolMediator, parentFile: fileNode) {
         this.symbolMediator = symbolMediator;
         this.parentFile = parentFile;
-        
+        this.children = this.symbolMediator.getChildren(symbolMediator.) ;
     }
     public render(){
 

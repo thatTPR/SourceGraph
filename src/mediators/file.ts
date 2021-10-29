@@ -7,42 +7,42 @@ import { folderMediator} from './folder';
 export class fileIconMediator {
    
 }
-class classicEditorMediator implements embeddedEditorMediator{
-    editorType: editorType;
-    constructor(){
-        this.editorType = 0 ;
-    }
-}
+// class classicEditorMediator implements embeddedEditorMediator{
+//     editorType: editorType;
+//     constructor(){
+//         this.editorType = 0 ;
+//     }
+// }
 
 
-class documentEditor {
-    editorType: CustomEditorProvider;
-    constructor(editorType: documentEditorType) {
-        this.editorType = editorType;
-    }
-    public setEditorType(editorType: documentEditorType) {
-        this.editorType = editorType;
-    }
-    public getEditorType() {
-        return this.editorType;
-    }
+// class documentEditor {
+//     editorType: CustomEditorProvider;
+//     constructor(editorType: documentEditorType) {
+//         this.editorType = editorType;
+//     }
+//     public setEditorType(editorType: documentEditorType) {
+//         this.editorType = editorType;
+//     }
+//     public getEditorType() {
+//         return this.editorType;
+//     }
    
-}
+// }
 
-export class multifileEditorMediator{
-    files: Set<fileMediator>;
-    constructor(files: Set<fileMediator>){
-        this.files = files ;
-    }
-}
-export class notebookEditorMediator{
-    notebook
-}
+// export class multifileEditorMediator{
+//     files: Set<fileMediator>;
+//     constructor(files: Set<fileMediator>){
+//         this.files = files ;
+//     }
+// }
+// export class notebookEditorMediator{
+//     notebook
+// }
 export class fileMediator {
     Uri: Uri ;
     children: symbolMediator ;
     parent: folderMediator ;
-    file: 
+    
     constructor(child: ){
         this.iconMediator = 
         this.Uri = current    
@@ -66,4 +66,8 @@ export class fileMediator {
 }
 
 
+
+function getReferences() {
+    throw new Error("Function not implemented.");
+}
 

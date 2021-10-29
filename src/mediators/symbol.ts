@@ -28,8 +28,14 @@ export class symbolMediator { // A kind of outline manager
     constructor(symbols: Set<DocumentSymbol> , parent: fileMediator, iconMediator:symbolIconMediator,){
         this.symbols = symbols ;
     }
+    public getChildrenDocument(symbol: DocumentSymbol){
+        return symbol.children
+    }
+    public getChildren(symbol: DocumentSymbol){
+        return symbol.children
+    }
     public provideReferences(symbol: DocumentSymbol){
-     
+        return DocumentSymbol.
     }
     public provideImplementations(symbol: DocumentSymbol){
      
