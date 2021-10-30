@@ -44,22 +44,22 @@ export class fileMediator {
     children: symbolMediator ;
     parent: folderMediator ;
     
-    constructor(parent: folderMediator, Uri: Uri){
-        this.children = 
-        this.Uri = 
+    constructor(parent: folderMediator, Uri: Uri, children: symbolMediator){
+        this.children = children ;
+        this.Uri = Uri ;
         this.parent = parent ;
           
     } 
-   
+    public getChildren(){
+
+    }
     public getReferences(){
 
     }
     public getUses(){
 
     }
-    public editRange(range: ; content: string){
-
-    }
+    
     public readRange(range: ; content: string){
 
     }

@@ -36,16 +36,15 @@ export class fileNode {
     isOpen: boolean ;
     children : Set<symbolNode>;
     fileMediator: fileMediator ;
-    workspace: workspaceGraph ;
     parentFolder: folderNode ;
     // New workspace contstructor
-    constructor(parentFolder:folderNode , zoomThresh: number, children : Set<symbolNode>,  workspace: workspaceGraph ){
+    constructor(parentFolder:folderNode , zoomThresh: number, children : Set<symbolNode> ){
         this.zoomThresh = zoomThresh ;
         this.isOpen = false ;
         this.children = children ;
         this.parentFolder = parentFolder; 
-        this.fileMediator = new fileMediator(this.parentFolder.folderMediator, this.parentFolder.folderMediator.uri) ;        
-        this.workspace = workspace ;
+        this.fileMediator = new fileMediator(this.parentFolder.folderMediator, this.parentFolder.folderMediator.uri , ) ;        
+       
     } 
     
     

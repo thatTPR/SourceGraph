@@ -25,11 +25,8 @@ export function renderWorkSpace(){
     
 // }
 export function viewContainerEnable(){
-    // contains multiple tree views. Right now just contains. Statistics about cycles and diamonds
-    
-}
-export function scaleSidebarGraph(){
-    
+    // contains multiple tree views. Right now just contains CycleScale and diamond Scales
+    var viewProvider: vscode.WebviewViewProvider  = new SidebarProvider ;
 }
 
 export function statusBarEnable() {

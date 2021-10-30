@@ -17,14 +17,16 @@ export class folderMediator {
     folderchildren: Set<folderMediator> ;
     filechildren: Set<fileMediator>
     parent: folderMediator | workspaceMediator ;
+    workspace: workspaceMediator ;
     // Constructed by another folder mediator
     constructor(Uri: Uri, parent: folderMediator | workspaceMediator, folderchildren: Set<folderMediator>,
-        filechildren: Set<fileMediator> ){
+        filechildren: Set<fileMediator>, workspace: workspaceMediator ){
         this.uri = Uri ;
         // this.iconMediator = new folderIconMediator(this.uri);
         this.folderchildren = folderchildren ;
         this.filechildren = filechildren ;
         this.parent = parent ;
+        this.workspace = workspace ;
     } 
     public provideChildren(){ // Called when constructed
         

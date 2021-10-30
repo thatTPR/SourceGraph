@@ -153,12 +153,13 @@ export class cycleScale {
         
         
     }
-    private renderMultiLevalScaleGraph(){
+    private renderMultiLevelChart(){
         
 
     }
+    
     private getSortedSymbol(index: cycleIndex){
-        return cycleIndex
+        
     }
     private getSortedFile(index: cycleIndex){
 
@@ -184,6 +185,7 @@ export class diamondScale {
 // export class embeddedView {
 //     workspace: workspaceGraph | undefined; // 
 //     parent: fileNode | Set<fileNode>| undefined;
+//      
 //     view: embeddedEditorMediator;
 
 //     constructor(view: embeddedEditorMediator, workspace: workspaceGraph| undefined, parent: fileNode | Set<fileNode> | undefined) {
@@ -236,11 +238,12 @@ export class workspaceGraph {
 
         this.workspaceMediator.detectDiamonds();
         this.workspaceMediator.detectCycles();
+        
         this.diamondIndex = new diamondIndex();
         this.cycleIndex = new cycleIndex();
         
-        this.cycleScale = new cycleScale();
-        this.diamondScale = new diamondScale();
+        this.cycleScale = new cycleScale(this.cycleIndex);
+        this.diamondScale = new diamondScale(this.diamondIndex);
         
 
     }
@@ -267,12 +270,6 @@ export class workspaceGraph {
 
     }
     private closeEmbeddedView() {
-
-    }
-    private openTransition() {
-
-    }
-    private closeTransition() {
 
     }
     private zoomLink() {
