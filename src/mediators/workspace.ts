@@ -1,5 +1,5 @@
 import { workspace, WorkspaceConfiguration, FileSystemProvider } from 'vscode';
-import { fileMediator , notebookMediator} from './file';
+import { fileMediator ,/* notebookMediator*/} from './file';
 import { folderMediator } from './folder';
 
 
@@ -23,26 +23,23 @@ import { folderMediator } from './folder';
 
 // }
 
+
 export class workspaceMediator {
-    folders: Set<folderMediator>;
-    
+    public folders: Set<folderMediator>;
+    public file: Set<fileMediator>;
+    public symbol: Set<symbolMediator>
     constructor() {        
-        for(let index = 1 ; index <= workspace.workspaceFolders.length; index++){
-            this.folders[index] = new folderMediator(workspace.workspaceFolders[index]);
+        for(let index in workspace.workspaceFolders){
+            this.folders = new  ;
+            this.folders.add(new folderMediator(workspace.workspaceFolders[index]));
     }
         
     }
-    public getFolders(){
-        return this.folders;
+    public detectDiamonds(){
+
     }
-      
-    
-    public detectDiamonds() {
-        this.folders.
-        
-    }
-    public detectCycles() {
-        
+    public detectCycles(){
+
     }
    
 }

@@ -1,5 +1,6 @@
 import { ThemeIcon,TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider, Uri } from "vscode";
-import { editorType, embeddedEditorMediator } from './workspace';
+
+import {/* editorType, embeddedEditorMediator */} from './workspace';
 import { symbolMediator } from './symbol';
 import { folderMediator} from './folder';
 
@@ -43,9 +44,11 @@ export class fileMediator {
     children: symbolMediator ;
     parent: folderMediator ;
     
-    constructor(child: ){
-        this.iconMediator = 
-        this.Uri = current    
+    constructor(parent: folderMediator, Uri: Uri){
+        this.children = 
+        this.Uri = 
+        this.parent = parent ;
+          
     } 
    
     public getReferences(){

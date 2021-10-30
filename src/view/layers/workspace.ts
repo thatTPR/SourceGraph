@@ -9,6 +9,10 @@ import { folderMediator } from '../../mediators/folder';
 import {scaleLinear} from 'd3-scale' ; 
 import { easeQuadIn } from 'd3-ease';
 
+
+// export interface graphIt extends Set<any>{
+//     Symbol.iterator
+// }
 export interface diamond{
     start: any ; 
     intPaths: Set<any>;
@@ -21,20 +25,9 @@ export interface cycle{
 export interface path{
     content: Set<any>;
 }
-export interface indexGraph{
-    symbol: Set<any>;
-    file: Set<any>;
-    folder: Set<any>;
-    constructor(symbol: Set<any>,
-        file: Set<any>,
-        folder: Set<any>) {
-        this.symbol  = symbol;
-        this.file = file;
-        this.folder = folder;
-        
-    } 
-}
-export class diamondIndex implements indexGraph {
+
+export class diamondIndex {
+    isSorted: boolean;
     symbol : Set<symbolDiamond>;
     file : Set<fileDiamond>;
     folder : Set<folderDiamond>;
@@ -44,19 +37,45 @@ export class diamondIndex implements indexGraph {
         this.symbol  = symbol;
         this.file = file;
         this.folder = folder;
+        this.isSorted = false ;
     }
-    private getSorted(indexMember: Set<symbolDiamond> | Set<fileDiamond> | Set<folderDiamond> ){
-        this.sort()
+    public sort(){
+        this.isSorted = true
+    }
+    private comapareSize(diamond1:symbolDiamond | fileDiamond | folderDiamond, diamond2:symbolDiamond | fileDiamond | folderDiamond){
+        let place1 = this.getPlace(diamond1) ;
+        let place2 = this.getPlace(diamond2) ;
+        if (place1 != place2){
+            throw new Error("Size compare failed, Diamonds not of the same type")
+        }
+        else{
+            if(diamond1 > diamond2){return 1 ;}
+            
+            if(diamond1 == diamond2){  return 0 ;}
+            
+            if(diamond1 < diamond2 ){return -1 ;}
+            }
         
     }
     private sortBySize(diamonds: Set<symbolDiamond> | Set<fileDiamond> | Set<folderDiamond> ){
         
     }
+    private removeDuplicatesSymbol(){
+        for ( var i in this.symbol )
+        {
+            for(var j in this.symbol){
+                if(this.equivalent(i,j) == true){
+                    this.symbol.delete(j) ;
+                }
+            }
+        }
+    }
     public equivalent(diamond1: diamond , diamond2: diamond){
         if(diamond1 == diamond2){
             return true;
-        }
+        } // Extra check needed in  cycle for rotational duplicates
         return false ;
+            
 
     }
 
@@ -67,19 +86,27 @@ export class diamondIndex implements indexGraph {
         return false ;
     }
     
-    private getPlaceinSet(diamond: fileDiamond | folderDiamond | symbolDiamond ){
+    public getPlaceinSet(diamond: fileDiamond | folderDiamond | symbolDiamond ){
         var place = this.getPlace(diamond) ;
-        place.
+        for (var i in place){
+            if (this.comapareSize(i, diamond) == 1){
+                
+            }
+            else{
+                continue 
+                
+            }
+        }
     }
     private getPlace(diamond: fileDiamond | folderDiamond | symbolDiamond ){
         if(typeof(diamond) == typeof(symbolDiamond)){
-            return this.symbolDiamonds;
+            return this.symbol;
         }
         if(typeof(diamond) == typeof(fileDiamond)){
-            return this.fileDiamonds;
+            return this.file;
         }
         if(typeof(diamond) == typeof(folderDiamond)){
-            return this.folderDiamonds;
+            return this.folder;
         }
     } 
     // private checkExists(diamond: fileDiamond | folderDiamond | symbolDiamond, 
@@ -95,6 +122,7 @@ export class diamondIndex implements indexGraph {
     }
 }
 export class cycleIndex {
+    isSorted: boolean ;
     symbol: Set<symbolCycle>;
     file: Set<fileCycle>;
     folder: Set<folderCycle>;
@@ -104,57 +132,51 @@ export class cycleIndex {
         this.symbol = symbolCycles;
         this.file = fileCycles;
         this.folder = folderCycles;
+        this.isSorted = false ;
     }
-  
+    
+    public sort(){
+        this.isSorted = true ;
+    }
 
-}
-
-export class scaleFileNode{
-    value!: Number;
-    ref!: fileNode;
-    contructor(value: Number , ref: fileNode){
-        this.value = value ; this.ref = ref ;
-    }
-}
-export class scaleFolderNode{
-    value!: Number;
-    ref!: folderNode;
-    contructor(value: Number , ref: folderNode){
-        this.value = value ; this.ref = ref ;
-    }
-}
-export class scaleSymbolNode{
-    value!: Number;
-    ref!: symbolNode;
-    contructor(value: Number , ref: symbolNode){
-        this.value = value ; this.ref = ref ;
-    }
 }
 
 export class cycleScale {
-    symbol: Set<scaleFolderNode> ;
-    file: Set<scaleFileNode> ;
-    folder: Set<scaleSymbolNode>;
-    constructor(cycleIndex: cycleIndex) {
-        this.symbol = this.getSorted(cycleIndex.symbol)  ;        
-        this.file = this.getSorted(cycleIndex.file)     ;   
-        this.folder = this.getSorted(cycleIndex.folder);  
-        
-        
-     }
+    symbol: Set<folderNode> ;
+    file: Set<fileNode> ;
+    folder: Set<symbolNode>;
     
+    constructor(cycleIndex: cycleIndex) {
+        this.symbol = this.getSortedSymbol(cycleIndex)  ;        
+        this.file = this.getSortedFile(cycleIndex)     ;   
+        this.folder = this.getSortedFolder(cycleIndex);  
+        
+        
+    }
+    private renderMultiLevalScaleGraph(){
+        
+
+    }
+    private getSortedSymbol(index: cycleIndex){
+        return cycleIndex
+    }
+    private getSortedFile(index: cycleIndex){
+
+    }
+    private getSortedFolder(index: cycleIndex){
+
+    }
 }
 export class diamondScale {
-    symbol: Set<Number> ;
-    file: Set<number> ;
-    folder: Set<number>
+    symbol: Set<symbolNode> ;
+    file: Set<fileNode> ;
+    folder: Set<folderNode>
     constructor(diamondIndex: diamondIndex) {
-        this.symbol = getSorted(diamondIndex.symbol)  ;        
-        this.file = getSorted(diamondIndex.file)     ;   
+        this.symbol = (diamondIndex.symbol)  ;        
+        this.file = (diamondIndex.file)     ;   
         this.folder = getSorted(diamondIndex.folder);  
-        
-        
-     }
+    }
+    
 
      
 }
@@ -207,17 +229,19 @@ export class workspaceGraph {
         // buildPipeGraph
         // buildSymbolGraph
         // builds graph and checks for diamonds and cycles returning information where appropiate
-        folderChannels = new 
-        folderLinks 
+        
         this.folderGraph = new folderGraph()
         this.symbolGraph = new symbolGraph()
         this.fileGraph = new fileGraph()
+
+        this.workspaceMediator.detectDiamonds();
+        this.workspaceMediator.detectCycles();
         this.diamondIndex = new diamondIndex();
         this.cycleIndex = new cycleIndex();
-        this.cycleScale =
-        this.diamondScale =
-        this.workspaceMediator.detectDiamond();
-        this.workspaceMediator.detectCycle();
+        
+        this.cycleScale = new cycleScale();
+        this.diamondScale = new diamondScale();
+        
 
     }
     

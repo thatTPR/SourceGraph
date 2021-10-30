@@ -6,7 +6,7 @@ import {
 } from 'd3';
 import { symbolArrow , symbolNode} from './symbol';
 import {folderChannel, folderNode} from './folder';
-import {cycleIndex, diamondIndex, embeddedView, workspaceGraph , cycle , path} from './workspace';
+import {cycleIndex, diamondIndex, /*embeddedView,*/ workspaceGraph , cycle , path} from './workspace';
 
 import {fileMediator, fileIconMediator} from '../../mediators/file';
 export class filePath implements path {
@@ -39,13 +39,13 @@ export class fileNode {
     workspace: workspaceGraph ;
     parentFolder: folderNode ;
     // New workspace contstructor
-    constructor(parentFolder:folderNode , zoomThresh: number, children : Set<symbolNode>, fileMediator: fileMediator, workspace: workspaceGraph ){
+    constructor(parentFolder:folderNode , zoomThresh: number, children : Set<symbolNode>,  workspace: workspaceGraph ){
         this.zoomThresh = zoomThresh ;
         this.isOpen = false ;
         this.children = children ;
-        this.fileMediator = fileMediator ;        
-        this.workspace = workspace ;
         this.parentFolder = parentFolder; 
+        this.fileMediator = new fileMediator(this.parentFolder.folderMediator, this.parentFolder.folderMediator.uri) ;        
+        this.workspace = workspace ;
     } 
     
     
@@ -77,6 +77,7 @@ export class filePipe {
     public include(symbolArrow: symbolArrow){
 
     }
+    
 }
 
 export class fileGraph {
@@ -98,5 +99,11 @@ export class fileGraph {
     public detectCycles(){
 
     }
+
+    public diamondModifier() {
+    }
+    public cycleModifier() {
+    }
+
    
 }

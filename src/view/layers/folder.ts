@@ -40,6 +40,7 @@ export class folderNode {
     folderMediator: folderMediator ;
     workspace: workspaceGraph ;
     parentFolder : folderNode ;
+    
     constructor(parentFolder: folderNode,children: Set<folderNode | fileNode>,folderMediator: folderMediator , workspace: workspaceGraph){
         this.children = children ; this.isOpen = false; this.workspace = workspace ;
         this.folderMediator = folderMediator ;      
@@ -102,7 +103,7 @@ export class treeLink {
 
 export class folderGraph {
     nodes: Set<folderNode>;
-    channels: Set<folderChannel>;
+    channels: Set<folderChannel> | undefined;
     tree: Set<treeLink>;
 
     constructor(nodes: Set<folderNode>, channels:Set<folderChannel>, tree: Set<treeLink>) {
@@ -110,16 +111,17 @@ export class folderGraph {
         this.nodes = nodes; this.channels = channels;this.tree = tree;
     }
    
-    
-    
-    public addLink(){
-
+    public removeLink(parent: folderNode, child: folderNode){
+        this.tree.delete
     }
-    public addChannel(src: folderNode, dest: folderNode) {
-        this.nodes;
-        this.channels
+    
+    public addLink(link: treeLink){
+        this.tree.add(link)
     }
-   
+    public addChannel(folderChannel: folderChannel) {
+       this.channels?.add(folderChannel)
+    }
+    
     public diamondModifier() {
     }
     public cycleModifier() {
