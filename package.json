@@ -16,6 +16,9 @@
 	],
 	"contributes": {
 		"viewsContainers": {
+			"source-graph":[
+				
+			],
 			"activity-bar": [
 				{
 					"id": "source-graph",
@@ -23,9 +26,12 @@
 					"icon": "resources/source-graph.svg"
 				}
 			]
+			
 		},
 		"views":{
-
+			"source-graph-scale":{
+				
+			}
 		},
 		"commands": [
 			{
@@ -37,7 +43,13 @@
 				"command": "sg.disable",
 				"category": "source-graph",
 				"title": "Source graph explorer disabled and Unset as default"
+			},
+			{
+				"command": "sg.focus",
+				"category": "source-graph",
+				"title": "Focused on sidebar"
 			}
+
 		]
 	},
 	"scripts": {

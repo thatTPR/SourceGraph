@@ -5,16 +5,11 @@ import {
     ZoomBehavior, ZoomInterpolator, ZoomScale
 } from 'd3';
 import { symbolArrow , symbolNode} from './symbol';
-import {folderChannel, folderNode} from './folder';
+import {folderChannel, folderGraph, folderNode} from './folder';
 import {cycleIndex, diamondIndex, /*embeddedView,*/ workspaceGraph , cycle , path} from './workspace';
 
 import {fileMediator, fileIconMediator} from '../../mediators/file';
-export class filePath implements path {
-    content: Set<fileNode>;
-    constructor( content: Set<fileNode>){
-        this.content = content;
-    }
-}
+
 export class fileCycle implements cycle {
     content: Set<fileNode>;
     constructor(content: Set<fileNode>){
@@ -23,9 +18,9 @@ export class fileCycle implements cycle {
 }
 export class fileDiamond{
     start:fileNode;
-    intPaths: Set<filePath>;
+    intPaths: Set<Set<fileNode>>;
     end:fileNode;
-    constructor(start:fileNode, intPaths: Set<filePath>, end:fileNode){
+    constructor(start:fileNode, intPaths: Set<Set<fileNode>>, end:fileNode){
         this.start = start; this.intPaths = intPaths ; this.end = end ;
     }
    
@@ -38,17 +33,13 @@ export class fileNode {
     fileMediator: fileMediator ;
     parentFolder: folderNode ;
     // New workspace contstructor
-    constructor(parentFolder:folderNode , zoomThresh: number, children : Set<symbolNode> ){
+    constructor(parentFolder:folderNode , zoomThresh: number, children : Set<symbolNode>, fileMediator: fileMediator ){
         this.zoomThresh = zoomThresh ;
         this.isOpen = false ;
         this.children = children ;
         this.parentFolder = parentFolder; 
-        this.fileMediator = new fileMediator(this.parentFolder.folderMediator, this.parentFolder.folderMediator.uri , ) ;        
-       
-    } 
-    
-    
-    
+        this.fileMediator = fileMediator;        
+    }
 
 }
 export class filePipe {
@@ -80,10 +71,13 @@ export class filePipe {
 }
 
 export class fileGraph {
-    
+    workspaceGraph: workspaceGraph ;
+    folderGraph: folderGraph ;
     nodes: Set<fileNode>;
     pipes: Set<filePipe>;
-    constructor(nodes: Set<fileNode>, pipes: Set<filePipe>) {
+    constructor(workspaceGraph: workspaceGraph ,folderGraph: folderGraph ,nodes: Set<fileNode>, pipes: Set<filePipe>) {
+        this.workspaceGraph = workspaceGraph ;
+        this.folderGraph = folderGraph ;
         this.nodes = nodes; this.pipes = pipes;
     }
     public addPipe(src: fileNode, dest: fileNode) {

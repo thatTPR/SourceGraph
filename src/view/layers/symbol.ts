@@ -1,16 +1,11 @@
 import { SymbolKind, ThemeIcon, SymbolInformation, SaveDialogOptions } from 'vscode';
-import { symbolMediator } from '../../mediators/symbol'
+import { symbolIconMediator, symbolMediator } from '../../mediators/symbol'
 
 import { fileGraph, fileNode, filePipe } from './file';
 import { folderChannel } from './folder';
 import { cycleIndex , diamond, cycle, path, workspaceGraph} from './workspace';
 
-export class symbolPath implements path {
-    content: Set<symbolNode>;
-    constructor(content: Set<symbolNode>){
-        this.content = content ;
-    }
-}
+
 export class symbolCycle implements cycle {
     content: Set<symbolNode>;
     constructor(content: Set<symbolNode>){
@@ -19,24 +14,25 @@ export class symbolCycle implements cycle {
 }
 export class symbolDiamond implements diamond{
     start: symbolNode;
-    intPaths: Set<symbolPath>;
+    intPaths: Set<Set<symbolNode>>;
     end: symbolNode;
-    constructor(start: symbolNode, intPaths: Set<symbolPath>, end: symbolNode) {
+    constructor(start: symbolNode, intPaths: Set<Set<symbolNode>>, end: symbolNode) {
         this.start = start; this.intPaths = intPaths; this.end = end;
     }
 
 }
 
 export class symbolNode {
-    symbolMediator: symbolMediator;
-    
+    parentMediator: symbolMediator;
+    symbolIconMediator: symbolIconMediator ;
     parentFile: fileNode;
     parentSymbol: symbolNode | undefined;
     child: symbolNode | undefined ;
-    constructor(type: SymbolInformation, symbolMediator: symbolMediator, parentFile: fileNode) {
-        this.symbolMediator = symbolMediator;
+    constructor(type: SymbolInformation, parentMediator: symbolMediator, parentFile: fileNode) {
+        this.parentMediator = parentMediator;
         this.parentFile = parentFile;
         this.child = undefined ;
+        this.symbolIconMediator =
     }
     public render(){
 
@@ -116,6 +112,7 @@ class parentArrow extends symbolArrow{
 // This is never a graph of the full workspace. 
 // Instead child instances get added and removed dynamically using the index.
 export class symbolGraph {
+    fileGraph: fileGraph ;
 
     nodes: Set<symbolNode>;
     implArrows: Set<implArrow> | undefined;
@@ -137,7 +134,6 @@ export class symbolGraph {
     }
     public addRefArrow(src: symbolNode, dest: symbolNode) {
        
-        
     }
     public addImplArrow(src: symbolNode, dest: symbolNode){
 
@@ -149,8 +145,8 @@ export class symbolGraph {
     public addDefArrow(src: symbolNode, dest: symbolNode){
         
     }
-    public arrowContructor(){
-
+    public arrowsContructor(){
+        
     }
     public refArrowsConstructor(){
 

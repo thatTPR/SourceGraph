@@ -10,33 +10,79 @@ export class SidebarProvider implements vscode.WebviewViewProvider{
     }
     
 }
+export class contextHandler{
+    explorer: vscode.WebviewViewResolveContext ; 
+    search:  vscode.WebviewViewResolveContext;
+    scm:  vscode.WebviewViewResolveContext;
+    sg: vscode.WebviewViewResolveContext;
+    constructor(explorer: vscode.WebviewViewResolveContext,
+        search:  vscode.WebviewViewResolveContext,
+        scm:  vscode.WebviewViewResolveContext,
+        
+    ){
+        this.explorer = explorer ;
+        this.search = search ;
+        this.scm = scm ;
+        this.sg = 
+    }
+    // debug:
+}
+class renderViewHandler{ // This is so you can move views and share them across view containers
+    explorer: vscode.WebviewViewProvider ; 
+    search:  vscode.WebviewViewProvider;
+    scm:  vscode.WebviewViewProvider;
+    constructor(explorer: vscode.WebviewViewProvider,
+        search:  vscode.WebviewViewProvider,
+        scm:  vscode.WebviewViewProvider,
+    ){
+        this.explorer = explorer ;
+        this.search = search ;
+        this.scm = scm ;
+    }
+    // debug:
 
-export function renderWorkSpace(){
+}
+
+export function mainViewEnable(){
+    vscode.window.showWorkspaceFolderPick
     const panel = vscode.window.createWebviewPanel('Source graph',
-        'Source graph',
-        vscode.ViewColumn.Active,
-        {}
+    'Source graph',
+    vscode.ViewColumn.Active,
+    {}
     )
     panel.webview.asWebviewUri(vscode.Uri.file('./view/index.html'))
-}
-// export function openFileSymbolGraph(){
-
-//     view = new embeddedView(new embeddedEditorMediator() , undefined, undefined)
     
-// }
-export function viewContainerEnable(){
-    // contains multiple tree views. Right now just contains CycleScale and diamond Scales
-    var viewProvider: vscode.WebviewViewProvider  = new SidebarProvider ;
 }
-
+export function customSidebarEnable(){
+    
+}
+export function explorerViewEnable(){
+    
+}
+export function scmViewEnable(){
+    
+}
+export function debugViewEnable(){
+    
+}
 export function statusBarEnable() {
     // Status bar and 
     
     const statusBarItem = vscode.window.createStatusBarItem(
         vscode.StatusBarAlignment.Left, 1)
-    statusBarItem.text = "SourceGraph";
-    statusBarItem.tooltip = "Open Ource Graph View";
-    statusBarItem.command = "sg.enable";
-    statusBarItem.show()
-   
-}
+        statusBarItem.text = "SourceGraph";
+        statusBarItem.tooltip = "Open Surce Graph Sidebar View";
+        statusBarItem.command = "sg.enable";
+        statusBarItem.show()
+        
+    }
+    
+    
+    export function viewsEnable(){
+        mainViewEnable();
+        customSidebarEnable();
+        explorerViewEnable();
+        scmViewEnable();
+        debugViewEnable();
+        statusBarEnable();
+    }

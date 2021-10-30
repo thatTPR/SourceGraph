@@ -1,12 +1,12 @@
-import { ThemeIcon,TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider, Uri } from "vscode";
+import { ThemeIcon, TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider, Uri } from "vscode";
 
-import {/* editorType, embeddedEditorMediator */} from './workspace';
-import { symbolMediator } from './symbol';
-import { folderMediator} from './folder';
+import {/* editorType, embeddedEditorMediator */ } from './workspace';
+import { symbolIconMediator, symbolMediator } from './symbol';
+import { folderMediator } from './folder';
 
 
 export class fileIconMediator {
-   
+
 }
 // class classicEditorMediator implements embeddedEditorMediator{
 //     editorType: editorType;
@@ -27,7 +27,7 @@ export class fileIconMediator {
 //     public getEditorType() {
 //         return this.editorType;
 //     }
-   
+
 // }
 
 // export class multifileEditorMediator{
@@ -40,37 +40,37 @@ export class fileIconMediator {
 //     notebook
 // }
 export class fileMediator {
-    Uri: Uri ;
-    children: symbolMediator ;
-    parent: folderMediator ;
-    
-    constructor(parent: folderMediator, Uri: Uri, children: symbolMediator){
-        this.children = children ;
-        this.Uri = Uri ;
-        this.parent = parent ;
-          
-    } 
-    public getChildren(){
+    Uri: Uri;
+    children: symbolMediator;
+    parent: folderMediator;
+    themIcon: ThemeIcon ;
+    constructor(parent: folderMediator, Uri: Uri) {
+        this.children = new symbolMediator( symbol, this, new symbolIconMediator());
+        this.Uri = Uri;
+        this.parent = parent;
 
     }
-    public getReferences(){
+    public getChildren() {
 
     }
-    public getUses(){
+    public getReferences() {
 
     }
-    
-    public readRange(range: ; content: string){
+    public getUses() {
 
     }
-    public getSVGIcon(){
+
+    public readRange(range: ; content: string) {
+
+    }
+    public getSVGIcon() {
         this.
     }
+
+    public getReferences() {
+        throw new Error("Function not implemented.");
+    }
 }
 
 
-
-function getReferences() {
-    throw new Error("Function not implemented.");
-}
 

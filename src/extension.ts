@@ -9,10 +9,12 @@ export function activate(context: vscode.ExtensionContext) {
 	
 	
 	context.subscriptions.push(vscode.commands.registerCommand('sg.enable', () => {
-		renderer.viewContainerEnable();
 		renderer.statusBarEnable();
-		renderer.renderWorkSpace();
+		renderer.viewsEnable();
+		
 	}));
+	
+	
 	// context.subscriptions.push(vscode.commands.registerCommand('sg.openFileSymbolGraph', ()=> {
 	// 	renderer.viewContainerEnable();
 	// 	renderer.statusBarEnable();

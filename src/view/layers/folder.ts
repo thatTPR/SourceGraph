@@ -11,12 +11,7 @@ import {diamond, cycle, path, workspaceGraph} from './workspace';
 
 import {folderMediator, folderIconMediator} from '../../mediators/folder'
 
-export class folderPath implements path {
-    content: Set<folderNode>;
-    constructor(content: Set<folderNode>){
-        this.content = content ;
-    }
-}
+
 export class folderCycle implements cycle {
     content: Set<folderNode>;
     constructor(content: Set<folderNode>){
@@ -26,9 +21,9 @@ export class folderCycle implements cycle {
 export class folderDiamond implements diamond {
 
     start:folderNode;
-    intPaths: Set<folderPath>;
+    intPaths: Set<Set<folderNode>>;
     end:folderNode;
-    constructor(start:folderNode, intPaths: Set<folderPath>, end:folderNode){
+    constructor(start:folderNode, intPaths: Set<Set<folderNode>>, end:folderNode){
         this.start = start; this.intPaths = intPaths ; this.end = end ;
     }
     
@@ -93,7 +88,7 @@ export class folderChannel {
         
     }    
 }
-export class treeLink {
+export class treeBranch {
     parentNode: folderNode; 
     childNode: fileNode | folderNode; 
     constructor(childNode: fileNode | folderNode, parentNode: folderNode) {
@@ -102,12 +97,15 @@ export class treeLink {
 }
 
 export class folderGraph {
+    workspaceGraph: workspaceGraph ;
+    
+
     nodes: Set<folderNode>;
     channels: Set<folderChannel> | undefined;
-    tree: Set<treeLink>;
+    tree: Set<treeBranch>;
 
-    constructor(nodes: Set<folderNode>, channels:Set<folderChannel>, tree: Set<treeLink>) {
-
+    constructor(workspaceGraph: workspaceGraph,nodes: Set<folderNode>, channels:Set<folderChannel>, tree: Set<treeBranch>) {
+        this.workspaceGraph = workspaceGraph ;
         this.nodes = nodes; this.channels = channels;this.tree = tree;
     }
    
@@ -115,7 +113,7 @@ export class folderGraph {
         this.tree.delete
     }
     
-    public addLink(link: treeLink){
+    public addLink(link: treeBranch){
         this.tree.add(link)
     }
     public addChannel(folderChannel: folderChannel) {

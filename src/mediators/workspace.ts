@@ -25,23 +25,17 @@ import { folderMediator } from './folder';
 
 
 export class workspaceMediator {
+    
     public folders: Set<folderMediator>;
-    public file: Set<fileMediator>;
-    public symbol: Set<symbolMediator>
     constructor() {        
         for(let index in workspace.workspaceFolders){
-            this.folders = new  ;
-            this.folders.add(new folderMediator(workspace.workspaceFolders[index]));
-    }
+            this.folders =        
         
     }
-    public detectDiamonds(){
+    public getFolders(){
 
     }
-    public detectCycles(){
-
-    }
-   
+          
 }
 
 

@@ -1,13 +1,15 @@
 
 import { symbolNode, symbolDiamond, symbolCycle, symbolArrow, symbolGraph } from './symbol';
 import { fileNode, fileDiamond, fileCycle, filePipe , fileGraph} from './file';
-import { folderGraph, treeLink,folderChannel, folderDiamond, folderCycle, folderNode, } from './folder';
+import { folderGraph, treeBranch,folderChannel, folderDiamond, folderCycle, folderNode, } from './folder';
 
 import {/* editorType,  embeddedEditorMediator,*/ workspaceMediator } from '../../mediators/workspace';
 import { folderMediator } from '../../mediators/folder';
 
 import {scaleLinear} from 'd3-scale' ; 
 import { easeQuadIn } from 'd3-ease';
+import { EventEmitter } from 'stream';
+import { eventNames } from 'process';
 
 
 // export interface graphIt extends Set<any>{
@@ -27,13 +29,13 @@ export interface path{
 }
 
 export class diamondIndex {
-    isSorted: boolean;
-    symbol : Set<symbolDiamond>;
-    file : Set<fileDiamond>;
-    folder : Set<folderDiamond>;
-    constructor(symbol: Set<symbolDiamond>,
-        file: Set<fileDiamond>,
-        folder: Set<folderDiamond>) {
+    isSorted: boolean | undefined;
+    symbol : Set<symbolDiamond> | undefined;
+    file : Set<fileDiamond> | undefined;
+    folder : Set<folderDiamond> | undefined;
+    constructor(symbol: Set<symbolDiamond> | undefined,
+        file: Set<fileDiamond> | undefined,
+        folder: Set<folderDiamond> | undefined) {
         this.symbol  = symbol;
         this.file = file;
         this.folder = folder;
@@ -61,9 +63,9 @@ export class diamondIndex {
         
     }
     private removeDuplicatesSymbol(){
-        for ( var i in this.symbol )
+        for ( var i:symbolDiamond in this.symbol )
         {
-            for(var j in this.symbol){
+            for(let j:symbolDiamond in this.symbol){
                 if(this.equivalent(i,j) == true){
                     this.symbol.delete(j) ;
                 }
@@ -122,16 +124,16 @@ export class diamondIndex {
     }
 }
 export class cycleIndex {
-    isSorted: boolean ;
-    symbol: Set<symbolCycle>;
-    file: Set<fileCycle>;
-    folder: Set<folderCycle>;
-    constructor(symbolCycles: Set<symbolCycle>,
-        fileCycles: Set<fileCycle>,
-        folderCycles: Set<folderCycle>) {
-        this.symbol = symbolCycles;
-        this.file = fileCycles;
-        this.folder = folderCycles;
+    isSorted: boolean | undefined;
+    symbol : Set<symbolDiamond> | undefined;
+    file : Set<fileDiamond> | undefined;
+    folder : Set<folderDiamond> | undefined;
+    constructor(symbol: Set<symbolDiamond> | undefined,
+        file: Set<fileDiamond> | undefined,
+        folder: Set<folderDiamond> | undefined) {
+        this.symbol  = symbol;
+        this.file = file;
+        this.folder = folder;
         this.isSorted = false ;
     }
     
@@ -145,7 +147,7 @@ export class cycleScale {
     symbol: Set<folderNode> ;
     file: Set<fileNode> ;
     folder: Set<symbolNode>;
-    
+    scope: folderNode | undefined ; // If set undefined defaults to entire project
     constructor(cycleIndex: cycleIndex) {
         this.symbol = this.getSortedSymbol(cycleIndex)  ;        
         this.file = this.getSortedFile(cycleIndex)     ;   
@@ -157,9 +159,13 @@ export class cycleScale {
         
 
     }
-    
+    private getSortedAll(){
+
+    }
     private getSortedSymbol(index: cycleIndex){
-        
+        for (let i in index.symbol){
+            for(let j in i)
+        }
     }
     private getSortedFile(index: cycleIndex){
 
@@ -172,11 +178,16 @@ export class diamondScale {
     symbol: Set<symbolNode> ;
     file: Set<fileNode> ;
     folder: Set<folderNode>
+    scope: folderNode | undefined ; // If set undefined defaults to entire project
     constructor(diamondIndex: diamondIndex) {
         this.symbol = (diamondIndex.symbol)  ;        
         this.file = (diamondIndex.file)     ;   
         this.folder = getSorted(diamondIndex.folder);  
     }
+    public setScope(folderNode: folderNode){
+        this.symbol = get
+    }
+    
     
 
      
@@ -210,8 +221,7 @@ export class workspaceGraph {
     folderGraph: folderGraph;
     fileGraph: fileGraph ;
     symbolGraph: symbolGraph ;
-
-    workspaceMediator: workspaceMediator;
+    
 
     diamondIndex: diamondIndex;  cycleIndex: cycleIndex;
     diamondScale: diamondScale;  cycleScale: cycleScale;
@@ -220,34 +230,28 @@ export class workspaceGraph {
     constructor() {
         // this.embeddedView  = undefined // For now no support for opening embedded views on boot up 
         // builds workspace tree from root recursively 
-        this.workspaceMediator = new workspaceMediator;
-
-        var folderMediators:Set<folderMediator>  = this.workspaceMediator.getFolders()
-
         // Build Link tree
-
+ // IdDFS here  https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search
         // buildChannelGraph
 
         // buildPipeGraph
         // buildSymbolGraph
         // builds graph and checks for diamonds and cycles returning information where appropiate
         
-        this.diamondIndex = new diamondIndex();
-        this.cycleIndex = new cycleIndex();
+        this.diamondIndex = new diamondIndex(undefined, undefined, undefined);
+        this.cycleIndex = new cycleIndex(undefined ,undefined ,undefined );
         this.cycleScale = new cycleScale(this.cycleIndex);
         this.diamondScale = new diamondScale(this.diamondIndex);
         this.folderGraph = new folderGraph()
-        this.fileGraph = new fileGraph()
+        this.fileGraph =  this.folderGraph.filegraph
         this.symbolGraph = new symbolGraph()
 
-        this.workspaceMediator.detectDiamonds();
-        this.workspaceMediator.detectCycles();
+        
         
         
         
 
     }
-    
     private refreshLinkTree() {
 
     }
@@ -258,12 +262,6 @@ export class workspaceGraph {
 
     }
     private refreshSymbolGraph() {
-
-    }
-    private addLink() {
-        
-    }
-    private removeLink() {
 
     }
     private openEmbeddedView() {
@@ -279,18 +277,19 @@ export class workspaceGraph {
 
     }
     private symbolLinkOrganise() {
-
+        console.log("symbol link organising") ;
     }
     private fileLinkOrganise() {
-
+        console.log("file link organising") ;
     }
     private folderLinkOrganise() {
-
+        console.log("folder organising") ;
     }
     private fileOrganise() {
-
+        console.log("file organising") ;
     }
     private organise() {
-
+        console.log("organising") ;
     }
 }
+
