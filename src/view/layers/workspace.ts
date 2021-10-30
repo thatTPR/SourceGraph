@@ -232,18 +232,18 @@ export class workspaceGraph {
         // buildSymbolGraph
         // builds graph and checks for diamonds and cycles returning information where appropiate
         
+        this.diamondIndex = new diamondIndex();
+        this.cycleIndex = new cycleIndex();
+        this.cycleScale = new cycleScale(this.cycleIndex);
+        this.diamondScale = new diamondScale(this.diamondIndex);
         this.folderGraph = new folderGraph()
-        this.symbolGraph = new symbolGraph()
         this.fileGraph = new fileGraph()
+        this.symbolGraph = new symbolGraph()
 
         this.workspaceMediator.detectDiamonds();
         this.workspaceMediator.detectCycles();
         
-        this.diamondIndex = new diamondIndex();
-        this.cycleIndex = new cycleIndex();
         
-        this.cycleScale = new cycleScale(this.cycleIndex);
-        this.diamondScale = new diamondScale(this.diamondIndex);
         
 
     }
