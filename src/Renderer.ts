@@ -10,7 +10,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider{
     }
     
 }
-export class contextHandler{
+export class contextHandler implements vscode.WebviewViewProvider {
     explorer: vscode.WebviewViewResolveContext ; 
     search:  vscode.WebviewViewResolveContext;
     scm:  vscode.WebviewViewResolveContext;
@@ -25,9 +25,17 @@ export class contextHandler{
         this.scm = scm ;
         this.sg = 
     }
+    resolveWebviewView(webviewView: vscode.)
+    
     // debug:
 }
-class renderViewHandler{ // This is so you can move views and share them across view containers
+class sidebarPresetHandler implements vscode.WebviewViewProvider{
+    
+}
+class sidedebarListeners {
+    explorer
+}
+class renderViewHandler { // This is so you can move views and share them across view containers
     explorer: vscode.WebviewViewProvider ; 
     search:  vscode.WebviewViewProvider;
     scm:  vscode.WebviewViewProvider;
@@ -42,6 +50,7 @@ class renderViewHandler{ // This is so you can move views and share them across 
     // debug:
 
 }
+
 
 export function mainViewEnable(){
     vscode.window.showWorkspaceFolderPick

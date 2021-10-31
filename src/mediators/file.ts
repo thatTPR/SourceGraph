@@ -1,4 +1,4 @@
-import { ThemeIcon, TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider, Uri } from "vscode";
+import { ThemeIcon, TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider, Uri, DocumentSymbolProvider } from "vscode";
 
 import {/* editorType, embeddedEditorMediator */ } from './workspace';
 import { symbolIconMediator, symbolMediator } from './symbol';
@@ -60,7 +60,7 @@ export class fileMediator {
 
     }
 
-    public readRange(range: ; content: string) {
+    public readRange(range:DocumentSymbolProvider.ranges ; content: string) {
 
     }
     public getSVGIcon() {
