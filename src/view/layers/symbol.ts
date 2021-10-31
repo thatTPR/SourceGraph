@@ -24,7 +24,7 @@ export class symbolDiamond implements diamond{
 
 export class symbolNode {
     parentMediator: symbolMediator;
-    symbolIconMediator: symbolIconMediator ;
+    // symbolIconMediator: symbolIconMediator ;
     parentFile: fileNode;
     parentSymbol: symbolNode | undefined;
     child: symbolNode | undefined ;
@@ -32,7 +32,7 @@ export class symbolNode {
         this.parentMediator = parentMediator;
         this.parentFile = parentFile;
         this.child = undefined ;
-        this.symbolIconMediator =
+        // this.symbolIconMediator =  ;
     }
     public render(){
 
@@ -52,13 +52,13 @@ export class symbolArrow {
     rendered: Boolean;
     source: symbolNode;
     dest: symbolNode;
-    includedIn: filePipe;
+    includedIn: filePipe | fileNode;
     constructor(incycles: Set<symbolCycle>,
         indiamonds: Set<symbolDiamond>,
         rendered: Boolean,
         source: symbolNode,
         dest: symbolNode,
-        includedIn: filePipe) {
+        includedIn: filePipe | fileNode) {
         this.incycles = incycles;this.indiamonds = indiamonds ;
         this.rendered = false;
         this.source = source;
@@ -70,7 +70,7 @@ export class symbolArrow {
         rendered: Boolean,
         source: symbolNode,
         dest: symbolNode,
-        includedIn: filePipe) {
+        includedIn: filePipe | fileNode ) {
         this.incycles = incycles;this.indiamonds = indiamonds ;
         this.rendered = false;
         this.source = source;
@@ -93,8 +93,6 @@ export class symbolArrow {
     }
 }
 class implArrow extends symbolArrow {
-
-
     
 }
 class refArrow extends symbolArrow{
@@ -106,31 +104,32 @@ class defArrow extends symbolArrow{
 class typedefArrow extends symbolArrow{
 
 }
-class parentArrow extends symbolArrow{
+class merged extends symbolArrow{
 
 }
 // This is never a graph of the full workspace. 
 // Instead child instances get added and removed dynamically using the index.
 export class symbolGraph {
-    fileGraph: fileGraph ;
+    workspaceGraph: workspaceGraph ;
 
-    nodes: Set<symbolNode>;
+    nodes: Set<symbolNode> | undefined;
     implArrows: Set<implArrow> | undefined;
     refArrows: Set<refArrow> | undefined ;
     defArrows: Set<defArrow> | undefined ;
     typedefArrows: Set<typedefArrow> | undefined;
-    parentArrow: parentArrow | undefined;
    
-    constructor(symbolNodes: Set<symbolNode>, implArrows: Set<implArrow>,
+   
+    constructor(workspaceGraph: workspaceGraph ,symbolNodes: Set<symbolNode> | undefined, implArrows: Set<implArrow> | undefined,
         refArrows: Set<refArrow> | undefined ,
         defArrows: Set<defArrow> | undefined ,
-        typedefArrows: Set<typedefArrow> | undefined,
-        parentArrow: parentArrow | undefined) {
+        typedefArrows: Set<typedefArrow> | undefined, 
+        ) {
+            this.workspaceGraph = workspaceGraph ;
         this.implArrows = implArrows; this.nodes = symbolNodes;
         this.refArrows = refArrows; 
         this.defArrows = defArrows ;
         this.typedefArrows = typedefArrows ;
-        this.parentArrow = parentArrow
+        
     }
     public addRefArrow(src: symbolNode, dest: symbolNode) {
        
@@ -144,6 +143,19 @@ export class symbolGraph {
     }
     public addDefArrow(src: symbolNode, dest: symbolNode){
         
+    }
+    public mergeDups(){
+        for( let i in this.refArrows){
+            for(let j in this.defArrows){
+                if(i.source == j.des){
+                    
+                }
+            }
+            for(let k in this.typedefArrows) {
+
+            }
+        }
+
     }
     public arrowsContructor(){
         

@@ -30,8 +30,9 @@ export class contextHandler implements vscode.WebviewViewProvider {
     // debug:
 }
 class sidebarPresetHandler implements vscode.WebviewViewProvider{
-    
+
 }
+
 class sidedebarListeners {
     explorer
 }

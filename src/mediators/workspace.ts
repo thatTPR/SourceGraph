@@ -25,16 +25,16 @@ import { folderMediator } from './folder';
 
 
 export class workspaceMediator {
-    
-    public folders: Set<folderMediator>;
+    public rootfolders: Set<folderMediator>; // Set of folders opened by editor
     constructor() {        
         for(let index in workspace.workspaceFolders){
-            this.folders =        
+            this.rootfolders =        
         
     }
     public getFolders(){
 
     }
+    
           
 }
 

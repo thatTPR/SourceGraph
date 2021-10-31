@@ -100,12 +100,12 @@ export class folderGraph {
     workspaceGraph: workspaceGraph ;
     
 
-    nodes: Set<folderNode>;
+    nodes: Set<folderNode> | undefined;
     channels: Set<folderChannel> | undefined;
-    tree: Set<treeBranch>;
+    tree: Set<treeBranch> | undefined;
 
-    constructor(workspaceGraph: workspaceGraph,nodes: Set<folderNode>, channels:Set<folderChannel>, tree: Set<treeBranch>) {
-        this.workspaceGraph = workspaceGraph ;
+    constructor(workspaceGraph: workspaceGraph | undefined,nodes: Set<folderNode> | undefined, channels:Set<folderChannel> | undefined, tree: Set<treeBranch> | undefined) {
+        this.workspaceGraph = workspaceGraph ; 
         this.nodes = nodes; this.channels = channels;this.tree = tree;
     }
    

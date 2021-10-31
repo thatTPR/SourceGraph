@@ -184,9 +184,7 @@ export class diamondScale {
         this.file = (diamondIndex.file)     ;   
         this.folder = getSorted(diamondIndex.folder);  
     }
-    public setScope(folderNode: folderNode){
-        this.symbol = get
-    }
+    
     
     
 
@@ -238,15 +236,15 @@ export class workspaceGraph {
         // buildSymbolGraph
         // builds graph and checks for diamonds and cycles returning information where appropiate
         
+        this.folderGraph = new folderGraph(this, undefined, undefined, undefined)
+        this.fileGraph =  new fileGraph(this, undefined, undefined, undefined)
+        this.symbolGraph = new symbolGraph(this, undefined, undefined, undefined , undefined, undefined)
+        
         this.diamondIndex = new diamondIndex(undefined, undefined, undefined);
         this.cycleIndex = new cycleIndex(undefined ,undefined ,undefined );
+        
         this.cycleScale = new cycleScale(this.cycleIndex);
         this.diamondScale = new diamondScale(this.diamondIndex);
-        this.folderGraph = new folderGraph()
-        this.fileGraph =  this.folderGraph.filegraph
-        this.symbolGraph = new symbolGraph()
-
-        
         
         
         

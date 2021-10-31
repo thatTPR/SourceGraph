@@ -43,7 +43,7 @@ export class fileMediator {
     Uri: Uri;
     children: symbolMediator;
     parent: folderMediator;
-    themIcon: ThemeIcon ;
+    themeIcon: ThemeIcon ;
     constructor(parent: folderMediator, Uri: Uri) {
         this.children = new symbolMediator( symbol, this, new symbolIconMediator());
         this.Uri = Uri;

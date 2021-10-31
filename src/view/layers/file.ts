@@ -72,10 +72,10 @@ export class filePipe {
 
 export class fileGraph {
     workspaceGraph: workspaceGraph ;
-    folderGraph: folderGraph ;
-    nodes: Set<fileNode>;
-    pipes: Set<filePipe>;
-    constructor(workspaceGraph: workspaceGraph ,folderGraph: folderGraph ,nodes: Set<fileNode>, pipes: Set<filePipe>) {
+    folderGraph: folderGraph | undefined ;
+    nodes: Set<fileNode> | undefined;
+    pipes: Set<filePipe> | undefined;
+    constructor(workspaceGraph: workspaceGraph ,folderGraph: folderGraph| undefined ,nodes: Set<fileNode>| undefined, pipes: Set<filePipe>| undefined) {
         this.workspaceGraph = workspaceGraph ;
         this.folderGraph = folderGraph ;
         this.nodes = nodes; this.pipes = pipes;
