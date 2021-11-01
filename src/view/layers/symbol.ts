@@ -7,35 +7,35 @@ import { cycleIndex , diamond, cycle, path, workspaceGraph} from './workspace';
 
 
 export class symbolCycle implements cycle {
-    content: Set<symbolNode>;
-    constructor(content: Set<symbolNode>){
+    content: Array<symbolNode>;
+    constructor(content: Array<symbolNode>){
         this.content = content ;
     }
 }
 export class symbolDiamond implements diamond{
     start: symbolNode;
-    intPaths: Set<Set<symbolNode>>;
+    intPaths: Array<Array<symbolNode>>;
     end: symbolNode;
-    constructor(start: symbolNode, intPaths: Set<Set<symbolNode>>, end: symbolNode) {
+    constructor(start: symbolNode, intPaths: Array<Array<symbolNode>>, end: symbolNode) {
         this.start = start; this.intPaths = intPaths; this.end = end;
     }
 
 }
 
 export class symbolNode {
-    parentMediator: symbolMediator;
-    // symbolIconMediator: symbolIconMediator ;
+    
     parentFile: fileNode;
+    // symbolIconMediator: symbolIconMediator ;
     parentSymbol: symbolNode | undefined;
     child: symbolNode | undefined ;
-    constructor(type: SymbolInformation, parentMediator: symbolMediator, parentFile: fileNode) {
-        this.parentMediator = parentMediator;
+    constructor(type: SymbolInformation, parentFile: fileNode) {
+        
         this.parentFile = parentFile;
         this.child = undefined ;
         // this.symbolIconMediator =  ;
     }
     public render(){
-
+        
     }
     public modify(){
 
@@ -47,14 +47,14 @@ export class symbolNode {
 
 
 export class symbolArrow {
-    incycles: Set<symbolCycle>;
-    indiamonds: Set<symbolDiamond>;
+    incycles: Array<symbolCycle>;
+    indiamonds: Array<symbolDiamond>;
     rendered: Boolean;
     source: symbolNode;
     dest: symbolNode;
     includedIn: filePipe | fileNode;
-    constructor(incycles: Set<symbolCycle>,
-        indiamonds: Set<symbolDiamond>,
+    constructor(incycles: Array<symbolCycle>,
+        indiamonds: Array<symbolDiamond>,
         rendered: Boolean,
         source: symbolNode,
         dest: symbolNode,
@@ -65,8 +65,8 @@ export class symbolArrow {
         this.dest = dest;
         this.includedIn = includedIn;
     }
-    set(incycles: Set<symbolCycle>,
-        indiamonds: Set<symbolDiamond>,
+    Array(incycles: Array<symbolCycle>,
+        indiamonds: Array<symbolDiamond>,
         rendered: Boolean,
         source: symbolNode,
         dest: symbolNode,
@@ -112,17 +112,17 @@ class merged extends symbolArrow{
 export class symbolGraph {
     workspaceGraph: workspaceGraph ;
 
-    nodes: Set<symbolNode> | undefined;
-    implArrows: Set<implArrow> | undefined;
-    refArrows: Set<refArrow> | undefined ;
-    defArrows: Set<defArrow> | undefined ;
-    typedefArrows: Set<typedefArrow> | undefined;
+    nodes: Array<symbolNode> | undefined;
+    implArrows: Array<implArrow> | undefined;
+    refArrows: Array<refArrow> | undefined ;
+    defArrows: Array<defArrow> | undefined ;
+    typedefArrows: Array<typedefArrow> | undefined;
    
    
-    constructor(workspaceGraph: workspaceGraph ,symbolNodes: Set<symbolNode> | undefined, implArrows: Set<implArrow> | undefined,
-        refArrows: Set<refArrow> | undefined ,
-        defArrows: Set<defArrow> | undefined ,
-        typedefArrows: Set<typedefArrow> | undefined, 
+    constructor(workspaceGraph: workspaceGraph ,symbolNodes: Array<symbolNode> | undefined, implArrows: Array<implArrow> | undefined,
+        refArrows: Array<refArrow> | undefined ,
+        defArrows: Array<defArrow> | undefined ,
+        typedefArrows: Array<typedefArrow> | undefined, 
         ) {
             this.workspaceGraph = workspaceGraph ;
         this.implArrows = implArrows; this.nodes = symbolNodes;
@@ -148,7 +148,7 @@ export class symbolGraph {
         for( let i in this.refArrows){
             for(let j in this.defArrows){
                 if(i.source == j.des){
-                    
+
                 }
             }
             for(let k in this.typedefArrows) {

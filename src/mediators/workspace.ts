@@ -1,7 +1,7 @@
 import { workspace, WorkspaceConfiguration, FileSystemProvider } from 'vscode';
 import { fileMediator ,/* notebookMediator*/} from './file';
 import { folderMediator } from './folder';
-
+import 'fs';
 
 // export enum editorType{
 //     classic = 0,
@@ -34,7 +34,7 @@ export class workspaceMediator {
     public getFolders(){
 
     }
-    
+
           
 }
 

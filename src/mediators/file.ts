@@ -5,9 +5,7 @@ import { symbolIconMediator, symbolMediator } from './symbol';
 import { folderMediator } from './folder';
 
 
-export class fileIconMediator {
 
-}
 // class classicEditorMediator implements embeddedEditorMediator{
 //     editorType: editorType;
 //     constructor(){
@@ -21,7 +19,7 @@ export class fileIconMediator {
 //     constructor(editorType: documentEditorType) {
 //         this.editorType = editorType;
 //     }
-//     public setEditorType(editorType: documentEditorType) {
+//     public ArrayEditorType(editorType: documentEditorType) {
 //         this.editorType = editorType;
 //     }
 //     public getEditorType() {
@@ -31,8 +29,8 @@ export class fileIconMediator {
 // }
 
 // export class multifileEditorMediator{
-//     files: Set<fileMediator>;
-//     constructor(files: Set<fileMediator>){
+//     files: Array<fileMediator>;
+//     constructor(files: Array<fileMediator>){
 //         this.files = files ;
 //     }
 // }
@@ -42,6 +40,7 @@ export class fileIconMediator {
 export class fileMediator {
     Uri: Uri;
     children: symbolMediator;
+    
     parent: folderMediator;
     themeIcon: ThemeIcon ;
     constructor(parent: folderMediator, Uri: Uri) {
@@ -50,11 +49,14 @@ export class fileMediator {
         this.parent = parent;
 
     }
+    private providerResultConvert(ProviderResult: ProviderResult){
+        return
+    }
     public getChildren() {
 
     }
     public getReferences() {
-
+        providerResult 
     }
     public getUses() {
 

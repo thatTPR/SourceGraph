@@ -29,7 +29,7 @@ export class contextHandler implements vscode.WebviewViewProvider {
     
     // debug:
 }
-class sidebarPresetHandler implements vscode.WebviewViewProvider{
+class sidebarPreArrayHandler implements vscode.WebviewViewProvider{
 
 }
 
@@ -96,3 +96,35 @@ export function statusBarEnable() {
         debugViewEnable();
         statusBarEnable();
     }
+
+
+
+
+
+
+
+    //  IDEAS
+    // class symbolScaleNode {
+    //     symbol: symbolNode ;
+    //     value: number ;
+    //     constructor(node: symbolNode, value: number ){
+    //         this.symbol = node ;
+    //         this.value = value ;
+    //     }
+    // }
+    // class fileScaleNode {
+    //     file: fileNode ;
+    //     value: number ;
+    //     constructor(node: fileNode, value: number ){
+    //         this.file = node ;
+    //         this.value = value ;
+    //     }
+    // }
+    // class folderScaleNode {
+    //     folder: folderNode ;
+    //     value: number ;
+    //     constructor(node: folderNode, value: number ){
+    //         this.folder = node ;
+    //         this.value = value ;
+    //     }
+    // }

@@ -10,36 +10,40 @@ import {scaleLinear} from 'd3-scale' ;
 import { easeQuadIn } from 'd3-ease';
 import { EventEmitter } from 'stream';
 import { eventNames } from 'process';
+import { TypeDefinitionProvider } from 'vscode';
 
 
-// export interface graphIt extends Set<any>{
+// export interface graphIt extends Array<any>{
 //     Symbol.iterator
 // }
 export interface diamond{
     start: any ; 
-    intPaths: Set<any>;
+    intPaths: Array<any>;
     end: any ;
 
 }
 export interface cycle{
-    content: Set<any> ;
+    content: Array<any> ;
 }
 export interface path{
-    content: Set<any>;
+    content: Array<any>;
 }
 
-export class diamondIndex {
-    isSorted: boolean | undefined;
-    symbol : Set<symbolDiamond> | undefined;
-    file : Set<fileDiamond> | undefined;
-    folder : Set<folderDiamond> | undefined;
-    constructor(symbol: Set<symbolDiamond> | undefined,
-        file: Set<fileDiamond> | undefined,
-        folder: Set<folderDiamond> | undefined) {
+export class diamondIndex { // Maybe use observables
+    symbol : Array<symbolDiamond> | undefined;
+    file : Array<fileDiamond> | undefined;
+    folder : Array<folderDiamond> | undefined;
+    isSorted: boolean ;
+    constructor(symbol: Array<symbolDiamond> | undefined,
+        file: Array<fileDiamond> | undefined,
+        folder: Array<folderDiamond> | undefined) {
         this.symbol  = symbol;
         this.file = file;
         this.folder = folder;
         this.isSorted = false ;
+    }
+    private revealDiamond(diamond: symbolDiamond | fileDiamond | folderDiamond){
+        
     }
     public sort(){
         this.isSorted = true
@@ -59,15 +63,15 @@ export class diamondIndex {
             }
         
     }
-    private sortBySize(diamonds: Set<symbolDiamond> | Set<fileDiamond> | Set<folderDiamond> ){
+    private sortBySize(diamonds: Array<symbolDiamond> | Array<fileDiamond> | Array<folderDiamond> ){
         
     }
     private removeDuplicatesSymbol(){
-        for ( var i:symbolDiamond in this.symbol )
+        for ( var i in this.symbol )
         {
-            for(let j:symbolDiamond in this.symbol){
+            for(let j in this.symbol){
                 if(this.equivalent(i,j) == true){
-                    this.symbol.delete(j) ;
+                    this.symbol.splice(j) ;
                 }
             }
         }
@@ -88,7 +92,7 @@ export class diamondIndex {
         return false ;
     }
     
-    public getPlaceinSet(diamond: fileDiamond | folderDiamond | symbolDiamond ){
+    public getPlaceinArray(diamond: fileDiamond | folderDiamond | symbolDiamond ){
         var place = this.getPlace(diamond) ;
         for (var i in place){
             if (this.comapareSize(i, diamond) == 1){
@@ -100,19 +104,21 @@ export class diamondIndex {
             }
         }
     }
+    
+
     private getPlace(diamond: fileDiamond | folderDiamond | symbolDiamond ){
-        if(typeof(diamond) == typeof(symbolDiamond)){
+        if(typeof(diamond) === typeof(symbolDiamond)){
             return this.symbol;
         }
-        if(typeof(diamond) == typeof(fileDiamond)){
+        if(typeof(diamond) === typeof(fileDiamond)){
             return this.file;
         }
-        if(typeof(diamond) == typeof(folderDiamond)){
+        if(typeof(diamond) === typeof(folderDiamond)){
             return this.folder;
         }
     } 
     // private checkExists(diamond: fileDiamond | folderDiamond | symbolDiamond, 
-    //     place: Set<symbolDiamond> | Set<fileDiamond> | Set<folderDiamond> ){
+    //     place: Array<symbolDiamond> | Array<fileDiamond> | Array<folderDiamond> ){
     //     place.find
     // }
     public add(diamond: fileDiamond | folderDiamond | symbolDiamond){
@@ -125,18 +131,20 @@ export class diamondIndex {
 }
 export class cycleIndex {
     isSorted: boolean | undefined;
-    symbol : Set<symbolDiamond> | undefined;
-    file : Set<fileDiamond> | undefined;
-    folder : Set<folderDiamond> | undefined;
-    constructor(symbol: Set<symbolDiamond> | undefined,
-        file: Set<fileDiamond> | undefined,
-        folder: Set<folderDiamond> | undefined) {
+    symbol : Array<symbolCycle> | undefined;
+    file : Array<fileCycle> | undefined;
+    folder : Array<folderCycle> | undefined;
+    constructor(symbol: Array<symbolCycle> | undefined,
+        file: Array<fileCycle> | undefined,
+        folder: Array<folderCycle> | undefined) {
         this.symbol  = symbol;
         this.file = file;
         this.folder = folder;
         this.isSorted = false ;
     }
-    
+    private revealCycle(cycle: symbolCycle | fileCycle | folderCycle){
+
+    }
     public sort(){
         this.isSorted = true ;
     }
@@ -144,45 +152,59 @@ export class cycleIndex {
 }
 
 export class cycleScale {
-    symbol: Set<folderNode> ;
-    file: Set<fileNode> ;
-    folder: Set<symbolNode>;
-    scope: folderNode | undefined ; // If set undefined defaults to entire project
-    constructor(cycleIndex: cycleIndex) {
-        this.symbol = this.getSortedSymbol(cycleIndex)  ;        
-        this.file = this.getSortedFile(cycleIndex)     ;   
-        this.folder = this.getSortedFolder(cycleIndex);  
-        
-        
+    symbol: Array<symbolNode> | undefined ;
+    file: Array<fileNode>  | undefined;
+    folder: Array<folderNode> | undefined ;
+    renderScope: folderNode | fileNode | Array<folderNode> | Array<fileNode> | undefined ; // If Array undefined defaults to entire project
+    constructor(root: Array<folderNode>) {
+        this.symbol = undefined ;      
+        this.file = undefined   ;
+        this.folder = undefined ;
+        this.renderScope = root ;
+    }
+    private zoomNode(node: folderNode | fileNode | symbolNode){
+
     }
     private renderMultiLevelChart(){
+        d3.Adder        
+
+    }
+    private sortSymbol(){
+
+    }
+    private sortFile(){
+
+    }
+    private sortFolder(){
         
+    }
+    private sortedAll(){
 
     }
-    private getSortedAll(){
-
-    }
-    private getSortedSymbol(index: cycleIndex){
+    private getSymbol(index: cycleIndex){
         for (let i in index.symbol){
-            for(let j in i)
+            for(let j in index.symbol){
+
+            }
         }
     }
-    private getSortedFile(index: cycleIndex){
+    private getFile(index: cycleIndex){
 
     }
-    private getSortedFolder(index: cycleIndex){
+    private getFolder(index: cycleIndex){
 
     }
 }
 export class diamondScale {
-    symbol: Set<symbolNode> ;
-    file: Set<fileNode> ;
-    folder: Set<folderNode>
-    scope: folderNode | undefined ; // If set undefined defaults to entire project
-    constructor(diamondIndex: diamondIndex) {
-        this.symbol = (diamondIndex.symbol)  ;        
-        this.file = (diamondIndex.file)     ;   
-        this.folder = getSorted(diamondIndex.folder);  
+    symbol: Array<symbolNode> | undefined ;
+    file: Array<fileNode>  | undefined;
+    folder: Array<folderNode> | undefined ;
+    renderScope: folderNode | fileNode | Array<folderNode> | Array<fileNode> | undefined ; // If Array undefined defaults to entire project
+    constructor(root: Array<folderNode>) {
+        this.symbol = undefined ;      
+        this.file = undefined   ;
+        this.folder = undefined ;
+        this.renderScope = root ;
     }
     
     
@@ -190,14 +212,17 @@ export class diamondScale {
 
      
 }
+// export class editorBinding{
+
+// }
 // If i finsh this down it should be pretty much done. Yay
 // export class embeddedView {
 //     workspace: workspaceGraph | undefined; // 
-//     parent: fileNode | Set<fileNode>| undefined;
+//     parent: fileNode | Array<fileNode>| undefined;
 //      
 //     view: embeddedEditorMediator;
 
-//     constructor(view: embeddedEditorMediator, workspace: workspaceGraph| undefined, parent: fileNode | Set<fileNode> | undefined) {
+//     constructor(view: embeddedEditorMediator, workspace: workspaceGraph| undefined, parent: fileNode | Array<fileNode> | undefined) {
 //         this.view = view;
 //         this.workspace = workspace ;
 //         this.parent = parent;
@@ -219,12 +244,12 @@ export class workspaceGraph {
     folderGraph: folderGraph;
     fileGraph: fileGraph ;
     symbolGraph: symbolGraph ;
-    
+    workspaceMediator: workspaceMediator ;
 
     diamondIndex: diamondIndex;  cycleIndex: cycleIndex;
     diamondScale: diamondScale;  cycleScale: cycleScale;
 
-    // embeddedView: Set<embeddedView> | undefined;
+    // embeddedView: Array<embeddedView> | undefined;
     constructor() {
         // this.embeddedView  = undefined // For now no support for opening embedded views on boot up 
         // builds workspace tree from root recursively 
@@ -235,9 +260,11 @@ export class workspaceGraph {
         // buildPipeGraph
         // buildSymbolGraph
         // builds graph and checks for diamonds and cycles returning information where appropiate
+        this.workspaceMediator = new workspaceMediator ;
         
+
         this.folderGraph = new folderGraph(this, undefined, undefined, undefined)
-        this.fileGraph =  new fileGraph(this, undefined, undefined, undefined)
+        this.fileGraph =  new fileGraph(this, this.folderGraph, undefined, undefined)
         this.symbolGraph = new symbolGraph(this, undefined, undefined, undefined , undefined, undefined)
         
         this.diamondIndex = new diamondIndex(undefined, undefined, undefined);

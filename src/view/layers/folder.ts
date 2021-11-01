@@ -13,30 +13,31 @@ import {folderMediator, folderIconMediator} from '../../mediators/folder'
 
 
 export class folderCycle implements cycle {
-    content: Set<folderNode>;
-    constructor(content: Set<folderNode>){
+    content: Array<folderNode>;
+    constructor(content: Array<folderNode>){
         this.content = content;
     }
 }
 export class folderDiamond implements diamond {
 
     start:folderNode;
-    intPaths: Set<Set<folderNode>>;
+    intPaths: Array<Array<folderNode>>;
     end:folderNode;
-    constructor(start:folderNode, intPaths: Set<Set<folderNode>>, end:folderNode){
+    constructor(start:folderNode, intPaths: Array<Array<folderNode>>, end:folderNode){
         this.start = start; this.intPaths = intPaths ; this.end = end ;
     }
     
    
 } 
 export class folderNode {
-    children: Set<folderNode | fileNode> ;
-    isOpen: boolean ;
     folderMediator: folderMediator ;
     workspace: workspaceGraph ;
-    parentFolder : folderNode ;
     
-    constructor(parentFolder: folderNode,children: Set<folderNode | fileNode>,folderMediator: folderMediator , workspace: workspaceGraph){
+    
+    children: Array<folderNode | fileNode> ;
+    isOpen: boolean ;
+    parentFolder : folderNode ;
+    constructor(parentFolder: folderNode,children: Array<folderNode | fileNode>,folderMediator: folderMediator , workspace: workspaceGraph){
         this.children = children ; this.isOpen = false; this.workspace = workspace ;
         this.folderMediator = folderMediator ;      
         this.parentFolder = parentFolder ;  
@@ -49,15 +50,15 @@ export class folderNode {
 
 }
 export class folderChannel { 
-    inCycles: Set<folderCycle>;
-    inDiamonds: Set<folderDiamond>;
+    inCycles: Array<folderCycle>;
+    inDiamonds: Array<folderDiamond>;
     source: folderNode | undefined;
     dest: folderNode | undefined;
     directed: boolean;
     zoomThresh: number ;
-    embeddedFilePipes: Set<filePipe> ;
+    embeddedFilePipes: Array<filePipe> ;
 
-    constructor(inCycles: Set<folderCycle>, inDiamonds: Set<folderDiamond> , source: folderNode |undefined, dest: folderNode |undefined, zoomThresh: number , embeddedFilePipes:Set<filePipe>) {
+    constructor(inCycles: Array<folderCycle>, inDiamonds: Array<folderDiamond> , source: folderNode |undefined, dest: folderNode |undefined, zoomThresh: number , embeddedFilePipes:Array<filePipe>) {
         this.inCycles =  inCycles; this.inDiamonds  = inDiamonds;
         this.source = source;
         this.dest = dest;
@@ -97,20 +98,23 @@ export class treeBranch {
 }
 
 export class folderGraph {
-    workspaceGraph: workspaceGraph ;
+    workspaceGraph: workspaceGraph  ;
     
 
-    nodes: Set<folderNode> | undefined;
-    channels: Set<folderChannel> | undefined;
-    tree: Set<treeBranch> | undefined;
+    nodes: Array<folderNode> | undefined;
+    channels: Array<folderChannel> | undefined;
+    tree: Array<treeBranch> | undefined;
 
-    constructor(workspaceGraph: workspaceGraph | undefined,nodes: Set<folderNode> | undefined, channels:Set<folderChannel> | undefined, tree: Set<treeBranch> | undefined) {
+    constructor(workspaceGraph: workspaceGraph ,nodes: Array<folderNode> | undefined, channels:Array<folderChannel> | undefined, tree: Array<treeBranch> | undefined) {
         this.workspaceGraph = workspaceGraph ; 
         this.nodes = nodes; this.channels = channels;this.tree = tree;
+        
     }
    
     public removeLink(parent: folderNode, child: folderNode){
-        this.tree.delete
+        for( let i in this.tree ){
+            if i.parentNode.
+        }
     }
     
     public addLink(link: treeBranch){

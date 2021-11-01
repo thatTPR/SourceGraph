@@ -5,6 +5,7 @@ ProviderResult,
 ThemeIcon,
 Range, TextDocument} from 'vscode';
 
+import 'langium'
 import {fileMediator } from './file';
 export class symbolIconMediator{
     themeIcon: ThemeIcon
@@ -18,18 +19,28 @@ export class queryWorkspace implements WorkspaceSymbolProvider {
         throw new Error('Method not implemented.');
     }
 
+    
+
 }
 
-export class symbolMediator implements DocumentSymbolProvider{ // A kind of outline manager
-    symbols: Set<DocumentSymbol> ;
-    parent: fileMediator ;
-    location: SymbolInformation;
+export class 
 
+export class symbolMediator implements DocumentSymbolProvider{ // A kind of outline manager
+    symbols: Array<DocumentSymbol> ;
+    parent: fileMediator ;
+    
+    ref: ReferenceProvid
+    def:
+    typedef:
+    impl:
+
+    
     public provideDocumentSymbols(document: TextDocument , token: CancellationToken):  Promise<vscode.DocumentSymbol[]> 
     {
+        this.symbols.
 
     }
-    constructor(symbols: Set<DocumentSymbol> , parent: fileMediator, iconMediator:symbolIconMediator,){
+    constructor(symbols: Array<DocumentSymbol> , parent: fileMediator, iconMediator:symbolIconMediator,){
         this.symbols = symbols ; this.parent = parent ;
         vscode.reg
     }

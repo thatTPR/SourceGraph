@@ -8,47 +8,52 @@ import { symbolArrow , symbolNode} from './symbol';
 import {folderChannel, folderGraph, folderNode} from './folder';
 import {cycleIndex, diamondIndex, /*embeddedView,*/ workspaceGraph , cycle , path} from './workspace';
 
-import {fileMediator, fileIconMediator} from '../../mediators/file';
+import {fileMediator} from '../../mediators/file';
+import { symbolMediator } from '../../mediators/symbol';
 
 export class fileCycle implements cycle {
-    content: Set<fileNode>;
-    constructor(content: Set<fileNode>){
+    content: Array<fileNode>;
+    constructor(content: Array<fileNode>){
         this.content = content ;
     }
 }
 export class fileDiamond{
     start:fileNode;
-    intPaths: Set<Set<fileNode>>;
+    intPaths: Array<Array<fileNode>>;
     end:fileNode;
-    constructor(start:fileNode, intPaths: Set<Set<fileNode>>, end:fileNode){
+    constructor(start:fileNode, intPaths: Array<Array<fileNode>>, end:fileNode){
         this.start = start; this.intPaths = intPaths ; this.end = end ;
     }
    
 } 
 
 export class fileNode {
+    
+    fileMediator: fileMediator ;
+    
+
     zoomThresh: number ;
     isOpen: boolean ;
-    children : Set<symbolNode>;
-    fileMediator: fileMediator ;
+    children : Array<symbolNode>;
     parentFolder: folderNode ;
     // New workspace contstructor
-    constructor(parentFolder:folderNode , zoomThresh: number, children : Set<symbolNode>, fileMediator: fileMediator ){
+    constructor(parentFolder:folderNode , zoomThresh: number, children : Array<symbolNode>, fileMediator: fileMediator ){
         this.zoomThresh = zoomThresh ;
         this.isOpen = false ;
         this.children = children ;
         this.parentFolder = parentFolder; 
-        this.fileMediator = fileMediator;        
+        this.fileMediator = fileMediator;      
+        
     }
 
 }
 export class filePipe {
     zoomThresh: number ;
-    incycles: Set<fileCycle> ; 
-    indiamonds: Set<fileDiamond> ;
-    embeddedSymbolArrows: Set<symbolArrow>;
+    incycles: Array<fileCycle> ; 
+    indiamonds: Array<fileDiamond> ;
+    embeddedSymbolArrows: Array<symbolArrow>;
     includedIn: folderChannel ;
-    constructor(incycles: Set<fileCycle>, indiamonds: Set<fileDiamond>, zoomThresh: number, includedIn: folderChannel, embeddedSymbolArrows: Set<symbolArrow>) {
+    constructor(incycles: Array<fileCycle>, indiamonds: Array<fileDiamond>, zoomThresh: number, includedIn: folderChannel, embeddedSymbolArrows: Array<symbolArrow>) {
         this.incycles = incycles ; this.indiamonds = indiamonds;
         this.zoomThresh = zoomThresh ;
         this.includedIn = includedIn;
@@ -73,9 +78,9 @@ export class filePipe {
 export class fileGraph {
     workspaceGraph: workspaceGraph ;
     folderGraph: folderGraph | undefined ;
-    nodes: Set<fileNode> | undefined;
-    pipes: Set<filePipe> | undefined;
-    constructor(workspaceGraph: workspaceGraph ,folderGraph: folderGraph| undefined ,nodes: Set<fileNode>| undefined, pipes: Set<filePipe>| undefined) {
+    nodes: Array<fileNode> | undefined;
+    pipes: Array<filePipe> | undefined;
+    constructor(workspaceGraph: workspaceGraph ,folderGraph: folderGraph| undefined ,nodes: Array<fileNode>| undefined, pipes: Array<filePipe>| undefined) {
         this.workspaceGraph = workspaceGraph ;
         this.folderGraph = folderGraph ;
         this.nodes = nodes; this.pipes = pipes;
