@@ -1,4 +1,4 @@
-import { workspace, WorkspaceConfiguration, FileSystemProvider } from 'vscode';
+import { workspace, WorkspaceConfiguration, FileSystemProvider, commands, Disposable } from 'vscode';
 import { fileMediator ,/* notebookMediator*/} from './file';
 import { folderMediator } from './folder';
 import 'fs';
@@ -16,16 +16,19 @@ import 'fs';
 
 // export interface embeddedEditorMediator{
 //     editorType: editorType ;
-//     resources: fileMediator | notebookMediator | Set<fileMediator> | Set<notebookMediator> ;
+//     resources: fileMediator | notebookMediator | Array<fileMediator> | Array<notebookMediator> ;
 //     public provideEditor(){
 
 //     }
 
 // }
 
+export class commandDisposable extends Disposable{
 
+}
 export class workspaceMediator {
-    public rootfolders: Set<folderMediator>; // Set of folders opened by editor
+    public rootfolders: Array<folderMediator>; // Array of folders opened by editor
+
     constructor() {        
         for(let index in workspace.workspaceFolders){
             this.rootfolders =        
@@ -33,6 +36,9 @@ export class workspaceMediator {
     }
     public getFolders(){
 
+    }
+    public lspCOmmand(){
+        commands.registerCommand()
     }
 
           

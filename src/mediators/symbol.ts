@@ -3,7 +3,7 @@ WorkspaceSymbolProvider,
 CancellationToken,
 ProviderResult,
 ThemeIcon,
-Range, TextDocument} from 'vscode';
+Range, TextDocument, ReferenceProvider} from 'vscode';
 
 import 'langium'
 import {fileMediator } from './file';
@@ -29,7 +29,7 @@ export class symbolMediator implements DocumentSymbolProvider{ // A kind of outl
     symbols: Array<DocumentSymbol> ;
     parent: fileMediator ;
     
-    ref: ReferenceProvid
+    ref: ReferenceProvider
     def:
     typedef:
     impl:
