@@ -1,3 +1,4 @@
+import { exists } from 'fs';
 import {
     SymbolInformation, SymbolKind, SymbolTag, DocumentSymbol, DocumentSymbolProvider, DocumentSymbolProviderMetadata,
     WorkspaceSymbolProvider,
@@ -25,44 +26,69 @@ class referenceMediator implements ReferenceProvider {
     }
 
 }
-class definitionMediator implements DefinitionProvider {
-    provideDefinition(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Definition | LocationLink[]> {
-        throw new Error('Method not implemented.');
-    }
+// class definitionMediator implements DefinitionProvider {
+//     provideDefinition(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Definition | LocationLink[]> {
+//         throw new Error('Method not implemented.');
+//     }
 
-}
-class typeDefintionMediator implements TypeDefinitionProvider {
-    provideTypeDefinition(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Definition | LocationLink[]> {
-        throw new Error('Method not implemented.');
-    }
+// }
+// class typeDefintionMediator implements TypeDefinitionProvider {
+//     provideTypeDefinition(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Definition | LocationLink[]> {
+//         throw new Error('Method not implemented.');
+//     }
 
-}
-class implmentationMediator implements ImplementationProvider {
-    provideImplementation(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Definition | LocationLink[]> {
-        throw new Error('Method not implemented.');
-    }
+// }
+// class implmentationMediator implements ImplementationProvider {
+//     provideImplementation(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Definition | LocationLink[]> {
+//         throw new Error('Method not implemented.');
+//     }
 
-}
+// }
 class parentMediator {
+
     provideParent() {
         let parent: symbolMediator ;
-        parent = new symbolMediator( , parentFile)
+        let exists: boolean ;
 
-        return parent ;
+
+        if(checkExists()){
+
+
+
+            return parent ;
+        }
+        else{
+            parent = new symbolMediator() ;
+            return parent ;
+        }
+
     }
 }
 class childMediator {
+    checkExists(){
+
+    }
     provideChild(parentFile: fileMediator) {
 
         let child: symbolMediator ;
-        child = new symbolMediator( , parentFile)
+        
+        if(checkExists()){
 
-        return child ;
+
+
+            return child ;
+        }
+        else{
+            child = new symbolMediator() ;
+            return child;
+        }
+        
     }
 }
 
 export class symbolMediator { // A kind of outline manager
     doc: DocumentSymbol;
+    owner: symbolNode ;
 
     parent: fileMediator;
 

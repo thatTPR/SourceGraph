@@ -1,7 +1,7 @@
-import { ThemeIcon, TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider, Uri, DocumentSymbolProvider } from "vscode";
+import { ThemeIcon, TextEditor, CustomTextEditorProvider, CustomDocument, NotebookDocument, CustomEditorProvider, Uri, DocumentSymbolProvider, TextDocument } from "vscode";
 
 import {/* editorType, embeddedEditorMediator */ } from './workspace';
-import { symbolIconMediator, symbolMediator } from './symbol';
+import { symbolMediator } from './symbol';
 import { folderMediator } from './folder';
 
 
@@ -40,7 +40,7 @@ import { folderMediator } from './folder';
 export class fileMediator {
     Uri: Uri;
     children: Array<symbolMediator> ;
-    
+    TextDocument: TextDocument ;
     
     parent: folderMediator;
     themeIcon: ThemeIcon ;
@@ -48,6 +48,7 @@ export class fileMediator {
         this.children = new symbolMediator( symbol, this, new symbolIconMediator());
         this.Uri = Uri;
         this.parent = parent;
+        this.TextDocument = 
 
     }
     private providerResultConvert(ProviderResult: ProviderResult){
