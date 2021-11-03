@@ -79,9 +79,9 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/thatTPR/interactiveSourceGraph.git"
+		"url": "https://github.com/thatTPR/SourceGraph"
 	},
 	"bugs": {
-		"url": "https://github.com/thatTPR/interactiveSourceGraph/issues"
+		"url": "https://github.com/thatTPR/SourceGraph/issues"
 	}
 }

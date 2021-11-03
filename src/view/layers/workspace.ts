@@ -6,16 +6,11 @@ import { folderGraph, treeBranch,folderChannel, folderDiamond, folderCycle, fold
 import {/* editorType,  embeddedEditorMediator,*/ workspaceMediator } from '../../mediators/workspace';
 import { folderMediator } from '../../mediators/folder';
 
-import {scaleLinear} from 'd3-scale' ; 
-import { easeQuadIn } from 'd3-ease';
-import { EventEmitter } from 'stream';
-import { eventNames } from 'process';
-import { TypeDefinitionProvider } from 'vscode';
+import 'd3' ;
+import d3 = require('d3');
 
 
-// export interface graphIt extends Array<any>{
-//     Symbol.iterator
-// }
+
 export interface diamond{
     start: any ; 
     intPaths: Array<any>;
@@ -42,9 +37,7 @@ export class diamondIndex { // Maybe use observables
         this.folder = folder;
         this.isSorted = false ;
     }
-    private revealDiamond(diamond: symbolDiamond | fileDiamond | folderDiamond){
-        
-    }
+    
     public sort(){
         this.isSorted = true
     }
@@ -67,7 +60,7 @@ export class diamondIndex { // Maybe use observables
         
     }
     private removeDuplicatesSymbol(){
-        for ( var i in this.symbol )
+        for ( var i=0 ; i < this.symbol.length ; i++ )
         {
             for(let j in this.symbol){
                 if(this.equivalent(i,j) == true){
@@ -88,7 +81,7 @@ export class diamondIndex { // Maybe use observables
     public checkExists(diamond:  fileDiamond | folderDiamond | symbolDiamond){
         var place = this.getPlace(diamond);
        
-  
+        
         return false ;
     }
     
@@ -152,6 +145,7 @@ export class cycleIndex {
 }
 
 export class cycleScale {
+    cycleIndex: cycleIndex ;
     symbol: Array<symbolNode> | undefined ;
     file: Array<fileNode>  | undefined;
     folder: Array<folderNode> | undefined ;
@@ -162,6 +156,7 @@ export class cycleScale {
         this.folder = undefined ;
         this.renderScope = root ;
     }
+
     private zoomNode(node: folderNode | fileNode | symbolNode){
 
     }
@@ -169,33 +164,41 @@ export class cycleScale {
         d3.Adder        
 
     }
-    private sortSymbol(){
-
-    }
-    private sortFile(){
-
-    }
-    private sortFolder(){
+    private cmpSymbol(){
+            if(typeof(this.symbol) !== typeof(undefined) ){
+                let aOccur:number = 0 ; let bOccur:number ;
+                for( let i ; i < this.cycleIndex.symbol.length ; i++){
         
-    }
-    private sortedAll(){
-
-    }
-    private getSymbol(index: cycleIndex){
-        for (let i in index.symbol){
-            for(let j in index.symbol){
-
+                }
+                
+                return n ;
+            }
+            else {
+                throw new Error("symbol is undefined")
+                
             }
         }
     }
-    private getFile(index: cycleIndex){
-
+   
+    private cmpFile(){
+        
     }
-    private getFolder(index: cycleIndex){
-
+    private cmpFolder(){
+        
     }
+    private sortAll(){
+        if (this.symbol === undefined){
+            throw new Error("Symbol array undefined");
+        }
+        else{
+            this.symbol.sort
+
+        }
+    }
+    
 }
-export class diamondScale {
+export class diamondScale { 
+
     symbol: Array<symbolNode> | undefined ;
     file: Array<fileNode>  | undefined;
     folder: Array<folderNode> | undefined ;
@@ -212,7 +215,8 @@ export class diamondScale {
 
      
 }
-// export class editorBinding{
+
+// export class editorBinding{ // Node(s) opens a context menu-like view for the 
 
 // }
 // If i finsh this down it should be pretty much done. Yay
@@ -251,15 +255,11 @@ export class workspaceGraph {
 
     // embeddedView: Array<embeddedView> | undefined;
     constructor() {
-        // this.embeddedView  = undefined // For now no support for opening embedded views on boot up 
+        // this.embeddedView  = undefined // For now no support for opening embedded views 
         // builds workspace tree from root recursively 
         // Build Link tree
  // IdDFS here  https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search
-        // buildChannelGraph
-
-        // buildPipeGraph
-        // buildSymbolGraph
-        // builds graph and checks for diamonds and cycles returning information where appropiate
+        
         this.workspaceMediator = new workspaceMediator ;
         
 
@@ -277,6 +277,9 @@ export class workspaceGraph {
         
 
     }
+    public forceGraph(){
+        d3.scale()
+    }
     private refreshLinkTree() {
 
     }
@@ -289,32 +292,24 @@ export class workspaceGraph {
     private refreshSymbolGraph() {
 
     }
-    private openEmbeddedView() {
-
-    }
-    private closeEmbeddedView() {
-
-    }
     private zoomLink() {
 
     }
-    private zoomNode() {
-
-    }
-    private symbolLinkOrganise() {
-        console.log("symbol link organising") ;
+    
+    private symbolLinkOrganise(center: fileNode | folderNode | symbolNode | undefined , cycle: symbolCycle| fileCycle| folderCycle | undefined ) {
+        console.log("symbol link organising") ;  // Update on sidebar
     }
     private fileLinkOrganise() {
-        console.log("file link organising") ;
+        console.log("file link organising") ; // Update on sidebar
     }
     private folderLinkOrganise() {
-        console.log("folder organising") ;
+        console.log("folder organising") ; // Update on sidebar
     }
     private fileOrganise() {
-        console.log("file organising") ;
+        console.log("file organising") ; // Update on sidebar
     }
     private organise() {
-        console.log("organising") ;
+        console.log("organising") ; // Update on sidebar
     }
 }
 

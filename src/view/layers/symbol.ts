@@ -1,5 +1,5 @@
 import { SymbolKind, ThemeIcon, SymbolInformation, SaveDialogOptions } from 'vscode';
-import { symbolIconMediator, symbolMediator } from '../../mediators/symbol'
+import { symbolMediator } from '../../mediators/symbol'
 
 import { fileGraph, fileNode, filePipe } from './file';
 import { folderChannel } from './folder';
@@ -92,21 +92,21 @@ export class symbolArrow {
         this.animation
     }
 }
-class implArrow extends symbolArrow {
-    
-}
 class refArrow extends symbolArrow{
 
 }
-class defArrow extends symbolArrow{
+// class implArrow extends symbolArrow {
+    
+// }
+// class defArrow extends symbolArrow{
 
-}
-class typedefArrow extends symbolArrow{
+// }
+// class typedefArrow extends symbolArrow{
 
-}
-class merged extends symbolArrow{
+// }
+// class merged extends symbolArrow{
 
-}
+// }
 // This is never a graph of the full workspace. 
 // Instead child instances get added and removed dynamically using the index.
 export class symbolGraph {
@@ -145,7 +145,7 @@ export class symbolGraph {
         
     }
     public mergeDups(){
-        for( let i in this.refArrows){
+        for( case let i as refArrow  in this.refArrow){
             for(let j in this.defArrows){
                 if(i.source == j.des){
 

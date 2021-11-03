@@ -45,6 +45,9 @@ export class fileNode {
         this.fileMediator = fileMediator;      
         
     }
+    private zoomIn() {
+
+    }
 
 }
 export class filePipe {
@@ -58,6 +61,9 @@ export class filePipe {
         this.zoomThresh = zoomThresh ;
         this.includedIn = includedIn;
         this.embeddedSymbolArrows = embeddedSymbolArrows;
+    }
+    private zoomIn(){
+        
     }
     private animation(source: fileNode, dest:fileNode){
 

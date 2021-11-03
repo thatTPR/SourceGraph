@@ -29,13 +29,7 @@ export class contextHandler implements vscode.WebviewViewProvider {
     
     // debug:
 }
-class sidebarPreArrayHandler implements vscode.WebviewViewProvider{
 
-}
-
-class sidedebarListeners {
-    explorer
-}
 class renderViewHandler { // This is so you can move views and share them across view containers
     explorer: vscode.WebviewViewProvider ; 
     search:  vscode.WebviewViewProvider;
@@ -54,7 +48,7 @@ class renderViewHandler { // This is so you can move views and share them across
 
 
 export function mainViewEnable(){
-    vscode.window.showWorkspaceFolderPick
+    
     const panel = vscode.window.createWebviewPanel('Source graph',
     'Source graph',
     vscode.ViewColumn.Active,

@@ -39,7 +39,8 @@ import { folderMediator } from './folder';
 // }
 export class fileMediator {
     Uri: Uri;
-    children: symbolMediator;
+    children: Array<symbolMediator> ;
+    
     
     parent: folderMediator;
     themeIcon: ThemeIcon ;

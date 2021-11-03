@@ -1,68 +1,87 @@
-import { SymbolInformation, SymbolKind, SymbolTag, DocumentSymbol, DocumentSymbolProvider, DocumentSymbolProviderMetadata, 
-WorkspaceSymbolProvider,
-CancellationToken,
-ProviderResult,
-ThemeIcon,
-Range, TextDocument, ReferenceProvider} from 'vscode';
+import {
+    SymbolInformation, SymbolKind, SymbolTag, DocumentSymbol, DocumentSymbolProvider, DocumentSymbolProviderMetadata,
+    WorkspaceSymbolProvider,
+    CancellationToken,
+    ProviderResult,
+    ThemeIcon,
+    Range, TextDocument, ReferenceProvider, TypeDefinitionProvider, ImplementationProvider, DefinitionProvider, Definition, LocationLink, Position, Location, ReferenceContext
+} from 'vscode';
 
-import 'langium'
-import {fileMediator } from './file';
-export class symbolIconMediator{
-    themeIcon: ThemeIcon
-   
-    public getSVG(symbol: symbolMediator){
+import { fileMediator } from './file';
 
-    }
-}
-export class queryWorkspace implements WorkspaceSymbolProvider {
-    provideWorkspaceSymbols(query: string, token: CancellationToken): ProviderResult<SymbolInformation[]> {
+// export class queryWorkspace implements WorkspaceSymbolProvider {
+//     provideWorkspacedoc(query: string, token: CancellationToken): ProviderResult<SymbolInformation[]> {
+//         throw new Error('Method not implemented.');
+//     }
+
+
+
+// }
+
+
+class referenceMediator implements ReferenceProvider {
+    provideReferences(document: TextDocument, position: Position, context: ReferenceContext, token: CancellationToken): ProviderResult<Location[]> {
         throw new Error('Method not implemented.');
     }
 
-    
+}
+class definitionMediator implements DefinitionProvider {
+    provideDefinition(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Definition | LocationLink[]> {
+        throw new Error('Method not implemented.');
+    }
 
 }
+class typeDefintionMediator implements TypeDefinitionProvider {
+    provideTypeDefinition(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Definition | LocationLink[]> {
+        throw new Error('Method not implemented.');
+    }
 
-export class 
+}
+class implmentationMediator implements ImplementationProvider {
+    provideImplementation(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Definition | LocationLink[]> {
+        throw new Error('Method not implemented.');
+    }
 
-export class symbolMediator implements DocumentSymbolProvider{ // A kind of outline manager
-    symbols: Array<DocumentSymbol> ;
-    parent: fileMediator ;
-    
-    ref: ReferenceProvider
-    def:
-    typedef:
-    impl:
+}
+class parentMediator {
+    provideParent() {
+        let parent: symbolMediator ;
+        parent = new symbolMediator( , parentFile)
 
-    
-    public provideDocumentSymbols(document: TextDocument , token: CancellationToken):  Promise<vscode.DocumentSymbol[]> 
-    {
-        this.symbols.
+        return parent ;
+    }
+}
+class childMediator {
+    provideChild(parentFile: fileMediator) {
+
+        let child: symbolMediator ;
+        child = new symbolMediator( , parentFile)
+
+        return child ;
+    }
+}
+
+export class symbolMediator { // A kind of outline manager
+    doc: DocumentSymbol;
+
+    parent: fileMediator;
+
+    symbolParent: parentMediator;
+    symbolChild: childMediator;
+
+    ref: referenceMediator;
+    def: definitionMediator;
+    typedef: typeDefintionMediator;
+    impl: implmentationMediator;
+
+
+    public provideDocumentSymbols(document: TextDocument, token: CancellationToken): Promise<vscode.DocumentSymbol[]> {
+        this.doc.
 
     }
-    constructor(symbols: Array<DocumentSymbol> , parent: fileMediator, iconMediator:symbolIconMediator,){
-        this.symbols = symbols ; this.parent = parent ;
-        vscode.reg
-    }
-    public getChildrenDocument(symbol: DocumentSymbol){
-        return symbol.children
-    }
-    public getChildren(symbol: DocumentSymbol){
-        return symbol.children
-    }
-    public provideReferences(symbol: DocumentSymbol){
-        return DocumentSymbol.
-    }
-    public getRange(symbol: DocumentSymbol){
-        return symbol.range;
-    }
-    public provideImplementations(symbol: DocumentSymbol){
+    constructor(doc: Array<DocumentSymbol>, parent: fileMediator, iconMediator: symbolIconMediator,) {
+        this.doc = doc; this.parent = parent;
         
     }
-    public provideDefinitions(symbol: DocumentSymbol){
-     
-    }
-    public provideTypeDefinitions(symbol: DocumentSymbol){
-     
-    }
+    
 }
